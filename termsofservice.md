@@ -123,5 +123,5 @@ We may update these Terms. If changes are material, we will provide notice as re
 
 - **Company:** CielPM, Inc.
 - **Email:** hi@cielpm.ai
-- **Website/support:** https://cielpm.ai/support
+- **Website/support:** https://glutt.org/support
 

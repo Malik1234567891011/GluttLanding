@@ -11,7 +11,7 @@ If you do not agree with this Privacy Policy, please do not use the App.
 
 - **Company:** CielPM, Inc.
 - **Contact email:** hi@cielpm.ai
-- **Website:** https://cielpm.ai
+- **Website:** https://glutt.org
 - **Mailing address (if applicable):** Available upon written request at hi@cielpm.ai
 
 ## 2) Information we collect
@@ -122,5 +122,5 @@ We may update this Privacy Policy. If we make material changes, we will update t
 For privacy questions or requests, contact:
 
 - **Email:** hi@cielpm.ai
-- **Website/support page:** https://cielpm.ai/support
+- **Website/support page:** https://glutt.org/support
 
