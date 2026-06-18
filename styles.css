@@ -348,6 +348,24 @@ h2 {
   line-height: 1.55;
 }
 
+.requirement {
+  margin-top: 1.1rem;
+  padding: 0.85rem 1rem;
+  border: 1px solid rgba(31, 107, 69, 0.35);
+  border-radius: 14px;
+  background: var(--brand-soft);
+  color: var(--text);
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+.hero-note {
+  margin: 0.9rem 0 0;
+  color: var(--text-muted);
+  font-size: 0.88rem;
+  line-height: 1.5;
+}
+
 .screens {
   margin-top: 1.35rem;
   grid-template-columns: repeat(3, minmax(0, 1fr));
