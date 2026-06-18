@@ -9,6 +9,7 @@
       content="Glutt helps you import recipes from anywhere, plan meals around real life, and cook with what you already have."
     />
     <link rel="stylesheet" href="/styles.css" />
+    <script src="/preorder.js" defer></script>
   </head>
   <body>
     <header class="site-header">
@@ -19,7 +20,7 @@
           <a class="nav-link" href="#how-it-works">How It Works</a>
           <a class="nav-link" href="/support">Support</a>
           <a class="nav-link" href="/privacy">Privacy</a>
-          <a class="nav-link" href="#download">Download</a>
+          <a class="nav-link" href="#preorder">Preorder</a>
         </nav>
       </div>
     </header>
@@ -35,7 +36,7 @@
               Save recipes from anywhere, plan fast, and waste less food.
             </p>
             <div class="actions" id="download">
-              <a class="btn btn-primary" href="#" aria-disabled="true">Coming Soon on the App Store</a>
+              <a class="btn btn-primary" href="#preorder">Preorder early access</a>
               <a class="btn btn-muted" href="#how-it-works">See how it works</a>
             </div>
           </div>
@@ -128,6 +129,58 @@
         </div>
       </section>
 
+      <section id="preorder">
+        <div class="container">
+          <p class="eyebrow">Early bird preorder</p>
+          <h2>Lock in launch pricing before Glutt hits the App Store.</h2>
+          <p class="section-copy">
+            Preorder now in USD and we will manually email your TestFlight invite or access instructions. Canadian
+            and US customers can check out securely through Stripe.
+          </p>
+          <div class="grid pricing-grid">
+            <article class="card pricing-card featured">
+              <span class="badge">Best value</span>
+              <h3>Yearly early access</h3>
+              <div class="price">
+                <strong>$32.99</strong>
+                <span>USD / year</span>
+              </div>
+              <p class="release-price">Expected launch price: $38/year.</p>
+              <ul class="pricing-list">
+                <li>Reserve your first year of Glutt Premium.</li>
+                <li>Get manually invited through TestFlight while launch access is rolling out.</li>
+                <li>Email receipt collected at checkout for fulfillment.</li>
+              </ul>
+              <button class="btn btn-primary" type="button" data-preorder-plan="yearly">
+                Preorder yearly
+              </button>
+            </article>
+
+            <article class="card pricing-card">
+              <span class="badge">Try first</span>
+              <h3>First month early access</h3>
+              <div class="price">
+                <strong>$8</strong>
+                <span>USD / first month</span>
+              </div>
+              <p class="release-price">Expected launch price: $14/month.</p>
+              <ul class="pricing-list">
+                <li>Pay only for your first month of early access.</li>
+                <li>Good if you want to try Glutt before committing yearly.</li>
+                <li>We will email access details after checkout.</li>
+              </ul>
+              <button class="btn btn-muted" type="button" data-preorder-plan="monthly">
+                Preorder first month
+              </button>
+            </article>
+          </div>
+          <p class="pricing-footnote">
+            Prices are charged in USD. Stripe may show local payment details based on your card, billing address,
+            and region. This preorder is fulfilled manually by email and is not an App Store purchase.
+          </p>
+        </div>
+      </section>
+
       <section>
         <div class="container">
           <h2>See Glutt in action</h2>
@@ -177,7 +230,7 @@
               deletion requests are straightforward.
             </p>
             <div class="actions">
-              <a class="btn btn-primary" href="#" aria-disabled="true">Coming Soon on the App Store</a>
+              <a class="btn btn-primary" href="#preorder">Preorder early access</a>
               <a class="btn btn-muted" href="/support">Contact support</a>
             </div>
           </div>

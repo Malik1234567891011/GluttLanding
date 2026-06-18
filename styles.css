@@ -146,6 +146,11 @@ h1 {
   background: var(--surface-muted);
 }
 
+.btn:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
 .hero-shot {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -229,6 +234,73 @@ h2 {
 .features {
   grid-template-columns: repeat(2, minmax(0, 1fr));
   margin-top: 1.35rem;
+}
+
+.pricing-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin-top: 1.35rem;
+}
+
+.pricing-card {
+  position: relative;
+  padding: 1.2rem;
+}
+
+.pricing-card.featured {
+  border-color: rgba(31, 107, 69, 0.35);
+  box-shadow: var(--shadow);
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  border-radius: 999px;
+  background: var(--brand-soft);
+  color: var(--brand);
+  font-size: 0.82rem;
+  font-weight: 700;
+  padding: 0.35rem 0.65rem;
+  margin-bottom: 0.8rem;
+}
+
+.price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+  margin: 0.7rem 0 0.35rem;
+}
+
+.price strong {
+  font-size: clamp(2rem, 5vw, 2.8rem);
+  letter-spacing: -0.04em;
+}
+
+.price span {
+  color: var(--text-muted);
+}
+
+.release-price {
+  color: var(--text-muted);
+  margin: 0 0 1rem;
+  line-height: 1.55;
+}
+
+.pricing-list {
+  padding-left: 1.1rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+.pricing-list li + li {
+  margin-top: 0.35rem;
+}
+
+.pricing-footnote {
+  margin-top: 1rem;
+  color: var(--text-muted);
+  font-size: 0.92rem;
+  line-height: 1.55;
 }
 
 .screens {
@@ -322,6 +394,7 @@ h2 {
   .hero-wrap,
   .steps,
   .features,
+  .pricing-grid,
   .screens,
   .who,
   .strip,
