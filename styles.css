@@ -16,6 +16,11 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 88px;
+}
+
 html,
 body {
   margin: 0;
@@ -23,6 +28,7 @@ body {
   font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
   color: var(--text);
   background: var(--bg);
+  -webkit-text-size-adjust: 100%;
 }
 
 a {
@@ -63,6 +69,12 @@ img {
   font-size: 1.125rem;
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+}
+
 .nav {
   display: flex;
   gap: 1rem;
@@ -76,6 +88,27 @@ img {
 
 .nav-link:hover {
   color: var(--text);
+}
+
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 0 11px;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  background: var(--surface);
+  cursor: pointer;
+}
+
+.nav-toggle span {
+  display: block;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--text);
 }
 
 .hero {
@@ -144,6 +177,11 @@ h1 {
 
 .btn-muted:hover {
   background: var(--surface-muted);
+}
+
+.btn-sm {
+  padding: 0.5rem 0.95rem;
+  font-size: 0.9rem;
 }
 
 .btn:disabled {
@@ -243,7 +281,14 @@ h2 {
 
 .pricing-card {
   position: relative;
+  display: flex;
+  flex-direction: column;
   padding: 1.2rem;
+}
+
+.pricing-card .btn {
+  width: 100%;
+  margin-top: auto;
 }
 
 .pricing-card.featured {
@@ -410,7 +455,35 @@ h2 {
     padding-top: 2.5rem;
   }
 
+  .nav-toggle {
+    display: flex;
+  }
+
   .nav {
     display: none;
+    position: absolute;
+    top: calc(100% + 1px);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    gap: 0;
+    padding: 0.4rem 1rem 0.8rem;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    box-shadow: var(--shadow);
+  }
+
+  .nav.open {
+    display: flex;
+  }
+
+  .nav-link {
+    padding: 0.85rem 0.2rem;
+    font-size: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .nav-link:last-child {
+    border-bottom: none;
   }
 }
