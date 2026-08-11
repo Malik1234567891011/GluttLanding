@@ -25,7 +25,7 @@ const planConfig = {
   },
   monthly: {
     priceEnv: "STRIPE_PRICE_COOK_MONTHLY",
-    label: "Glutt two cooking sessions per month",
+    label: "Glutt Membership (two cooking sessions a month)",
     mode: "subscription",
     customFields: [guestsField],
   },
