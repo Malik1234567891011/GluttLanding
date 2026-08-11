@@ -1,13 +1,33 @@
 const Stripe = require("stripe");
 
+const dishField = {
+  key: "dish",
+  label: { type: "custom", custom: "What do you want to cook?" },
+  type: "text",
+  optional: false,
+  text: { maximum_length: 200 },
+};
+
+const guestsField = {
+  key: "guests",
+  label: { type: "custom", custom: "How many people are you cooking for?" },
+  type: "numeric",
+  optional: false,
+  numeric: { maximum_length: 3 },
+};
+
 const planConfig = {
-  yearly: {
-    priceEnv: "STRIPE_PRICE_YEARLY_PREORDER",
-    label: "Glutt yearly preorder",
+  session: {
+    priceEnv: "STRIPE_PRICE_COOK_SESSION",
+    label: "Glutt in-home cooking session",
+    mode: "payment",
+    customFields: [dishField, guestsField],
   },
   monthly: {
-    priceEnv: "STRIPE_PRICE_MONTHLY_PREORDER",
-    label: "Glutt first month preorder",
+    priceEnv: "STRIPE_PRICE_COOK_MONTHLY",
+    label: "Glutt two cooking sessions per month",
+    mode: "subscription",
+    customFields: [guestsField],
   },
 };
 
@@ -50,7 +70,7 @@ module.exports = async function handler(req, res) {
   const stripeSecretKey = process.env.STRIPE_SECRET_KEY;
 
   if (!stripeSecretKey) {
-    return sendJson(res, 500, { error: "Stripe is not configured yet." });
+    return sendJson(res, 500, { error: "Checkout is not configured yet." });
   }
 
   const body = getRequestBody(req);
@@ -58,54 +78,59 @@ module.exports = async function handler(req, res) {
   const selectedPlan = planConfig[plan];
 
   if (!selectedPlan) {
-    return sendJson(res, 400, { error: "Choose a valid preorder plan." });
+    return sendJson(res, 400, { error: "Choose a valid booking option." });
   }
 
   const priceId = process.env[selectedPlan.priceEnv];
 
   if (!priceId) {
-    return sendJson(res, 500, { error: "Selected preorder plan is not configured yet." });
+    return sendJson(res, 500, { error: "That booking option is not configured yet." });
   }
 
   const stripe = new Stripe(stripeSecretKey);
   const siteUrl = getSiteUrl(req);
 
+  const metadata = {
+    plan,
+    product: selectedPlan.label,
+    fulfillment: "in_home_cooking_session",
+  };
+
+  const params = {
+    mode: selectedPlan.mode,
+    line_items: [
+      {
+        price: priceId,
+        quantity: 1,
+      },
+    ],
+    billing_address_collection: "auto",
+    phone_number_collection: { enabled: true },
+    allow_promotion_codes: true,
+    automatic_tax: {
+      enabled: process.env.STRIPE_AUTOMATIC_TAX === "true",
+    },
+    custom_fields: selectedPlan.customFields,
+    metadata,
+    custom_text: {
+      submit: {
+        message:
+          "After checkout, we email you a calendar link so you can pick a time that works for you.",
+      },
+    },
+    success_url: `${siteUrl}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${siteUrl}/checkout/cancel`,
+  };
+
+  if (selectedPlan.mode === "subscription") {
+    params.subscription_data = { metadata };
+  } else {
+    params.customer_creation = "always";
+    params.payment_intent_data = { metadata };
+  }
+
   try {
-    const session = await stripe.checkout.sessions.create({
-      mode: "payment",
-      line_items: [
-        {
-          price: priceId,
-          quantity: 1,
-        },
-      ],
-      customer_creation: "always",
-      billing_address_collection: "auto",
-      allow_promotion_codes: true,
-      automatic_tax: {
-        enabled: process.env.STRIPE_AUTOMATIC_TAX === "true",
-      },
-      metadata: {
-        plan,
-        product: selectedPlan.label,
-        fulfillment: "manual_testflight_invite",
-      },
-      payment_intent_data: {
-        metadata: {
-          plan,
-          product: selectedPlan.label,
-          fulfillment: "manual_testflight_invite",
-        },
-      },
-      custom_text: {
-        submit: {
-          message:
-            "After checkout, Glutt will email your TestFlight invite or access instructions manually.",
-        },
-      },
-      success_url: `${siteUrl}/checkout/success?session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${siteUrl}/checkout/cancel`,
-    });
+    const session = await stripe.checkout.sessions.create(params);
 
     return sendJson(res, 200, { url: session.url });
   } catch (error) {

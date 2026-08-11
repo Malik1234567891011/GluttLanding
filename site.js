@@ -15,11 +15,11 @@ if (navToggle && siteNav) {
   });
 }
 
-const preorderButtons = document.querySelectorAll("[data-preorder-plan]");
+const checkoutButtons = document.querySelectorAll("[data-checkout-plan]");
 
-preorderButtons.forEach((button) => {
+checkoutButtons.forEach((button) => {
   button.addEventListener("click", async () => {
-    const plan = button.dataset.preorderPlan;
+    const plan = button.dataset.checkoutPlan;
     const originalText = button.textContent;
 
     button.disabled = true;
@@ -44,7 +44,10 @@ preorderButtons.forEach((button) => {
     } catch (error) {
       button.textContent = originalText;
       button.disabled = false;
-      alert(error.message || "Checkout is not ready yet. Please try again soon.");
+      alert(
+        error.message ||
+          "Checkout is not ready yet. Please try again soon, or email hi@cielpm.ai to book directly."
+      );
     }
   });
 });

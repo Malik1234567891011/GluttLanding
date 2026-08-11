@@ -14,7 +14,7 @@
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f6b45'/%3E%3Ctext x='16' y='23' font-family='Helvetica, Arial, sans-serif' font-size='20' font-weight='bold' text-anchor='middle' fill='white'%3EG%3C/text%3E%3C/svg%3E"
     />
     <link rel="stylesheet" href="/styles.css" />
-    <script src="/preorder.js" defer></script>
+    <script src="/site.js" defer></script>
   </head>
   <body>
     <header class="site-header">
@@ -27,7 +27,7 @@
             <a class="nav-link" href="/support">Support</a>
             <a class="nav-link" href="/privacy">Privacy</a>
           </nav>
-          <a class="btn btn-primary btn-sm header-cta" href="#preorder">Preorder</a>
+          <a class="btn btn-primary btn-sm header-cta" href="#book">Book a session</a>
           <button
             class="nav-toggle"
             id="nav-toggle"
@@ -55,7 +55,7 @@
               Save recipes from anywhere, plan fast, and waste less food.
             </p>
             <div class="actions" id="download">
-              <a class="btn btn-primary" href="#preorder">Preorder early access</a>
+              <a class="btn btn-primary" href="#book">Book a cooking session</a>
               <a class="btn btn-muted" href="#how-it-works">See how it works</a>
             </div>
             <p class="hero-note">Requires iPhone with iOS 17 or later. Not supported on iPad or iOS 16 and earlier.</p>
@@ -149,60 +149,62 @@
         </div>
       </section>
 
-      <section id="preorder">
+      <section id="book">
         <div class="container">
-          <p class="eyebrow">Early bird preorder</p>
-          <h2>Lock in launch pricing before Glutt hits the App Store.</h2>
+          <p class="eyebrow">We cook with you</p>
+          <h2>We come to your place and cook it with you.</h2>
           <p class="section-copy">
-            Preorder now in USD and we will manually email your TestFlight invite or access instructions. Canadian
-            and US customers can check out securely through Stripe.
+            Pick any meal you want to learn. We show up at your kitchen with all the ingredients and any tools
+            we need, and we cook it with you from scratch, start to finish. You keep the skills and the food.
           </p>
           <p class="requirement" role="note">
-            <strong>Before you preorder, please check compatibility.</strong> Glutt currently runs on
-            <strong>iPhone with iOS 17 or later</strong>. It is not yet supported on iPad, or on iOS 16 and
-            earlier. If you are unsure, check Settings &rarr; General &rarr; About on your iPhone before paying.
+            <strong>After you pay, we email you a calendar link</strong> so you can pick a time that works.
+            Tell us about allergies or dietary needs when you book and we will plan around them.
           </p>
           <div class="grid pricing-grid">
             <article class="card pricing-card featured">
-              <span class="badge">Best value</span>
-              <h3>Yearly early access</h3>
+              <span class="badge">One session</span>
+              <h3>We cook with you</h3>
               <div class="price">
-                <strong>$32.99</strong>
-                <span>USD / year</span>
+                <strong>$100</strong>
+                <span>USD one-time</span>
               </div>
-              <p class="release-price">Expected launch price: $38/year.</p>
+              <p class="release-price">One visit, one meal, everything included.</p>
               <ul class="pricing-list">
-                <li>Reserve your first year of Glutt Premium.</li>
-                <li>Get manually invited through TestFlight while launch access is rolling out.</li>
-                <li>Email receipt collected at checkout for fulfillment.</li>
+                <li>You pick the meal &mdash; anything you want to learn.</li>
+                <li>We bring every ingredient and any tools you are missing.</li>
+                <li>Cook for however many people you are feeding.</li>
+                <li>We walk you through every step, start to finish.</li>
               </ul>
-              <button class="btn btn-primary" type="button" data-preorder-plan="yearly">
-                Preorder yearly
+              <button class="btn btn-primary" type="button" data-checkout-plan="session">
+                Book a session
               </button>
             </article>
 
             <article class="card pricing-card">
-              <span class="badge">Try first</span>
-              <h3>First month early access</h3>
+              <span class="badge">Twice a month</span>
+              <h3>Two recipes a month</h3>
               <div class="price">
-                <strong>$8</strong>
-                <span>USD / first month</span>
+                <strong>$75</strong>
+                <span>USD / month</span>
               </div>
-              <p class="release-price">Expected launch price: $14/month.</p>
+              <p class="release-price">Two visits every month, ingredients included.</p>
               <ul class="pricing-list">
-                <li>Pay only for your first month of early access.</li>
-                <li>Good if you want to try Glutt before committing yearly.</li>
-                <li>We will email access details after checkout.</li>
+                <li>We come cook with you twice every month.</li>
+                <li>Ingredients and tools included on every visit.</li>
+                <li>New recipes each month, picked together with you.</li>
+                <li>Cancel anytime, no commitment.</li>
               </ul>
-              <button class="btn btn-muted" type="button" data-preorder-plan="monthly">
-                Preorder first month
+              <button class="btn btn-muted" type="button" data-checkout-plan="monthly">
+                Start monthly
               </button>
             </article>
           </div>
           <p class="pricing-footnote">
-            Prices are charged in USD. Stripe may show local payment details based on your card, billing address,
-            and region. This preorder is fulfilled manually by email and is not an App Store purchase. Requires an
-            iPhone running iOS 17 or later; not supported on iPad or iOS 16 and earlier.
+            Prices are charged in USD through Stripe. Stripe may show local payment details based on your card,
+            billing address, and region. This is an in-person service booked and scheduled by email, not an App
+            Store purchase. To cancel the monthly plan, email
+            <a href="mailto:hi@cielpm.ai">hi@cielpm.ai</a> before your next billing date.
           </p>
         </div>
       </section>
@@ -256,7 +258,7 @@
               deletion requests are straightforward.
             </p>
             <div class="actions">
-              <a class="btn btn-primary" href="#preorder">Preorder early access</a>
+              <a class="btn btn-primary" href="#book">Book a cooking session</a>
               <a class="btn btn-muted" href="/support">Contact support</a>
             </div>
           </div>
