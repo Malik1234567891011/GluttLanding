@@ -1,0 +1,2501 @@
+/* ==========================================================================
+   Glutt — landing experience
+   Scoped to the new front door. styles.css (classic + legal pages) is untouched.
+   Palette + type derive from the existing Glutt identity:
+     bg #f3efe6 · text #1f1b18 · brand #1f6b45 · brand-soft #d7eadf · border #e4ddd4
+   ========================================================================== */
+
+:root {
+  /* ---- surface: the warm night the journey starts in ---- */
+  --ink: #100d0b;
+  --ink-2: #17130f;
+  --ink-3: #211b16;
+
+  /* ---- bone: the brand daylight the journey resolves into ---- */
+  --bone: #f3efe6;
+  --bone-2: #e9e2d4;
+  --bone-3: #d9d0bd;
+
+  /* ---- brand ---- */
+  --char: #1f1b18;
+  --muted: #6c645d;
+  --green: #1f6b45;
+  --green-lit: #5aab7e;
+  --green-deep: #123f29;
+  --green-soft: #d7eadf;
+
+  /* ---- culinary accents (from the app's pantry + hot-honey UI) ---- */
+  --amber: #c98a2e;
+  --amber-lit: #e6b76b;
+  --clay: #a8563a;
+
+  /* ---- on-dark text ---- */
+  --on-dark: #f1ece2;
+  --on-dark-2: rgba(241, 236, 226, 0.66);
+  --on-dark-3: rgba(241, 236, 226, 0.38);
+  --hair: rgba(241, 236, 226, 0.14);
+  --hair-lt: rgba(31, 27, 24, 0.14);
+
+  /* ---- type ---- */
+  --sans: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --serif: "Instrument Serif", "Iowan Old Style", Georgia, serif;
+
+  --fs-hero: clamp(3rem, 10.6vw, 10.5rem);
+  --fs-beat: clamp(2.25rem, 6.6vw, 5.6rem);
+  --fs-display: clamp(2.1rem, 6vw, 5.2rem);
+  --fs-sub: clamp(1.5rem, 3vw, 2.6rem);
+  --fs-body: clamp(1rem, 1.08vw, 1.125rem);
+  --fs-meta: 0.75rem;
+
+  --tr-tight: -0.045em;
+  --lh-tight: 0.88;
+
+  /* ---- motion system ----------------------------------------------------
+     ui      150–300ms   soft, immediate
+     major   700–1600ms  camera + scene changes
+     ambient 6–20s       the world breathing
+     ---------------------------------------------------------------------- */
+  --t-ui-fast: 160ms;
+  --t-ui: 220ms;
+  --t-ui-slow: 300ms;
+  --t-major: 1100ms;
+  --t-major-long: 1500ms;
+
+  --e-out: cubic-bezier(0.22, 0.61, 0.36, 1);      /* UI response */
+  --e-inout: cubic-bezier(0.66, 0, 0.14, 1);        /* camera / major */
+  --e-soft: cubic-bezier(0.33, 1, 0.68, 1);         /* settle */
+  --e-mass: cubic-bezier(0.16, 0.84, 0.24, 1);      /* heavy object */
+
+  /* ---- layering: the headline lives BETWEEN world planes so the phone
+          physically occludes it ---- */
+  --z-back: 0;
+  --z-mid: 1;
+  --z-front: 2;
+  --z-ui: 3;
+  --z-flat: 5;
+  --z-nav: 40;
+  --z-intro: 90;
+
+  --pad: clamp(1.15rem, 4vw, 4.5rem);
+  --wrap: 1440px;
+}
+
+/* ========================= base ========================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  /* No global smooth scroll: on a page this tall it turns a nav click into a
+     five-second slide. main.js scrolls anchors itself and jumps long distances. */
+  scroll-padding-top: 5rem;
+}
+
+body.lp {
+  margin: 0;
+  font-family: var(--sans);
+  font-size: var(--fs-body);
+  line-height: 1.55;
+  color: var(--on-dark);
+  background: var(--ink);
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-synthesis-weight: none;
+}
+
+img {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+dl,
+dd,
+figure {
+  margin: 0;
+}
+
+em {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+}
+
+::selection {
+  background: var(--green);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--green-lit);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.wrap {
+  width: min(var(--wrap), 100% - var(--pad) * 2);
+  margin-inline: auto;
+}
+
+.skip-link {
+  position: fixed;
+  top: 0.6rem;
+  left: 0.6rem;
+  z-index: 100;
+  padding: 0.7rem 1.1rem;
+  border-radius: 999px;
+  background: var(--bone);
+  color: var(--char);
+  font-weight: 600;
+  transform: translateY(-160%);
+  transition: transform var(--t-ui) var(--e-out);
+}
+
+.skip-link:focus-visible {
+  transform: none;
+}
+
+/* ========================= buttons ========================= */
+
+.btn {
+  --btn-bg: transparent;
+  --btn-fg: var(--on-dark);
+  --btn-bd: transparent;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+  padding: 0.95em 1.6em;
+  border: 1px solid var(--btn-bd);
+  border-radius: 999px;
+  background: var(--btn-bg);
+  color: var(--btn-fg);
+  font: inherit;
+  font-weight: 600;
+  font-size: 0.95rem;
+  letter-spacing: -0.011em;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background var(--t-ui) var(--e-out), color var(--t-ui) var(--e-out),
+    border-color var(--t-ui) var(--e-out), box-shadow var(--t-ui) var(--e-out),
+    transform var(--t-ui-fast) var(--e-out);
+  will-change: transform;
+}
+
+.btn--primary {
+  --btn-bg: var(--green);
+  --btn-fg: #fff;
+  --btn-bd: var(--green);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.16) inset, 0 10px 30px -12px rgba(31, 107, 69, 0.9);
+}
+
+.btn--primary:hover {
+  --btn-bg: #23794e;
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.2) inset, 0 16px 40px -14px rgba(31, 107, 69, 1);
+}
+
+.btn--ghost {
+  --btn-bd: var(--hair);
+  --btn-fg: var(--on-dark);
+  backdrop-filter: blur(6px);
+  background: rgba(241, 236, 226, 0.05);
+}
+
+.btn--ghost:hover {
+  --btn-bd: rgba(241, 236, 226, 0.34);
+  background: rgba(241, 236, 226, 0.1);
+}
+
+.btn--sm {
+  padding: 0.62em 1.15em;
+  font-size: 0.85rem;
+}
+
+.btn--lg {
+  padding: 1.1em 2em;
+  font-size: 1.02rem;
+}
+
+.btn:active {
+  transform: scale(0.978);
+}
+
+.btn:disabled {
+  cursor: wait;
+  opacity: 0.7;
+}
+
+.link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55em;
+  font-weight: 600;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 0.15em;
+  transition: gap var(--t-ui) var(--e-out), opacity var(--t-ui) var(--e-out);
+}
+
+.link-arrow span {
+  transition: transform var(--t-ui) var(--e-out);
+}
+
+.link-arrow:hover span {
+  transform: translateX(0.25em);
+}
+
+/* ========================= intro ========================= */
+
+/* Hidden until JS opts in. A full-screen overlay that depends on a script to
+   dismiss it would black out the whole site if that script never runs. */
+.intro {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-intro);
+  display: none;
+  place-items: center;
+  background: var(--ink);
+  pointer-events: none;
+}
+
+body.is-intro .intro,
+body.intro-done .intro {
+  display: grid;
+}
+
+.intro__mark {
+  font-size: clamp(2.4rem, 7vw, 5rem);
+  font-weight: 700;
+  letter-spacing: var(--tr-tight);
+  color: var(--bone);
+  overflow: hidden;
+  padding: 0.1em 0.06em 0.14em;
+}
+
+.intro__mark span {
+  display: block;
+  transform: translateY(0);
+}
+
+/* the slice: a hairline of light passes through the wordmark */
+.intro__mark::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(46vw, 30rem);
+  height: 1px;
+  translate: -50% -50%;
+  background: linear-gradient(90deg, transparent, var(--green-lit), transparent);
+  transform: scaleX(0);
+  transform-origin: 50% 50%;
+}
+
+body.is-intro .intro__mark span {
+  animation: introRise 620ms var(--e-inout) both;
+}
+
+body.is-intro .intro__mark::after {
+  animation: introSlice 700ms var(--e-inout) 240ms both;
+}
+
+body.intro-done .intro {
+  animation: introOut 620ms var(--e-inout) both;
+}
+
+@keyframes introRise {
+  from {
+    transform: translateY(105%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes introSlice {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  35% {
+    opacity: 1;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 0;
+  }
+}
+
+@keyframes introOut {
+  to {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* ========================= nav ========================= */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: var(--z-nav);
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 3vw, 2.5rem);
+  padding: clamp(0.9rem, 1.6vw, 1.5rem) var(--pad);
+  color: var(--on-dark);
+  transition: color var(--t-major) var(--e-inout);
+}
+
+.nav::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(16, 13, 11, 0.72), transparent);
+  opacity: 1;
+  transition: opacity var(--t-major) var(--e-inout);
+  pointer-events: none;
+}
+
+.nav.is-light {
+  color: var(--char);
+}
+
+/* Over the flat chapters the nav sits on bone and, briefly, on a
+   full-bleed photograph. A scrim keeps the wordmark legible on both. */
+.nav.is-light::before {
+  opacity: 1;
+  background: linear-gradient(to bottom, var(--bone) 46%, rgba(243, 239, 230, 0.86) 72%, rgba(243, 239, 230, 0));
+  backdrop-filter: blur(4px);
+  -webkit-mask-image: linear-gradient(to bottom, #000 62%, transparent);
+  mask-image: linear-gradient(to bottom, #000 62%, transparent);
+}
+
+.nav__brand {
+  position: relative;
+  font-weight: 700;
+  font-size: 1.1rem;
+  letter-spacing: -0.03em;
+}
+
+.nav__links {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: clamp(1rem, 2vw, 1.9rem);
+  margin-left: auto;
+}
+
+.nav__link {
+  position: relative;
+  font-size: 0.86rem;
+  font-weight: 500;
+  letter-spacing: -0.005em;
+  opacity: 0.72;
+  transition: opacity var(--t-ui) var(--e-out);
+}
+
+.nav__link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -0.35em;
+  height: 1px;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  transition: transform var(--t-ui-slow) var(--e-out);
+}
+
+.nav__link:hover {
+  opacity: 1;
+}
+
+.nav__link:hover::after {
+  transform: scaleX(1);
+}
+
+.nav__cta {
+  position: relative;
+}
+
+.nav.is-light .btn--ghost {
+  --btn-bd: var(--hair-lt);
+  --btn-fg: var(--char);
+}
+
+.nav__toggle {
+  display: none;
+  position: relative;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.nav__toggle span {
+  position: absolute;
+  left: 50%;
+  width: 15px;
+  height: 1.5px;
+  background: currentColor;
+  translate: -50% 0;
+  transition: transform var(--t-ui) var(--e-out);
+}
+
+.nav__toggle span:nth-child(1) {
+  top: 18px;
+}
+
+.nav__toggle span:nth-child(2) {
+  top: 24px;
+}
+
+.nav__toggle[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(3px) rotate(45deg);
+}
+
+.nav__toggle[aria-expanded="true"] span:nth-child(2) {
+  transform: translateY(-3px) rotate(-45deg);
+}
+
+/* ==========================================================================
+   THE WORLD
+   Two fixed planes with the headline layered between them, so the phone
+   genuinely occludes type instead of just stacking on top of it.
+   ========================================================================== */
+
+.world {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  contain: layout paint size style;
+}
+
+.world--back {
+  z-index: var(--z-back);
+}
+
+.world--front {
+  z-index: var(--z-front);
+}
+
+/* the ground the whole journey sits on: warm night -> warm daylight */
+.world--back::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+      120% 90% at 72% 18%,
+      rgba(41, 32, 25, 0.95) 0%,
+      rgba(16, 13, 11, 1) 62%
+    ),
+    var(--ink);
+  transition: opacity var(--t-major-long) var(--e-inout);
+}
+
+.heat {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1200ms var(--e-inout);
+}
+
+.heat.is-on {
+  opacity: 1;
+}
+
+.stage {
+  position: absolute;
+  inset: 0;
+  perspective: 1500px;
+  perspective-origin: 60% 45%;
+  transform-style: preserve-3d;
+}
+
+/* world dims out once the flat editorial chapter takes over */
+.world {
+  opacity: var(--world-op, 1);
+  transition: opacity 700ms var(--e-inout);
+}
+
+/* ========================= the phone ========================= */
+
+.phone {
+  --pw: clamp(228px, 20.5vw, 312px);
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--pw);
+  aspect-ratio: 1206 / 2622;
+  margin-left: calc(var(--pw) / -2);
+  margin-top: calc(var(--pw) * -1.087);
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.phone__tilt {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* ambient life: a slow vertical breath, ~14s, never bouncy */
+.phone__body {
+  position: absolute;
+  inset: 0;
+  border-radius: calc(var(--pw) * 0.135);
+  background: #0b0908;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  animation: phoneBreath 14s var(--e-soft) infinite;
+  box-shadow:
+    /* inner bezel */ 0 0 0 1.5px #070605,
+    /* machined edge highlight */ 0 0 0 2.5px rgba(241, 236, 226, 0.16),
+    0 0 0 4px rgba(0, 0, 0, 0.55),
+    /* contact shadow + cast */ 0 30px 60px -18px rgba(0, 0, 0, 0.85),
+    0 70px 120px -40px rgba(0, 0, 0, 0.9);
+}
+
+@keyframes phoneBreath {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+  50% {
+    transform: translate3d(0, -3.5px, 0);
+  }
+}
+
+.phone__screens {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  overflow: hidden;
+  background: var(--bone);
+}
+
+.scr {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 0;
+  opacity: 0;
+  transform: scale(1.015);
+  transition: opacity 620ms var(--e-inout), transform 900ms var(--e-inout);
+}
+
+.scr.is-on {
+  opacity: 1;
+  transform: none;
+}
+
+/* specular sheen travelling across the glass; follows the pointer */
+.phone__gloss {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  mix-blend-mode: screen;
+  background: linear-gradient(
+    var(--sheen-a, 118deg),
+    transparent 30%,
+    rgba(255, 255, 255, 0.11) 44%,
+    rgba(255, 255, 255, 0.2) 50%,
+    rgba(255, 255, 255, 0.08) 56%,
+    transparent 72%
+  );
+  background-size: 260% 260%;
+  background-position: var(--sheen-x, 50%) var(--sheen-y, 40%);
+  opacity: 0.85;
+  transition: background-position 900ms var(--e-out);
+}
+
+/* a second, very slow sheen so the glass is alive with the pointer at rest */
+.phone__gloss::after {
+  content: "";
+  position: absolute;
+  inset: -20%;
+  background: linear-gradient(
+    100deg,
+    transparent 42%,
+    rgba(255, 255, 255, 0.07) 50%,
+    transparent 58%
+  );
+  animation: sheenDrift 19s linear infinite;
+}
+
+@keyframes sheenDrift {
+  from {
+    transform: translate3d(-38%, 0, 0);
+  }
+  to {
+    transform: translate3d(38%, 0, 0);
+  }
+}
+
+/* warm light pooling under the device */
+.phone__aura {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 260%;
+  height: 170%;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: radial-gradient(
+    closest-side,
+    rgba(201, 138, 46, 0.2),
+    rgba(201, 138, 46, 0.07) 42%,
+    transparent 72%
+  );
+  filter: blur(18px);
+  animation: auraBreath 17s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes auraBreath {
+  0%,
+  100% {
+    opacity: 0.75;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.06);
+  }
+}
+
+.phone__shadow {
+  position: absolute;
+  left: 50%;
+  bottom: -9%;
+  width: 118%;
+  height: 9%;
+  translate: -50% 0;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(0, 0, 0, 0.72), transparent 76%);
+  filter: blur(14px);
+}
+
+/* ========================= recipe fragments ========================= */
+
+.frag {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: var(--fw, 150px);
+  translate: -50% -50%;
+  transform-style: preserve-3d;
+  will-change: transform, opacity;
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--ink-2);
+  box-shadow: 0 18px 40px -16px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(241, 236, 226, 0.07);
+  font-size: 11px;
+  line-height: 1.35;
+  color: var(--on-dark-2);
+}
+
+.frag img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* — saved video card — */
+.frag--video {
+  aspect-ratio: 9 / 16;
+}
+
+.frag--video .frag__media {
+  position: absolute;
+  inset: 0;
+}
+
+.frag--video .frag__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.78), transparent 52%);
+}
+
+.frag__play {
+  position: absolute;
+  left: 50%;
+  top: 44%;
+  width: 30px;
+  height: 30px;
+  translate: -50% -50%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.9);
+  display: grid;
+  place-items: center;
+}
+
+.frag__play::after {
+  content: "";
+  border-left: 8px solid var(--char);
+  border-top: 5px solid transparent;
+  border-bottom: 5px solid transparent;
+  margin-left: 2px;
+}
+
+.frag__cap {
+  position: absolute;
+  left: 9px;
+  right: 9px;
+  bottom: 8px;
+  color: #fff;
+  font-weight: 500;
+  font-size: 10.5px;
+  letter-spacing: -0.01em;
+}
+
+.frag__tag {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  padding: 2px 6px;
+  border-radius: 5px;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(4px);
+  color: rgba(255, 255, 255, 0.92);
+  font-size: 9px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+/* — screenshot / website / note fragments (paper-ish, lighter mass) — */
+.frag--paper {
+  background: #fbf9f4;
+  color: #494039;
+  padding: 11px 12px 13px;
+  box-shadow: 0 16px 36px -16px rgba(0, 0, 0, 0.75), 0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+
+.frag--paper .frag__url {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-bottom: 9px;
+  padding: 4px 7px;
+  border-radius: 999px;
+  background: #ece7dd;
+  font-size: 9px;
+  color: #7b7168;
+  letter-spacing: -0.01em;
+}
+
+.frag--paper .frag__url::before {
+  content: "";
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--green);
+  flex: none;
+}
+
+.frag__h {
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: -0.02em;
+  color: #2a2420;
+  margin-bottom: 7px;
+}
+
+.frag__lines {
+  display: grid;
+  gap: 5px;
+}
+
+.frag__lines i {
+  display: block;
+  height: 4px;
+  border-radius: 2px;
+  background: #ddd6ca;
+}
+
+.frag__lines i:nth-child(2) {
+  width: 88%;
+}
+.frag__lines i:nth-child(3) {
+  width: 64%;
+}
+.frag__lines i:nth-child(4) {
+  width: 79%;
+}
+
+/* — small utility chips: nutrition, timer, pantry — */
+.frag--chip {
+  /* chips vary in width, so they are placed by their left edge — otherwise a
+     column of centred pills reads as scattered, not aligned */
+  translate: 0 -50%;
+  width: auto;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(241, 236, 226, 0.07);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 0 1px rgba(241, 236, 226, 0.12), 0 12px 28px -14px rgba(0, 0, 0, 0.8);
+  color: var(--on-dark);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.frag--chip b {
+  font-weight: 700;
+}
+
+.frag--chip .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex: none;
+}
+
+.dot--green {
+  background: var(--green-lit);
+}
+.dot--amber {
+  background: var(--amber-lit);
+}
+
+.frag--pantry {
+  background: rgba(201, 138, 46, 0.13);
+  box-shadow: 0 0 0 1px rgba(230, 183, 107, 0.3), 0 12px 28px -14px rgba(0, 0, 0, 0.8);
+  color: var(--amber-lit);
+}
+
+/* — real food, small — */
+.frag--food {
+  border-radius: 12px;
+}
+
+.frag--food.is-round {
+  border-radius: 50%;
+}
+
+/* — the organised Glutt row a fragment becomes after it crosses the glass — */
+.frag__resolved {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  border-radius: inherit;
+  overflow: hidden;
+  background: #fff;
+  opacity: 0;
+  transform: scale(0.96);
+  transition: opacity 420ms var(--e-out), transform 520ms var(--e-out);
+}
+
+.frag.is-resolved {
+  aspect-ratio: 148 / 118;
+}
+
+.frag.is-resolved .frag__resolved {
+  opacity: 1;
+  transform: none;
+}
+
+.frag__resolved img {
+  width: 100%;
+  flex: 1 1 auto;
+  min-height: 0;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+.frag__rmeta {
+  flex: none;
+  padding: 7px 8px 9px;
+}
+
+.frag__rmeta b {
+  display: block;
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #23201d;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+}
+
+.frag__rmeta i {
+  display: block;
+  margin-top: 2px;
+  font-style: normal;
+  font-size: 9px;
+  color: #8d837a;
+}
+
+/* ==========================================================================
+   ACTS — sticky stages. Native scroll is never intercepted; the camera
+   simply reads scroll position and eases toward it.
+   ========================================================================== */
+
+.act {
+  position: relative;
+}
+
+/* A sticky element ALWAYS forms a stacking context, so the z-index values on
+   the type inside are scoped to this box, not to the page. Pinning the act at
+   z-index 1 is what puts it between the two world planes: the phone (plane 2)
+   genuinely occludes the headline, while the ground (plane 0) stays behind.
+   The consequence is that nothing interactive may sit under the phone — the
+   compositions below are laid out so nothing does. */
+.act__pin {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  height: 100svh;
+  display: grid;
+  align-content: center;
+  overflow: clip;
+}
+
+.act--hero {
+  height: 190vh;
+}
+.act--save {
+  height: 250vh;
+}
+.act--plan {
+  height: 210vh;
+}
+.act--portal {
+  height: 170vh;
+}
+.act--cook {
+  height: 250vh;
+}
+.act--final {
+  height: 170vh;
+}
+
+/* ---------------- hero ---------------- */
+
+.hero {
+  display: grid;
+  gap: clamp(1.4rem, 3vh, 2.6rem);
+  align-content: center;
+  padding-block: clamp(5rem, 12vh, 8rem) clamp(2rem, 6vh, 4rem);
+}
+
+.hero__eyebrow {
+  position: relative;
+  z-index: var(--z-ui);
+  font-size: var(--fs-meta);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--green-lit);
+  overflow: hidden;
+}
+
+.hero__eyebrow span {
+  display: inline-block;
+}
+
+.hero__title {
+  position: relative;
+  z-index: var(--z-mid); /* deliberately BELOW the phone */
+  max-width: 15ch;
+  font-size: var(--fs-hero);
+  font-weight: 700;
+  line-height: var(--lh-tight);
+  letter-spacing: var(--tr-tight);
+  color: var(--bone);
+  text-wrap: balance;
+}
+
+.hero__title .ln {
+  display: block;
+  overflow: hidden;
+}
+
+.hero__title .w {
+  display: inline-block;
+  will-change: transform;
+}
+
+.hero__title .it {
+  font-family: var(--serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--amber-lit);
+  padding-right: 0.06em;
+}
+
+.hero__foot {
+  position: relative;
+  z-index: var(--z-ui);
+  display: grid;
+  gap: 1.15rem;
+  max-width: 34rem;
+}
+
+.hero__lead {
+  color: var(--on-dark-2);
+  font-size: clamp(0.98rem, 1.12vw, 1.14rem);
+  line-height: 1.55;
+  max-width: 33ch;
+}
+
+.hero__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+}
+
+.hero__note {
+  color: var(--on-dark-3);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  max-width: 40ch;
+}
+
+.scroll-hint {
+  position: absolute;
+  left: var(--pad);
+  bottom: clamp(1.2rem, 4vh, 2.4rem);
+  z-index: var(--z-ui);
+  width: 1px;
+  height: clamp(38px, 6vh, 62px);
+  background: var(--hair);
+  overflow: hidden;
+}
+
+.scroll-hint i {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, transparent, var(--green-lit), transparent);
+  animation: hintFall 3.4s var(--e-inout) infinite;
+}
+
+@keyframes hintFall {
+  0% {
+    transform: translateY(-100%);
+  }
+  60%,
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* ---------------- beats (save / plan / cook) ---------------- */
+
+.beat {
+  /* .wrap and .beat sit on the same element. .wrap's auto margins centre the
+     box; capping it at 31rem and then aligning it left/right would drop the
+     page gutter entirely, so the gutter is restated here. */
+  --gutter: max(var(--pad), calc((100% - var(--wrap)) / 2));
+  display: grid;
+  gap: 1.05rem;
+  max-width: 31rem;
+  margin-left: var(--gutter);
+  margin-right: auto;
+  padding-block: 6rem;
+}
+
+.beat--right {
+  margin-left: auto;
+  margin-right: var(--gutter);
+  text-align: right;
+  justify-items: end;
+}
+
+.beat--center {
+  max-width: 44rem;
+  margin-inline: auto;
+  text-align: center;
+  justify-items: center;
+}
+
+.beat__index {
+  position: relative;
+  z-index: var(--z-ui);
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  font-size: var(--fs-meta);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--on-dark-3);
+}
+
+.beat__index span {
+  color: var(--green-lit);
+  font-weight: 700;
+}
+
+.beat__title {
+  position: relative;
+  z-index: var(--z-mid);
+  font-size: var(--fs-beat);
+  font-weight: 700;
+  line-height: 0.94;
+  letter-spacing: var(--tr-tight);
+  color: var(--bone);
+}
+
+.beat__title em {
+  color: var(--amber-lit);
+}
+
+.beat__title--cook {
+  line-height: 1.06;
+  font-size: clamp(1.9rem, 4.4vw, 3.9rem);
+}
+
+.beat__copy {
+  position: relative;
+  z-index: var(--z-ui);
+  color: var(--on-dark-2);
+  max-width: 32ch;
+  font-size: clamp(0.96rem, 1.05vw, 1.08rem);
+}
+
+.beat__ticks {
+  position: relative;
+  z-index: var(--z-ui);
+  display: flex;
+  gap: 0.5rem;
+  margin: 0.4rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.beat__ticks li {
+  padding: 0.42em 0.9em;
+  border: 1px solid var(--hair);
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: var(--on-dark-3);
+  transition: color var(--t-ui-slow) var(--e-out), border-color var(--t-ui-slow) var(--e-out),
+    background var(--t-ui-slow) var(--e-out);
+}
+
+.beat__ticks li.is-on {
+  color: var(--bone);
+  border-color: rgba(90, 171, 126, 0.55);
+  background: rgba(31, 107, 69, 0.22);
+}
+
+/* ---------------- the plate portal ---------------- */
+
+.act--cook .act__pin {
+  align-content: start;
+}
+
+.act--cook .beat {
+  padding-top: clamp(4rem, 10vh, 7rem);
+  padding-bottom: 0;
+}
+
+/* Set like a film caption rather than stacked under the title, which keeps
+   the middle of the frame for the device. */
+.act--cook .beat__copy {
+  position: absolute;
+  left: var(--pad);
+  bottom: clamp(2rem, 7vh, 4rem);
+  max-width: 26ch;
+  text-align: left;
+  margin: 0;
+}
+
+.act--final .act__pin {
+  align-content: stretch;
+  padding-block: clamp(5.5rem, 13vh, 9rem) clamp(3rem, 9vh, 6rem);
+}
+
+.act--portal .act__pin {
+  place-content: center;
+  /* the aperture has to pass in front of the phone we are travelling past */
+  z-index: 6;
+}
+
+.portal {
+  display: grid;
+  place-items: center;
+  will-change: transform;
+}
+
+.portal__disc {
+  position: relative;
+  width: clamp(200px, 27vw, 380px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  will-change: transform;
+  box-shadow: 0 40px 90px -30px rgba(0, 0, 0, 0.9), 0 0 0 1px rgba(241, 236, 226, 0.1),
+    0 0 0 12px rgba(241, 236, 226, 0.03);
+}
+
+.portal__disc img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 42%;
+  transform: scale(1.08);
+}
+
+/* Past ~2.5x the photo would just be a wall of pixels, so the plate becomes
+   the warm ground of the kitchen we are arriving in. */
+.portal__glow {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  opacity: 0;
+  background: radial-gradient(62% 62% at 50% 44%, #48301c 0%, #241a12 55%, #120f0c 100%);
+  transition: opacity 200ms linear;
+}
+
+/* ---------------- final ---------------- */
+
+.final {
+  display: grid;
+  align-content: space-between;
+  justify-items: center;
+  text-align: center;
+  height: 100%;
+}
+
+.final__title {
+  position: relative;
+  z-index: var(--z-mid);
+  font-size: clamp(1.95rem, 5.2vw, 4.8rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: var(--tr-tight);
+  color: var(--bone);
+}
+
+.final__title em {
+  color: var(--amber-lit);
+}
+
+.final__cta {
+  position: relative;
+  z-index: var(--z-ui);
+}
+
+/* ==========================================================================
+   COOK SCREEN — a faithful rebuild of Glutt's live cooking screen.
+   Copy and states are taken from the shipped app (wake word "Hey Chef",
+   "Listening", step/timer/substitute controls). Nothing is invented, and
+   nothing here talks to a model — the sequence is scripted in the client.
+   ========================================================================== */
+
+.scr--cook {
+  --u: calc(var(--pw) / 21);
+  font-size: var(--u);
+  display: flex;
+  flex-direction: column;
+  gap: 0.7em;
+  padding: 2.6em 1.05em 1.05em;
+  background: radial-gradient(130% 120% at 50% -10%, #f1ead9 0%, #e7dfcc 55%, #e0d7c2 100%);
+  color: #2b241d;
+  line-height: 1.35;
+  letter-spacing: -0.012em;
+  text-align: left;
+}
+
+.ck__top {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 0.86em;
+}
+
+.ck__top svg {
+  width: 1.15em;
+  height: 1.15em;
+  flex: none;
+  color: var(--green);
+}
+
+.ck__dish {
+  font-weight: 700;
+  color: #241e19;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ck__timer {
+  margin-left: auto;
+  padding: 0.24em 0.62em;
+  border-radius: 999px;
+  background: rgba(31, 107, 69, 0.1);
+  color: var(--green);
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  transition: background var(--t-ui) var(--e-out), color var(--t-ui) var(--e-out);
+}
+
+.ck__timer.is-live {
+  background: var(--green);
+  color: #fff;
+}
+
+.ck__say {
+  align-self: flex-start;
+  padding: 0.32em 0.7em;
+  border-radius: 999px;
+  background: rgba(31, 107, 69, 0.08);
+  color: #6d7a6f;
+  font-size: 0.72em;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: background var(--t-ui) var(--e-out), color var(--t-ui) var(--e-out);
+}
+
+.ck__say.is-listening {
+  background: rgba(31, 107, 69, 0.16);
+  color: var(--green);
+}
+
+/* The conversation centres itself in whatever room is left between the
+   recipe header and the step card, instead of pooling dead space. */
+.ck__convo {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 0.6em;
+  min-height: 0;
+}
+
+.ck__chef {
+  font-size: 0.98em;
+  font-weight: 600;
+  color: #1d4634;
+}
+
+.ck__user {
+  align-self: flex-end;
+  max-width: 88%;
+  padding: 0.5em 0.75em;
+  border-radius: 1em 1em 0.25em 1em;
+  background: rgba(31, 27, 24, 0.07);
+  color: #4b4239;
+  font-size: 0.8em;
+  opacity: 0;
+  transform: translateY(0.5em);
+  transition: opacity 320ms var(--e-out), transform 380ms var(--e-out);
+}
+
+.ck__user.is-on {
+  opacity: 1;
+  transform: none;
+}
+
+/* waveform — reacts to the scripted conversation, never to real audio */
+.ck__wave {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  gap: 0.18em;
+  height: 1.6em;
+  opacity: 0.35;
+  transition: opacity var(--t-ui-slow) var(--e-out);
+}
+
+.ck__wave.is-active {
+  opacity: 1;
+}
+
+.ck__wave i {
+  flex: 1;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--green);
+  transform: scaleY(0.16);
+  transform-origin: 50% 50%;
+  transition: transform 120ms linear;
+}
+
+.ck__step {
+  padding: 0.85em 0.9em;
+  border-radius: 1.05em;
+  background: rgba(255, 255, 255, 0.78);
+  box-shadow: 0 0.5em 1.4em -0.6em rgba(40, 32, 24, 0.28);
+}
+
+.ck__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.45em;
+  font-size: 0.66em;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #8a8076;
+  margin-bottom: 0.45em;
+}
+
+.ck__meta b {
+  color: var(--green);
+}
+
+.ck__title {
+  font-size: 1em;
+  font-weight: 700;
+  color: #241e19;
+  margin-bottom: 0.3em;
+}
+
+.ck__body {
+  font-size: 0.76em;
+  color: #6b6157;
+}
+
+.ck__pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  margin-top: 0.7em;
+  padding: 0.42em 0.8em;
+  border-radius: 999px;
+  background: var(--green);
+  color: #fff;
+  font-size: 0.72em;
+  font-weight: 700;
+  transform: scale(0.94);
+  opacity: 0.55;
+  transition: transform 420ms var(--e-out), opacity 420ms var(--e-out);
+}
+
+.ck__pill.is-on {
+  transform: none;
+  opacity: 1;
+}
+
+.ck__controls {
+  display: flex;
+  justify-content: center;
+  gap: 0.75em;
+  padding-top: 0.2em;
+}
+
+.ck__ctl {
+  width: 2.5em;
+  height: 2.5em;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  color: #4b4239;
+  box-shadow: 0 0.4em 1em -0.5em rgba(40, 32, 24, 0.4);
+}
+
+.ck__ctl svg {
+  width: 1.1em;
+  height: 1.1em;
+}
+
+.ck__ctl--mic {
+  background: var(--green);
+  color: #fff;
+  transition: box-shadow var(--t-ui) var(--e-out);
+}
+
+.ck__ctl--mic.is-hot {
+  box-shadow: 0 0 0 0.32em rgba(31, 107, 69, 0.18), 0 0.4em 1em -0.5em rgba(40, 32, 24, 0.4);
+}
+
+.ck__ctl--end {
+  background: #b4472f;
+  color: #fff;
+}
+
+/* steam rising off the phone during the cooking act */
+.steam {
+  position: absolute;
+  left: 50%;
+  bottom: 4%;
+  width: 190%;
+  height: 118%;
+  translate: -50% 0;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 900ms var(--e-inout);
+}
+
+.steam.is-on {
+  opacity: 1;
+}
+
+.steam i {
+  position: absolute;
+  bottom: 0;
+  width: 28%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(241, 236, 226, 0.13), transparent 70%);
+  filter: blur(12px);
+  animation: steamUp var(--dur, 11s) ease-in-out var(--del, 0s) infinite;
+}
+
+.steam i:nth-child(1) {
+  left: 22%;
+  --dur: 11s;
+  --del: 0s;
+}
+.steam i:nth-child(2) {
+  left: 40%;
+  --dur: 14s;
+  --del: -3.5s;
+}
+.steam i:nth-child(3) {
+  left: 56%;
+  --dur: 12.5s;
+  --del: -7s;
+}
+
+@keyframes steamUp {
+  0% {
+    transform: translate3d(0, 22%, 0) scale(0.7);
+    opacity: 0;
+  }
+  22% {
+    opacity: 0.9;
+  }
+  100% {
+    transform: translate3d(6%, -62%, 0) scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* ==========================================================================
+   EDITORIAL RESET — the dimensional world stops here. Flat, printed,
+   magazine. Also the tonal resolution: the page arrives at Glutt's own bone.
+   ========================================================================== */
+
+.ed {
+  position: relative;
+  z-index: var(--z-flat);
+  background: var(--bone);
+  color: var(--char);
+  padding-block: clamp(4rem, 11vh, 9rem) clamp(3rem, 8vh, 6rem);
+}
+
+/* the seam between world and page — a soft horizon, not a hard cut */
+.ed::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: clamp(90px, 16vh, 210px);
+  background: linear-gradient(to bottom, transparent, var(--bone));
+  pointer-events: none;
+}
+
+.ed__rule {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  width: min(var(--wrap), 100% - var(--pad) * 2);
+  margin: 0 auto clamp(3rem, 8vh, 6rem);
+  padding-bottom: 0.7rem;
+  border-bottom: 1px solid var(--hair-lt);
+  font-size: var(--fs-meta);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.ed__lead {
+  display: grid;
+  gap: clamp(1.5rem, 4vw, 4rem);
+  grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr);
+  align-items: end;
+  margin-bottom: clamp(3rem, 8vh, 6rem);
+}
+
+.ed__display {
+  font-size: var(--fs-display);
+  font-weight: 700;
+  line-height: 0.95;
+  letter-spacing: var(--tr-tight);
+  text-wrap: balance;
+}
+
+.ed__display em {
+  color: var(--green);
+}
+
+.ed__standfirst {
+  color: var(--muted);
+  max-width: 42ch;
+  padding-bottom: 0.5rem;
+}
+
+/* full-bleed photography, intentionally cropped */
+.ed__bleed {
+  position: relative;
+  margin-block: clamp(2rem, 6vh, 5rem);
+  height: clamp(320px, 62vh, 720px);
+  overflow: clip;
+}
+
+.ed__bleed img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 46%;
+  will-change: transform;
+}
+
+.ed__bleed figcaption {
+  position: absolute;
+  left: var(--pad);
+  bottom: clamp(0.9rem, 3vh, 1.8rem);
+  display: flex;
+  align-items: baseline;
+  gap: 0.7em;
+  color: rgba(255, 255, 255, 0.94);
+  font-size: 0.82rem;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.6);
+}
+
+.ed__bleed figcaption span {
+  font-size: var(--fs-meta);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  opacity: 0.75;
+}
+
+/* features as an editorial index, not a bento of cards */
+.ed__grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  margin-block: clamp(2.5rem, 7vh, 5rem);
+  border-top: 1px solid var(--hair-lt);
+}
+
+.ed__item {
+  padding: clamp(1.4rem, 2.6vw, 2.4rem) clamp(1rem, 2vw, 2rem) clamp(1.4rem, 2.6vw, 2.4rem) 0;
+  border-bottom: 1px solid var(--hair-lt);
+}
+
+.ed__item + .ed__item {
+  padding-left: clamp(1rem, 2vw, 2rem);
+  border-left: 1px solid var(--hair-lt);
+}
+
+.ed__item:nth-child(3n + 1) {
+  border-left: 0;
+  padding-left: 0;
+}
+
+.ed__item h3 {
+  font-size: 1.02rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.4rem;
+}
+
+.ed__item p {
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.ed__duo {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(1.5rem, 5vw, 5rem);
+  align-items: center;
+  width: min(var(--wrap), 100% - var(--pad) * 2);
+  margin: clamp(3rem, 9vh, 7rem) auto;
+}
+
+.ed__shot {
+  position: relative;
+  justify-self: center;
+  width: min(300px, 74%);
+}
+
+.ed__shot img {
+  width: 100%;
+  border-radius: 26px;
+  box-shadow: 0 40px 80px -34px rgba(31, 27, 24, 0.5), 0 0 0 1px rgba(31, 27, 24, 0.08);
+}
+
+.ed__aside {
+  display: grid;
+  gap: 1.1rem;
+  justify-items: start;
+  max-width: 40ch;
+}
+
+.ed__aside p {
+  color: var(--muted);
+}
+
+.ed__sub {
+  font-size: var(--fs-sub);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+
+.ed__sub em {
+  color: var(--green);
+}
+
+.ed__sub--wide {
+  margin-bottom: 1.6rem;
+}
+
+.ed__who {
+  margin-top: clamp(2.5rem, 7vh, 5rem);
+}
+
+.ed__deflist {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.2rem, 3vw, 3rem);
+  border-top: 1px solid var(--hair-lt);
+  padding-top: 1.6rem;
+}
+
+.ed__deflist dt {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.35rem;
+}
+
+.ed__deflist dd {
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+/* ========================= booking ========================= */
+
+.book {
+  position: relative;
+  z-index: var(--z-flat);
+  background: var(--bone-2);
+  color: var(--char);
+  padding-block: clamp(3.5rem, 10vh, 7rem);
+  scroll-margin-top: 4.5rem;
+}
+
+/* The journey changes tone four times — dark, bone, dark, bone, dark. Every
+   seam is a gradient so none of them reads as a section boundary. */
+.book::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: clamp(80px, 14vh, 190px);
+  background: linear-gradient(to top, var(--bone-2) 0%, rgba(233, 226, 212, 0.38) 42%, transparent 100%);
+  pointer-events: none;
+}
+
+.ed::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 100%;
+  height: clamp(80px, 14vh, 190px);
+  /* weighted toward bone so the crossfade never parks on a muddy mid-grey */
+  background: linear-gradient(to bottom, var(--bone) 0%, rgba(243, 239, 230, 0.38) 42%, transparent 100%);
+  pointer-events: none;
+}
+
+.book__eyebrow {
+  font-size: var(--fs-meta);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green);
+  margin-bottom: 0.9rem;
+}
+
+.book__title {
+  font-size: clamp(1.7rem, 3.6vw, 3rem);
+  font-weight: 700;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  max-width: 20ch;
+  margin-bottom: 0.9rem;
+}
+
+.book__copy {
+  color: var(--muted);
+  max-width: 56ch;
+}
+
+.book__note {
+  margin-top: 1.3rem;
+  padding: 0.95rem 1.15rem;
+  border: 1px solid rgba(31, 107, 69, 0.32);
+  border-radius: 14px;
+  background: var(--green-soft);
+  font-size: 0.94rem;
+  max-width: 62ch;
+}
+
+.plans {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.1rem;
+  margin-top: 2rem;
+}
+
+.plan {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  padding: clamp(1.3rem, 2.4vw, 2rem);
+  border: 1px solid var(--hair-lt);
+  border-radius: 20px;
+  background: #fff;
+}
+
+.plan--featured {
+  border-color: rgba(31, 107, 69, 0.42);
+  box-shadow: 0 30px 60px -34px rgba(31, 107, 69, 0.5);
+}
+
+.plan__badge {
+  align-self: start;
+  padding: 0.34em 0.72em;
+  border-radius: 999px;
+  background: var(--green-soft);
+  color: var(--green);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.plan__name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-top: 0.3rem;
+}
+
+.plan__price {
+  display: flex;
+  align-items: baseline;
+  gap: 0.45rem;
+}
+
+.plan__price strong {
+  font-size: clamp(2rem, 4.4vw, 2.9rem);
+  font-weight: 700;
+  letter-spacing: -0.045em;
+}
+
+.plan__price span {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.plan__sub {
+  color: var(--muted);
+  font-size: 0.94rem;
+}
+
+.plan__list {
+  margin: 0.5rem 0 1.4rem;
+  padding-left: 1.05rem;
+  color: var(--muted);
+  font-size: 0.94rem;
+  line-height: 1.6;
+}
+
+.plan__list li + li {
+  margin-top: 0.32rem;
+}
+
+.plan .btn {
+  margin-top: auto;
+  width: 100%;
+}
+
+.plan .btn--ghost {
+  --btn-bd: var(--hair-lt);
+  --btn-fg: var(--char);
+  background: transparent;
+  backdrop-filter: none;
+}
+
+.plan .btn--ghost:hover {
+  --btn-bd: rgba(31, 27, 24, 0.4);
+  background: rgba(31, 27, 24, 0.04);
+}
+
+.book__fine {
+  margin-top: 1.4rem;
+  color: var(--muted);
+  font-size: 0.86rem;
+  line-height: 1.6;
+  max-width: 86ch;
+}
+
+.book__fine a {
+  color: var(--green);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ========================= footer ========================= */
+
+.ft {
+  position: relative;
+  z-index: var(--z-flat);
+  background: var(--ink);
+  color: var(--on-dark);
+  padding-block: clamp(3rem, 8vh, 5rem) clamp(2rem, 5vh, 3.5rem);
+}
+
+.ft__inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) repeat(2, minmax(0, 1fr));
+  gap: clamp(1.8rem, 4vw, 4rem);
+}
+
+.ft__brand strong {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  display: block;
+  margin-bottom: 0.6rem;
+}
+
+.ft__brand p {
+  color: var(--on-dark-2);
+  font-size: 0.92rem;
+  max-width: 32ch;
+}
+
+.ft__muted {
+  color: var(--on-dark-3) !important;
+  font-size: 0.86rem !important;
+  margin-top: 0.5rem !important;
+}
+
+.ft__muted a {
+  border-bottom: 1px solid var(--hair);
+}
+
+.ft__muted a:hover {
+  color: var(--on-dark);
+}
+
+.ft__col {
+  display: grid;
+  gap: 0.6rem;
+  align-content: start;
+}
+
+.ft__col h4 {
+  font-size: var(--fs-meta);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--on-dark-3);
+  margin-bottom: 0.3rem;
+}
+
+.ft__col a {
+  color: var(--on-dark-2);
+  font-size: 0.94rem;
+  width: fit-content;
+  transition: color var(--t-ui) var(--e-out);
+}
+
+.ft__col a:hover {
+  color: var(--on-dark);
+}
+
+/* ==========================================================================
+   RESPONSIVE
+   Mobile is a different composition, not a narrower desktop: the phone comes
+   forward and frontal, the type restacks, the object count drops.
+   ========================================================================== */
+
+/* default camera pose, so the composition is already right with no JS */
+.phone {
+  transform: translate3d(25vw, 0, 0) rotateY(-11deg) rotateX(2.5deg);
+}
+
+@media (max-width: 1280px) {
+  .hero__title {
+    max-width: 13ch;
+  }
+  .phone {
+    transform: translate3d(27vw, 0, 0) rotateY(-11deg) rotateX(2.5deg);
+  }
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --fs-hero: clamp(2.9rem, 9.4vw, 5.6rem);
+  }
+
+  .ed__lead {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+
+  .ed__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ed__item:nth-child(3n + 1) {
+    border-left: 1px solid var(--hair-lt);
+    padding-left: clamp(1rem, 2vw, 2rem);
+  }
+
+  .ed__item:nth-child(2n + 1) {
+    border-left: 0;
+    padding-left: 0;
+  }
+
+  .ed__deflist {
+    grid-template-columns: 1fr;
+    gap: 1.3rem;
+  }
+
+  .ft__inner {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .ft__brand {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 860px) {
+  .ed__duo {
+    grid-template-columns: 1fr;
+    gap: 2.2rem;
+  }
+
+  .ed__aside {
+    max-width: none;
+  }
+
+  .plans {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------------- mobile: recomposed ---------------- */
+
+@media (max-width: 760px) {
+  :root {
+    --fs-hero: clamp(2.6rem, 12.4vw, 4.2rem);
+    --fs-beat: clamp(2rem, 9.6vw, 3.2rem);
+    --pad: 1.15rem;
+  }
+
+  .nav__links {
+    position: fixed;
+    inset: 0 0 auto;
+    top: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    margin: 0;
+    padding: 5.2rem var(--pad) 1.6rem;
+    background: rgba(16, 13, 11, 0.96);
+    backdrop-filter: blur(16px);
+    transform: translateY(-101%);
+    transition: transform 460ms var(--e-inout);
+  }
+
+  .nav__links.is-open {
+    transform: none;
+  }
+
+  .nav {
+    gap: 0.6rem;
+  }
+
+  .nav__link {
+    padding: 1rem 0;
+    font-size: 1.05rem;
+    opacity: 1;
+    border-bottom: 1px solid var(--hair);
+    color: var(--on-dark);
+  }
+
+  .nav__link::after {
+    display: none;
+  }
+
+  .nav__cta {
+    margin-left: auto;
+    padding: 0.6em 0.95em;
+    font-size: 0.8rem;
+  }
+
+  .nav__toggle {
+    display: block;
+  }
+
+  /* phone comes forward, frontal, and centred */
+  .phone {
+    --pw: clamp(190px, 52vw, 260px);
+    transform: translate3d(0, 16vh, 0) rotateY(-4deg) rotateX(1.5deg);
+  }
+
+  .act--hero {
+    height: 165vh;
+  }
+  .act--save {
+    height: 200vh;
+  }
+  .act--plan {
+    height: 175vh;
+  }
+  .act--portal {
+    height: 140vh;
+  }
+  .act--cook {
+    height: 205vh;
+  }
+  .act--final {
+    height: 150vh;
+  }
+
+  /* Mobile hero is its own composition: type and the call to action own the
+     top of the screen, and the device rises from the bottom edge, cropped.
+     Nothing interactive is allowed under the phone. */
+  .act--hero .act__pin {
+    align-content: start;
+  }
+
+  .hero {
+    align-content: start;
+    padding-block: 4.6rem 0;
+    gap: 0.8rem;
+  }
+
+  .hero__title {
+    max-width: none;
+  }
+
+  .hero__foot {
+    position: static;
+    gap: 0.7rem;
+    max-width: none;
+  }
+
+  .hero__lead {
+    font-size: 0.95rem;
+    max-width: 32ch;
+  }
+
+  .hero__cta {
+    align-items: center;
+    gap: 1rem;
+  }
+
+  /* the quiet second action becomes a link, which buys back a whole row */
+  .hero__cta .btn--ghost {
+    padding: 0.4em 0;
+    border: 0;
+    background: none;
+    backdrop-filter: none;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+    text-decoration-thickness: 1px;
+  }
+
+  .hero__note {
+    font-size: 0.72rem;
+  }
+
+  .scroll-hint {
+    display: none;
+  }
+
+  .beat {
+    padding-block: 0;
+    max-width: none;
+  }
+
+  .act--save .act__pin,
+  .act--plan .act__pin {
+    align-content: end;
+  }
+
+  .act--save .beat,
+  .act--plan .beat {
+    padding-bottom: clamp(2rem, 8vh, 4rem);
+  }
+
+  .beat--right {
+    text-align: left;
+    justify-items: start;
+    margin-left: var(--gutter);
+    margin-right: auto;
+  }
+
+  .beat__copy {
+    max-width: 30ch;
+    font-size: 0.95rem;
+  }
+
+  .act--cook .act__pin {
+    align-content: start;
+  }
+
+  .act--cook .beat {
+    padding-top: 4.6rem;
+  }
+
+  .act--cook .beat__copy {
+    position: static;
+    max-width: 34ch;
+    text-align: center;
+  }
+
+  .beat__title--cook {
+    font-size: clamp(1.55rem, 6.6vw, 2.2rem);
+  }
+
+  .scr--cook {
+    --u: calc(var(--pw) / 18.5);
+  }
+
+  .ck__wave {
+    height: 2.2em;
+  }
+
+  .portal__disc {
+    width: clamp(190px, 62vw, 300px);
+  }
+
+  .final__title {
+    font-size: clamp(1.8rem, 8.4vw, 2.8rem);
+  }
+
+  .ed__bleed {
+    height: clamp(280px, 52vh, 420px);
+  }
+
+  .ed__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .ed__item,
+  .ed__item + .ed__item {
+    border-left: 0 !important;
+    padding-left: 0 !important;
+    padding-right: 0;
+  }
+
+  .ed__shot {
+    width: min(260px, 68%);
+  }
+
+  .ft__inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .phone {
+    --pw: clamp(178px, 54vw, 218px);
+    transform: translate3d(0, 14vh, 0) rotateY(-4deg) rotateX(1.5deg);
+  }
+
+  .hero__note {
+    font-size: 0.68rem;
+  }
+}
+
+/* short landscape phones: never let the pin overflow */
+@media (max-height: 620px) and (min-width: 761px) {
+  .hero {
+    padding-block: 4.5rem 1.5rem;
+  }
+  .phone {
+    --pw: clamp(180px, 15vw, 230px);
+  }
+}
+
+/* ==========================================================================
+   REDUCED MOTION
+   Compositions survive. Continuous motion, camera travel, distortion and
+   parallax do not.
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  /* keep the deliberate scene changes legible, just quick and simple */
+  .scr,
+  .frag,
+  .phone,
+  .portal__disc,
+  .beat__ticks li {
+    transition-duration: 260ms !important;
+  }
+
+  .heat,
+  .steam,
+  .scroll-hint,
+  .phone__gloss::after {
+    display: none !important;
+  }
+
+  .intro {
+    display: none;
+  }
+}
+
+/* ==========================================================================
+   FALLBACKS
+   No JS: the hero is a finished static composition. No WebGL: the warm
+   gradient ground stays, only the shimmer is missing.
+   ========================================================================== */
+
+.no-js .scroll-hint,
+.no-js .intro {
+  display: none;
+}
+
+.no-js .world--front {
+  opacity: 1;
+}
+
+@supports not (height: 100svh) {
+  .act__pin {
+    height: 100vh;
+  }
+}
+
+/* ==========================================================================
+   REVEALS — the flat chapter's own motion language.
+   Type is unmasked, not faded up. Supporting UI gets the smallest possible
+   lift. Nothing here is the primary design language; it is punctuation.
+   ========================================================================== */
+
+.rv {
+  --rv-d: calc(var(--rv-i, 0) * 55ms);
+}
+
+/* headings: a mask passes over the type, like a print reveal */
+.ed__display.rv,
+.ed__sub.rv,
+.book__title.rv,
+.final__title.rv {
+  clip-path: inset(0 0 106% 0);
+  transition: clip-path 1150ms var(--e-inout) var(--rv-d);
+}
+
+.ed__display.rv.is-in,
+.ed__sub.rv.is-in,
+.book__title.rv.is-in,
+.final__title.rv.is-in {
+  clip-path: inset(0 0 -12% 0);
+}
+
+/* supporting text + panels: hairline draw, then content settles in */
+.ed__item.rv,
+.ed__deflist > div.rv,
+.plan.rv {
+  opacity: 0;
+  transform: translate3d(0, 10px, 0);
+  transition: opacity 640ms var(--e-out) var(--rv-d), transform 820ms var(--e-mass) var(--rv-d);
+}
+
+.ed__standfirst.rv,
+.ed__aside > *.rv,
+.book__copy.rv {
+  opacity: 0;
+  transform: translate3d(0, 8px, 0);
+  transition: opacity 700ms var(--e-out) var(--rv-d), transform 900ms var(--e-mass) var(--rv-d);
+}
+
+.ed__rule > span.rv {
+  opacity: 0;
+  letter-spacing: 0.34em;
+  transition: opacity 700ms var(--e-out) var(--rv-d), letter-spacing 1000ms var(--e-inout) var(--rv-d);
+}
+
+.ed__item.rv.is-in,
+.ed__deflist > div.rv.is-in,
+.plan.rv.is-in,
+.ed__standfirst.rv.is-in,
+.ed__aside > *.rv.is-in,
+.book__copy.rv.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+.ed__rule > span.rv.is-in {
+  opacity: 1;
+  letter-spacing: 0.16em;
+}
+
+/* anchor targets clear the fixed nav */
+#how-it-works,
+#features {
+  scroll-margin-top: 0;
+}
