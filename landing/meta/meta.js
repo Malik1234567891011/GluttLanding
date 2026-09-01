@@ -13,44 +13,6 @@ import { initTracking, track, pixel, attribution } from './track.js';
 document.documentElement.classList.remove('no-js');
 
 const $ = (id) => document.getElementById(id);
-const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-/* ------------------------------ hero video ------------------------------
-   Kept off the critical path: nothing is fetched until the page has painted,
-   and never on a metered connection or with reduced motion.
-------------------------------------------------------------------------- */
-
-function initVideo() {
-  const v = $('hero-video');
-  if (!v) return;
-
-  const saveData = navigator.connection?.saveData;
-  const slow = /2g/.test(navigator.connection?.effectiveType || '');
-  if (reduced || saveData || slow) {
-    v.pause?.(); // the poster is a complete image on its own
-    v.removeAttribute('autoplay');
-    return;
-  }
-
-  const start = () => {
-    v.preload = 'auto';
-    v.load();
-    v.play?.().catch(() => {
-      /* autoplay refused — the poster remains, which is a complete image */
-    });
-  };
-
-  if (document.readyState === 'complete') start();
-  else window.addEventListener('load', start, { once: true });
-
-  // don't decode frames for a video nobody is looking at
-  new IntersectionObserver((entries) => {
-    for (const e of entries) {
-      if (e.isIntersecting) v.play?.().catch(() => {});
-      else v.pause?.();
-    }
-  }).observe(v);
-}
 
 /* ------------------------------ sticky CTA ------------------------------
    Appears once the hero action has scrolled away, and gets out of the way
@@ -270,7 +232,6 @@ syncPrice();
 
 initTracking();
 initCtas();
-initVideo();
 initSticky();
 initCalendly();
 initCalendlyEvents();

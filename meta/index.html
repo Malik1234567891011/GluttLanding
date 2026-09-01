@@ -18,8 +18,11 @@
       content="A private cooking experience at your home in Miami. $109.99, ingredients included."
     />
     <meta property="og:url" content="https://glutt.org/meta" />
-    <meta property="og:image" content="https://glutt.org/assets/meta/session-poster.jpg" />
+    <meta property="og:image" content="https://glutt.org/assets/meta/share.jpg" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Hot honey chicken and rice in a home kitchen." />
     <link
       rel="icon"
       href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f6b45'/%3E%3Ctext x='16' y='23' font-family='Helvetica, Arial, sans-serif' font-size='20' font-weight='bold' text-anchor='middle' fill='white'%3EG%3C/text%3E%3C/svg%3E"
@@ -32,7 +35,6 @@
       href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
     />
     <link rel="stylesheet" href="/landing/meta/meta.css" />
-    <link rel="preload" as="image" href="/assets/meta/session-poster.webp" fetchpriority="high" />
     <link rel="preconnect" href="https://assets.calendly.com" />
     <link rel="preconnect" href="https://calendly.com" />
   </head>
@@ -58,34 +60,12 @@
       <section class="hero">
         <h1 class="hero__title">Cook anything you want.<br />We bring everything.</h1>
 
+        <!-- Deliberately short: "pick the recipe / we bring the ingredients /
+             you cook" is said properly by the three steps below, and saying it
+             twice was the biggest block of text on the page. -->
         <p class="hero__sub">
-          A private cooking experience at your home, guided by Glutt&nbsp;+ Meta glasses. Pick the
-          recipe. We bring the ingredients and help you cook it step by step.
+          A private cooking experience at your home, guided by Glutt&nbsp;+ Meta&nbsp;glasses.
         </p>
-
-        <!-- No autoplay attribute on purpose: the browser would honour it
-             regardless of prefers-reduced-motion. meta.js starts playback only
-             when motion is welcome, and the poster stands on its own. -->
-        <figure class="media">
-          <video
-            class="media__vid"
-            id="hero-video"
-            poster="/assets/meta/session-poster.webp"
-            preload="none"
-            muted
-            loop
-            playsinline
-            disablepictureinpicture
-            aria-hidden="true"
-            tabindex="-1"
-            width="640"
-            height="800"
-          >
-            <source src="/assets/meta/session-loop.mp4" type="video/mp4" />
-          </video>
-        </figure>
-
-        <p class="price"><strong data-price>$109.99</strong><span>·</span>ingredients included</p>
 
         <a class="btn btn--primary" href="#book" data-ev="meta_booking_cta_clicked" data-cta="hero" data-price="cta">
           Book for $109.99
@@ -123,12 +103,11 @@
       <!-- =========================== BOOKING =========================== -->
       <section class="book" id="book" aria-labelledby="book-h">
         <h2 class="book__h" id="book-h">Book your cooking session</h2>
-        <p class="price price--book"><strong data-price>$109.99</strong><span>·</span>ingredients included</p>
+        <p class="book__meta"><strong data-price>$109.99</strong> · ingredients included</p>
 
         <ul class="assure" aria-label="What's included">
           <li>Miami</li>
           <li>Private session</li>
-          <li>Ingredients included</li>
           <li>No experience needed</li>
         </ul>
 

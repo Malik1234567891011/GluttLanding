@@ -168,69 +168,27 @@ video {
 
 .hero {
   display: grid;
-  gap: 14px;
-  padding: 6px var(--pad) 0;
+  gap: 20px;
+  padding: 18px var(--pad) 0;
 }
 
 .hero__title {
-  font-size: clamp(30px, 8.6vw, 38px);
+  font-size: clamp(34px, 9.6vw, 44px);
   font-weight: 700;
-  line-height: 1.06;
-  letter-spacing: -0.035em;
+  line-height: 1.05;
+  letter-spacing: -0.038em;
   text-wrap: balance;
 }
 
 .hero__sub {
   color: var(--muted);
-  font-size: 15.5px;
+  font-size: 16.5px;
   line-height: 1.5;
-  max-width: 36ch;
+  max-width: 34ch;
 }
 
-.media {
-  position: relative;
-  border-radius: var(--r-lg);
-  overflow: hidden;
-  background: #e8e0d5;
-  /* short enough that the price and the action still clear the fold on a
-     667px-tall phone, tall enough to read as real footage */
-  aspect-ratio: 5 / 4;
-  max-height: min(46vh, 360px);
-}
-
-.media__vid {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* a whisper of warmth over the footage so the type below sits on one surface */
-.media::after {
-  content: "";
-  position: absolute;
-  inset: auto 0 0 0;
-  height: 34%;
-  background: linear-gradient(to top, rgba(27, 25, 23, 0.22), transparent);
-  pointer-events: none;
-}
-
-.price {
-  display: flex;
-  align-items: baseline;
-  gap: 7px;
-  font-size: 17px;
-  font-weight: 500;
-  color: var(--ink);
-}
-
-.price strong {
-  font-size: 26px;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-}
-
-.price span {
-  color: var(--muted);
+.hero .btn {
+  margin-top: 2px;
 }
 
 /* =============================== buttons =============================== */
@@ -330,8 +288,17 @@ video {
   line-height: 1.1;
 }
 
-.price--book {
-  margin-top: 8px;
+/* Deliberately quiet. The number is on the button people actually press; this
+   is here so it is never absent at the moment of choosing a time. */
+.book__meta {
+  margin-top: 9px;
+  color: var(--muted);
+  font-size: 15.5px;
+}
+
+.book__meta strong {
+  color: var(--ink);
+  font-weight: 700;
 }
 
 .assure {
@@ -609,17 +576,14 @@ video {
   }
 
   .hero__sub {
-    font-size: 17px;
-  }
-
-  .media {
-    aspect-ratio: 16 / 10;
-    max-height: none;
+    font-size: 17.5px;
+    max-width: 38ch;
   }
 
   /* on desktop the scheduler is always in view, so the hero button is enough */
   .hero .btn {
     justify-self: start;
+    margin-top: 6px;
   }
 
   .steps {
@@ -655,16 +619,13 @@ video {
 
 /* very short viewports (SE, landscape, in-app browsers with big chrome) */
 @media (max-height: 700px) and (max-width: 899px) {
-  .media {
-    max-height: 34vh;
-  }
-
   .hero {
-    gap: 11px;
+    gap: 15px;
+    padding-top: 12px;
   }
 
   .hero__sub {
-    font-size: 15px;
+    font-size: 15.5px;
   }
 }
 

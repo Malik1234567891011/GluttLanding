@@ -9,9 +9,8 @@ meta/index.html            the ad landing page (static, instant)
 landing/meta/
   config.js                the two public values + widget options
   meta.css                 self-contained styles
-  meta.js                  video, sticky CTA, Calendly embed, events
+  meta.js                  sticky CTA, Calendly embed, funnel events
   track.js                 campaign capture + funnel events + Meta Pixel
-assets/meta/               hero loop (709KB) + poster
 api/
   cooking/confirm.js       Calendly's redirect target: verify → sign → 302
   cooking-confirmed.js     server-rendered, gated confirmation page
@@ -89,11 +88,42 @@ In `landing/meta/config.js`:
 - `HIDE_EVENT_DETAILS` — `true`. Hides Calendly's duplicate name/price/description
   header so the calendar itself is the first thing in the module.
 
+## Restraint
+
+There is no hero image or video: the page is type, one action, three steps and
+the calendar. That is deliberate — the offer is legible in a single viewport at
+375px and the scheduler arrives almost immediately, which is the only thing this
+route is measured on.
+
+The subhead is one line because the three steps say "pick the recipe / we bring
+the ingredients / you cook" properly; saying it twice was the largest block of
+text on the page.
+
+A hero loop cut from the app's butter-chicken footage was built and then removed
+(see git history for `assets/meta/`). To bring it back:
+
+```
+ffmpeg -ss 5 -t 3 -i seg-bc-aromatics.mp4 -ss 6 -t 3 -i seg-bc-cream.mp4 \
+       -ss 4.5 -t 3.5 -i seg-bc-butter.mp4 \
+  -filter_complex "[0:v]crop=ih*4/5:ih,scale=640:800,setsar=1[a]; \
+                   [1:v]crop=ih*4/5:ih,scale=640:800,setsar=1[b]; \
+                   [2:v]crop=ih*4/5:ih,scale=640:800,setsar=1[c]; \
+                   [a][b][c]concat=n=3:v=1:a=0[v]" \
+  -map "[v]" -an -c:v libx264 -pix_fmt yuv420p -r 24 -crf 33 \
+  -movflags +faststart session-loop.mp4
+```
+
+(Sources are in `Cook4Me/media-worker/work/finish-hDjK5C2aoSs/`. Those offsets
+skip the burned-in ingredient captions in the first seconds of each clip.)
+
 ## Price
 
-The page advertises **$109.99**, matching the Calendly event. It lives in one
-place — `PRICE` (and `PRICE_VALUE` for the Meta conversion value) in
-`config.js` — and every label on the page is marked `[data-price]`. The
+The page advertises **$109.99**, matching the Calendly event. It appears three
+times and only once as a display: on the hero button, on the sticky button, and
+as one quiet line at the booking module so the number is never absent while
+someone is choosing a time. It lives in one place — `PRICE` (and
+`PRICE_VALUE` for the Meta conversion value) in `config.js` — and every label
+is marked `[data-price]`. The
 confirmation page does not use it at all: that figure comes from the payment
 Calendly reports, so it cannot disagree with what was actually charged.
 
@@ -103,9 +133,5 @@ If the price changes, change it in Calendly and in `config.js`.
 
 - `/meta` is indexable. Ad landing pages are often `noindex`; add the tag if you
   prefer. `/cooking/confirmed` is `noindex, nofollow` and `no-store`.
-- The hero loop is real footage from the app's media pipeline (butter chicken,
-  home kitchen, no faces, no burned-in captions). It is illustrative b-roll, not
-  footage of a Glutt customer session — worth replacing with real session
-  footage once you have some.
 - The session is 2 hours per the Calendly event. That is not stated on the page,
   to avoid a hardcoded value drifting out of sync; the scheduler shows it.
