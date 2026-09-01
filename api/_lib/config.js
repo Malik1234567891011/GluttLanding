@@ -32,11 +32,15 @@ module.exports = {
   apiToken: () => process.env.CALENDLY_API_TOKEN || '',
   secret: () => process.env.CONFIRMATION_SECRET || '',
   /**
-   * Server-rendered pages can read the environment, so either name works.
+   * Reserved for the Conversions API. No browser Pixel event is sent from the
+   * server-rendered confirmation page — /meta owns the single browser Purchase
+   * — so nothing reads this today.
+   *
+   * Either env name works, since server-rendered code can read the environment.
    * NEXT_PUBLIC_ is a Next.js build-time convention and this project has no
-   * build step — it is accepted here only because that is where the value was
-   * put. The static /meta page cannot read either one; its value is the literal
-   * in landing/meta/config.js.
+   * build step; it is accepted only because that is where the value was put.
+   * The static /meta page cannot read either one: its value is the literal in
+   * landing/meta/config.js.
    */
   pixelId: () =>
     process.env.META_PIXEL_ID ||

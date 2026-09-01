@@ -228,6 +228,21 @@ test('a verified booking renders the confirmation with real details', async () =
   assert.ok(res.cookies.some((c) => c.includes('HttpOnly') && c.includes('SameSite=Lax')));
 });
 
+test('the confirmation page sends no browser Pixel event of its own', async () => {
+  useCalendly(fixtures());
+  const res = mockRes();
+  await confirmed(reqWith(validCookie()), res);
+  assert.equal(res.statusCode, 200);
+  // /meta owns the single browser Purchase; a second one here, deduped only by
+  // a shared eventID, is not a path Meta documents for two browser events.
+  assert.doesNotMatch(res.body, /fbq/, 'no Pixel calls');
+  assert.doesNotMatch(res.body, /connect\.facebook\.net/, 'no Pixel base code');
+  assert.doesNotMatch(res.body, /Purchase/, 'no Purchase event');
+  assert.doesNotMatch(res.body, /<script/i, 'no script tags at all');
+  // …but the verified payment is still shown
+  assert.match(res.body, /Paid · \$109\.99/);
+});
+
 test('no payment on the event type → no money is claimed', async () => {
   useCalendly(fixtures({ invitee: { payment: null } }));
   const res = mockRes();

@@ -108,7 +108,7 @@ const mark = ({ check = true } = {}) => `
   <path class="mark__steam mark__steam--b" d="M69 12c-3.5-4 3.5-6.5 0-11"/>
 </svg>`;
 
-function shell({ title, body, pixel }) {
+function shell({ title, body }) {
   return `<!doctype html>
 <html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -118,12 +118,12 @@ function shell({ title, body, pixel }) {
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap">
 <style>${STYLE}</style></head>
-<body><div class="wrap">${body}</div>${pixel || ''}</body></html>`;
+<body><div class="wrap">${body}</div></body></html>`;
 }
 
 /* -------------------------------- content -------------------------------- */
 
-function successPage(b, pixelId) {
+function successPage(b) {
   const paid =
     b.payment && b.payment.amount != null
       ? `<span class="paid"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12.5 9.5 18 20 7"/></svg>
@@ -182,7 +182,7 @@ ${manage}
   <nav><a href="/privacy">Privacy</a><a href="/terms">Terms</a><a href="mailto:hi@cielpm.ai">Contact</a></nav>
 </div>`;
 
-  return shell({ title: "You're booked — Glutt", body, pixel: purchaseScript(b, pixelId) });
+  return shell({ title: "You're booked — Glutt", body });
 }
 
 function formatMoney(p) {
@@ -202,37 +202,38 @@ function formatMoney(p) {
 }
 
 /**
- * The server-verified copy of the conversion. /meta reports the same Purchase
- * the moment Calendly says the booking was scheduled; both carry the invitee
- * uuid as eventID, so Meta counts one conversion however many arrive. Sending
- * it from both places means the conversion survives a customer closing the tab
- * before this page, or this redirect not being configured yet.
+ * The conversion is reported exactly once from the browser, by /meta on
+ * Calendly's event_scheduled. This page deliberately sends no Pixel event of
+ * its own: two browser Pixel events sharing an eventID is not a deduplication
+ * path Meta documents — eventID is specified for pairing a browser event with a
+ * Conversions API event — so a second fbq('track','Purchase') here would risk
+ * counting the same booking twice.
  *
- * Purchase is reserved for bookings where Calendly confirms a successful
- * payment; otherwise Schedule is sent, because we will not report revenue we
- * cannot verify.
+ * What this page still does is verify the payment server-side and record it,
+ * which is the honest signal and the foundation for CAPI below.
  */
-function purchaseScript(b, pixelId) {
-  if (!pixelId) return '';
-  const paid = b.payment && b.payment.amount != null;
-  const ev = paid ? 'Purchase' : 'Schedule';
-  const params = paid
-    ? `{value:${Number(b.payment.amount)},currency:${JSON.stringify((b.payment.currency || 'USD').toUpperCase())}}`
-    : '{}';
-  /* Adopt an existing Pixel if one is already on the page; only install and
-     init when there is none, so we can never end up with two. */
-  return `<script>
-(function(){
-  if(!window.fbq){
-    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;
-    s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-    fbq('init',${JSON.stringify(pixelId)});
-    fbq('track','PageView');
-  }
-  try{ fbq('track',${JSON.stringify(ev)},${params},{eventID:${JSON.stringify(b.inviteeUuid)}}); }catch(e){}
-})();
-</script>`;
+function logVerifiedConversion(booking) {
+  const paid = Boolean(booking.payment && booking.payment.amount != null);
+  console.log(
+    JSON.stringify({
+      at: 'cooking_session_booking_confirmed',
+      booking_id: booking.inviteeUuid,
+      event_id: booking.inviteeUuid,
+      paid,
+      value: paid ? booking.payment.amount : null,
+      currency: paid ? booking.payment.currency : null,
+      // never logged: name, email, phone, address, recipe
+    })
+  );
+
+  /* ---- Conversions API hook -------------------------------------------
+     When server-side conversions are added, send the Purchase from here with
+     event_id set to booking.inviteeUuid — the same id /meta puts in the
+     browser event's eventID. That is the pairing Meta actually deduplicates,
+     and it makes the reported conversion payment-verified rather than merely
+     scheduled. It needs a META_CAPI_TOKEN, which must stay server-side.
+     Deliberately not implemented on a guess at credentials.
+  --------------------------------------------------------------------- */
 }
 
 function pendingPage() {
@@ -300,7 +301,9 @@ module.exports = async function handler(req, res) {
       S.TTL_VERIFIED
     );
 
-    return send(res, successPage(result.booking, cfg.pixelId()), [
+    logVerifiedConversion(result.booking);
+
+    return send(res, successPage(result.booking), [
       S.cookie(S.VERIFIED_COOKIE, token, S.TTL_VERIFIED, { secure }),
       S.clear(S.PENDING_COOKIE),
     ]);
