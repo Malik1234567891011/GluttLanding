@@ -187,10 +187,68 @@ function initCalendly() {
   document.querySelectorAll('a[href="#book"]').forEach((a) => a.addEventListener('click', boot));
 }
 
+/* --------------------------- Purchase conversion --------------------------
+   The embedded event is the paid Private Cooking Session — Miami, which cannot
+   be scheduled unless its Stripe payment succeeds. So calendly.event_scheduled
+   is the moment money has actually changed hands, and the only moment we count
+   a Purchase — never on opening the scheduler, picking a time, reaching the
+   payment step, or reloading.
+
+   The eventID is the Calendly invitee uuid, which is exactly what the
+   server-verified confirmation page sends. Meta collapses the two into a single
+   conversion, so reporting it from both places is redundancy rather than
+   double counting — and the conversion still lands if the customer closes the
+   tab before the confirmation page, or if that redirect is not configured yet.
+
+   Nothing personal is sent: value, currency, and an opaque booking id.
+------------------------------------------------------------------------- */
+
+const PURCHASE_KEY = 'glutt_purchase';
+const firedPurchases = new Set();
+
+function inviteeIdFrom(payload) {
+  const uri = payload?.invitee?.uri;
+  return typeof uri === 'string' ? uri.split('/').filter(Boolean).pop() || '' : '';
+}
+
+function alreadyCounted(key) {
+  if (firedPurchases.has(key)) return true;
+  try {
+    return localStorage.getItem(`${PURCHASE_KEY}:${key}`) === '1';
+  } catch {
+    return false; // storage blocked; the in-memory guard and eventID still hold
+  }
+}
+
+function markCounted(key) {
+  firedPurchases.add(key);
+  try {
+    localStorage.setItem(`${PURCHASE_KEY}:${key}`, '1');
+  } catch {
+    /* ignore */
+  }
+}
+
+function recordPurchase(payload) {
+  const id = inviteeIdFrom(payload);
+  const key = id || 'unidentified-booking';
+
+  // once per booking, however many times the listener or the page runs
+  if (alreadyCounted(key)) return;
+  markCounted(key);
+
+  track('meta_booking_completed', id ? { booking_id: id } : {});
+  pixel('Purchase', { value: PRICE_VALUE, currency: 'USD' }, id || undefined);
+
+  if (!id) {
+    console.warn('[glutt] event_scheduled carried no invitee uri — Purchase sent without an eventID');
+  }
+}
+
 /* --------------------------- Calendly events ----------------------------
-   Officially supported postMessage events. `event_scheduled` fires when the
-   booking is created — the Purchase conversion itself is only counted on the
-   server-verified confirmation page, never here.
+   Officially supported postMessage events, read from Calendly's own origin.
+   Nothing here reaches into the iframe, so Calendly's native Pixel integration
+   is untouched.
 ------------------------------------------------------------------------- */
 
 function initCalendlyEvents() {
@@ -204,7 +262,10 @@ function initCalendlyEvents() {
       track('meta_booking_time_selected');
       pixel('InitiateCheckout', { value: PRICE_VALUE, currency: 'USD' });
     }
-    if (name === 'calendly.event_scheduled') track('meta_booking_scheduled');
+    if (name === 'calendly.event_scheduled') {
+      track('meta_booking_scheduled');
+      recordPurchase(e.data?.payload);
+    }
   });
 }
 

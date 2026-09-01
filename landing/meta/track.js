@@ -61,11 +61,15 @@ export function attribution() {
 
 /* ------------------------------- pixel -------------------------------- */
 
-let pixelReady = false;
-
-function bootPixel() {
-  if (!META_PIXEL_ID || pixelReady) return;
-  pixelReady = true;
+/**
+ * Uses whatever Pixel is already on the page. The base code is only injected
+ * when there is no `fbq` at all and an ID is configured, so a Pixel installed
+ * globally (or by a tag manager) is adopted rather than duplicated — calling
+ * init twice would double-count everything.
+ */
+function ensurePixel() {
+  if (typeof window.fbq === 'function') return true;
+  if (!META_PIXEL_ID) return false;
 
   /* eslint-disable */
   !(function (f, b, e, v, n, t, s) {
@@ -88,12 +92,18 @@ function bootPixel() {
 
   window.fbq('init', META_PIXEL_ID);
   window.fbq('track', 'PageView');
+  return true;
 }
 
-/** Meta standard event. `id` makes it idempotent against the server copy. */
+/**
+ * Meta standard event. `id` becomes the eventID, which is how Meta collapses
+ * the same conversion reported from more than one place.
+ *
+ * Only ever pass non-personal parameters: value, currency and the like. No
+ * name, email, phone, address or recipe goes anywhere near this.
+ */
 export function pixel(event, params = {}, id) {
-  if (!META_PIXEL_ID) return;
-  bootPixel();
+  if (!ensurePixel()) return; // no Pixel on the page: nothing to do, nothing breaks
   try {
     window.fbq('track', event, params, id ? { eventID: id } : undefined);
   } catch {
@@ -121,7 +131,7 @@ export function track(name, props = {}) {
 
 export function initTracking() {
   attribution();
-  bootPixel();
+  ensurePixel();
   track('meta_landing_view');
 }
 

@@ -51,8 +51,16 @@ export const HIDE_EVENT_DETAILS = true;
  */
 export const HIDE_CALENDLY_COOKIE_BANNER = false;
 
-/** Leave empty to ship no pixel at all. */
-export const META_PIXEL_ID = '';
+/**
+ * The Glutt Meta Pixel. Public by nature — it is visible in the source of every
+ * page that loads one. Calendly is configured with the same ID, but that fires
+ * inside its own iframe on calendly.com: a pixel cannot be shared across
+ * documents, so this page installs it once for glutt.org. See the README on
+ * checking Events Manager for duplicate conversions.
+ *
+ * Set to '' to ship no pixel at all.
+ */
+export const META_PIXEL_ID = '1015291791330103';
 
 /** Builds the embed URL, carrying the invitee's campaign attribution through. */
 export function calendlyEmbedUrl(params = {}) {

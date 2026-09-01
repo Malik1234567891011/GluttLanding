@@ -28,7 +28,7 @@ server-side; none may use a `NEXT_PUBLIC_`-style public prefix.
 | --- | --- |
 | `CALENDLY_API_TOKEN` | Calendly personal access token. Verification is impossible without it, and the page **fails closed** — customers keep Calendly's own confirmation. |
 | `CONFIRMATION_SECRET` | Long random string; signs the confirmation cookie. |
-| `META_PIXEL_ID` | Optional. Enables the Purchase signal on confirmation. |
+| `META_PIXEL_ID` | Optional override for the Pixel ID. `NEXT_PUBLIC_META_PIXEL_ID` is also accepted. **Only reaches the confirmation page** — see Pixel below. |
 | `CALENDLY_BOOKING_URL` | Optional override; defaults to the event above. |
 
 **2. Configure the Calendly event** (Event type → Confirmation page):
@@ -87,6 +87,57 @@ In `landing/meta/config.js`:
   than a design one, so it is off until someone decides.
 - `HIDE_EVENT_DETAILS` — `true`. Hides Calendly's duplicate name/price/description
   header so the calendar itself is the first thing in the module.
+
+## Meta Pixel and the Purchase conversion
+
+Pixel `1015291791330103`, set in `landing/meta/config.js` and mirrored in
+`api/_lib/config.js`.
+
+**The env var only reaches the confirmation page.** `/meta` is a static file and
+this project has no build step, so nothing can inline an environment variable
+into it — `NEXT_PUBLIC_` is a Next.js convention that does not apply here. The
+literal in `config.js` is what that page actually uses. The serverless
+confirmation page does read the environment, and accepts either
+`META_PIXEL_ID` or `NEXT_PUBLIC_META_PIXEL_ID`, falling back to the same
+literal. A Pixel ID is public either way, so nothing is exposed by this.
+
+If a Pixel is ever installed site-wide (or via a tag manager), both pages adopt
+the existing `fbq` and never call `init` a second time.
+
+**Purchase** fires on Calendly's `event_scheduled` message, and nowhere else —
+not on opening the scheduler, picking a time, reaching payment, or reloading.
+The embedded event is the paid Private Cooking Session, which cannot be
+scheduled unless its Stripe payment succeeds, so that message is the moment
+money has changed hands. Parameters are `value: 109.99`, `currency: 'USD'`,
+and nothing else.
+
+It is reported from two places, both with `eventID` set to the Calendly invitee
+uuid, so Meta collapses them into one conversion:
+
+1. `/meta`, the instant Calendly confirms the booking;
+2. `/cooking/confirmed`, after the server has verified it against the Calendly
+   API and confirmed the payment succeeded.
+
+That redundancy means the conversion still lands if someone closes the tab
+before the confirmation page, or if that redirect is not configured yet.
+Guarded three ways against double counting: an in-memory set, a `localStorage`
+key per booking (so a reload cannot re-count), and Meta's own `eventID`
+deduplication.
+
+**⚠️ Calendly has the same Pixel ID.** Calendly's integration fires from inside
+its own iframe on calendly.com, which is a separate document — a Pixel cannot be
+shared across documents, so this is not something we can dedupe against; those
+events carry no `eventID` of ours. After the first real booking, open Events
+Manager and check whether a single booking produced more than one **Purchase**.
+If Calendly is firing Purchase as well, remove the Pixel from the Calendly event
+and keep ours: ours carries the value, the currency and an eventID, and is
+corroborated by the server-verified copy. (Calendly's integration is usually
+`PageView` + `Schedule` rather than `Purchase`, in which case there is no
+conflict — but verify rather than assume.)
+
+Tested in a real browser: `tests/purchase.browser.test.js` covers every rule
+above, including the wrong-origin case, the reload case and a Pixel broken by an
+ad blocker.
 
 ## Restraint
 

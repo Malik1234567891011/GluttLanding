@@ -202,9 +202,15 @@ function formatMoney(p) {
 }
 
 /**
- * The conversion is only counted here, after the server has verified the
- * booking. eventID makes a refresh idempotent, and Purchase is reserved for
- * bookings where Calendly actually confirms a successful payment.
+ * The server-verified copy of the conversion. /meta reports the same Purchase
+ * the moment Calendly says the booking was scheduled; both carry the invitee
+ * uuid as eventID, so Meta counts one conversion however many arrive. Sending
+ * it from both places means the conversion survives a customer closing the tab
+ * before this page, or this redirect not being configured yet.
+ *
+ * Purchase is reserved for bookings where Calendly confirms a successful
+ * payment; otherwise Schedule is sent, because we will not report revenue we
+ * cannot verify.
  */
 function purchaseScript(b, pixelId) {
   if (!pixelId) return '';
@@ -213,12 +219,19 @@ function purchaseScript(b, pixelId) {
   const params = paid
     ? `{value:${Number(b.payment.amount)},currency:${JSON.stringify((b.payment.currency || 'USD').toUpperCase())}}`
     : '{}';
+  /* Adopt an existing Pixel if one is already on the page; only install and
+     init when there is none, so we can never end up with two. */
   return `<script>
-!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;
-s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
-fbq('init',${JSON.stringify(pixelId)});fbq('track','PageView');
-fbq('track',${JSON.stringify(ev)},${params},{eventID:${JSON.stringify(b.inviteeUuid)}});
+(function(){
+  if(!window.fbq){
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+    if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;
+    s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init',${JSON.stringify(pixelId)});
+    fbq('track','PageView');
+  }
+  try{ fbq('track',${JSON.stringify(ev)},${params},{eventID:${JSON.stringify(b.inviteeUuid)}}); }catch(e){}
+})();
 </script>`;
 }
 
