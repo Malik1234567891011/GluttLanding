@@ -45,7 +45,7 @@ module.exports = {
   pixelId: () =>
     process.env.META_PIXEL_ID ||
     process.env.NEXT_PUBLIC_META_PIXEL_ID ||
-    '1015291791330103',
+    '1541408760532310', // website Pixel, not the app dataset
 
   /** Where unverified visitors go. */
   FALLBACK_PATH: '/meta',

@@ -90,7 +90,11 @@ In `landing/meta/config.js`:
 
 ## Meta Pixel and the Purchase conversion
 
-Pixel `1015291791330103`, set in `landing/meta/config.js`.
+Website Pixel `1541408760532310`, set in `landing/meta/config.js`.
+
+`1015291791330103` is the Glutt **app** dataset and is not used by this
+funnel. If the Vercel env var still holds it, update it — see the env note at
+the end of this section.
 
 **Exactly one browser Purchase, and it is on `/meta`.** It fires on Calendly's
 `event_scheduled` message and nowhere else — not on opening the scheduler,
@@ -135,9 +139,15 @@ the existing `fbq` and never calls `init` a second time.
 **The env var only reaches server-rendered code.** `/meta` is a static file and
 this project has no build step, so nothing can inline an environment variable
 into it — `NEXT_PUBLIC_` is a Next.js convention that does not apply here. The
-literal in `config.js` is what that page uses. `META_PIXEL_ID` /
-`NEXT_PUBLIC_META_PIXEL_ID` are read by `api/_lib/config.js`, which is
-currently reserved for the CAPI work above. A Pixel ID is public either way.
+literal in `config.js` is what that page uses, which is why swapping the Pixel
+was a code change rather than an env change. A Pixel ID is public either way.
+
+⚠️ `NEXT_PUBLIC_META_PIXEL_ID` in Vercel was set to the **app dataset**
+(`1015291791330103`). Nothing reads it today — `api/_lib/config.js` is
+reserved for the CAPI work above — but it takes precedence over the literal
+there, so update it to `1541408760532310` or delete it before server-side
+conversions are added. Otherwise the verified Purchase would land in the app
+dataset instead of the website one.
 
 Tested in a real browser: `tests/purchase.browser.test.js` covers every rule
 above, including the wrong-origin case, the reload case and a Pixel broken by an
