@@ -14,6 +14,7 @@
    the funnel there is deliberately left untouched.
 --------------------------------------------------------------------------- */
 
+// Deploy canary: touched 2026-09-01 to confirm main auto-deploys to production.
 import { ensurePixel } from './track.js';
 
 ensurePixel();
