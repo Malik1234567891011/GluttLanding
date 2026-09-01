@@ -1,0 +1,39 @@
+/* ==========================================================================
+   Glutt booking funnel — design tokens.
+
+   The single definition of the palette shared by /meta and the server-rendered
+   /cooking/confirmed page, so the confirmation cannot drift away from the page
+   the customer just booked on. Both link this file; nothing hardcodes these
+   values a second time.
+   ========================================================================== */
+
+:root {
+  /* surfaces — the same warm bone the Calendly widget is configured with */
+  --bg: #f7f3ee;
+  --surface: #ffffff;
+  --surface-warm: #fbf8f4;
+  --ink: #1b1917;
+  --muted: #6b635b;
+  --line: #e3dbd0;
+  --line-soft: #ede6dc;
+
+  /* action — carried through from /meta and the scheduler itself, so the
+     confirmation reads as the same product rather than a different one */
+  --green: #1f6b45;
+  --green-ink: #17573a;
+  --green-soft: #e6f0e9;
+
+  /* geometry */
+  --r-sm: 12px;
+  --r: 18px;
+  --r-lg: 24px;
+  --r-xl: 28px;
+
+  --pad: 20px;
+  --tap: 52px;
+
+  --e: cubic-bezier(0.22, 0.61, 0.36, 1);
+
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-t: env(safe-area-inset-top, 0px);
+}

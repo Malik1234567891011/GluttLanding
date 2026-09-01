@@ -27,9 +27,22 @@ if (!fs.existsSync(CHROME)) {
 
 /* -------------------------- tiny static server -------------------------- */
 
+const confirmRequests = [];
+
 function serve() {
   const server = http.createServer((req, res) => {
     const url = new URL(req.url, 'http://x');
+
+    // stand in for /api/cooking/confirm so the handover can be observed
+    if (url.pathname === '/api/cooking/confirm') {
+      confirmRequests.push({
+        pathname: url.pathname,
+        query: Object.fromEntries(url.searchParams),
+      });
+      res.writeHead(200, { 'Content-Type': 'text/html' });
+      return res.end('<!doctype html><title>confirm stub</title>');
+    }
+
     const rel = decodeURIComponent(url.pathname).replace(/^\/+/, '');
     for (const c of [rel, path.join(rel, 'index.html')]) {
       const abs = path.join(ROOT, c);
@@ -127,73 +140,85 @@ test('Meta Purchase rules on /meta', async (t) => {
     },
   };
 
+  const nav = () => confirmRequests.slice();
+  const reload = async () => {
+    confirmRequests.length = 0;
+    await b.S('Page.navigate', { url: `${base}/meta` });
+    await sleep(1500);
+  };
+
   await t.test('adopts the existing Pixel instead of initialising another', async () => {
-    const all = await calls();
-    assert.equal(all.filter((c) => c[0] === 'init').length, 0, 'must never call fbq init');
+    assert.equal((await calls()).filter((c) => c[0] === 'init').length, 0, 'must never call fbq init');
   });
 
-  await t.test('no Purchase from opening the scheduler or picking a time', async () => {
+  await t.test('no Purchase and no handover from the other Calendly events', async () => {
     await post({ event: 'calendly.profile_page_viewed' });
     await post({ event: 'calendly.event_type_viewed' });
     await post({ event: 'calendly.date_and_time_selected' });
-    await sleep(150);
+    await sleep(1200); // longer than the handover delay
     assert.equal((await purchases()).length, 0);
-    const ic = (await calls()).filter((c) => c[1] === 'InitiateCheckout');
-    assert.equal(ic.length, 1, 'picking a time is InitiateCheckout, not Purchase');
+    assert.deepEqual(nav(), [], 'nothing navigates on load, date or time selection');
+    assert.equal((await calls()).filter((c) => c[1] === 'InitiateCheckout').length, 1,
+      'picking a time is InitiateCheckout, not Purchase');
   });
 
-  await t.test('no Purchase from a message that is not really Calendly', async () => {
+  await t.test('a message that is not really from Calendly does nothing', async () => {
     await post(scheduled, 'https://evil.example');
-    await sleep(150);
+    await sleep(1200);
     assert.equal((await purchases()).length, 0);
+    assert.deepEqual(nav(), [], 'a spoofed origin must not redirect');
   });
 
-  await t.test('Purchase fires on event_scheduled, with value, currency and eventID', async () => {
+  await t.test('event_scheduled fires exactly one Purchase, with value, currency and eventID', async () => {
     await post(scheduled);
-    await sleep(200);
-    const p = await purchases();
-    assert.equal(p.length, 1);
-    assert.deepEqual(p[0][2], { value: 109.99, currency: 'USD' });
-    assert.deepEqual(p[0][3], { eventID: INVITEE }, 'eventID must be the invitee uuid so it dedupes');
-  });
+    await post(scheduled); // repeats inside the handover window
+    await post(scheduled);
+    await sleep(300); // read before the navigation happens
 
-  await t.test('carries no personal data', async () => {
-    const p = (await purchases())[0];
-    const blob = JSON.stringify(p).toLowerCase();
+    const p = await purchases();
+    assert.equal(p.length, 1, 'once per booking however many messages arrive');
+    assert.deepEqual(p[0][2], { value: 109.99, currency: 'USD' });
+    assert.deepEqual(p[0][3], { eventID: INVITEE }, 'eventID is the Calendly invitee uuid');
+
+    const blob = JSON.stringify(p[0]).toLowerCase();
     for (const leak of ['email', '@', 'phone', 'name', 'address', 'recipe'])
       assert.ok(!blob.includes(leak), `Purchase parameters must not contain "${leak}"`);
-    assert.deepEqual(Object.keys(p[2]).sort(), ['currency', 'value']);
+    assert.deepEqual(Object.keys(p[0][2]).sort(), ['currency', 'value']);
   });
 
-  await t.test('fires once per booking however many times the message arrives', async () => {
-    await post(scheduled);
-    await post(scheduled);
-    await post(scheduled);
-    await sleep(250);
-    assert.equal((await purchases()).length, 1);
+  await t.test('then hands over to the verified confirmation, once', async () => {
+    await sleep(1200); // past HANDOVER_DELAY_MS
+    const seen = nav();
+    assert.equal(seen.length, 1, 'exactly one handover despite three messages');
+    assert.equal(seen[0].pathname, '/api/cooking/confirm',
+      'the entry point that issues the signed cookie, not /cooking/confirmed directly');
+    assert.equal(seen[0].query.invitee_uuid, INVITEE, 'identified by the Calendly invitee uuid');
+    assert.equal(seen[0].query.event_uuid, EVENT, 'event uuid passed so verification reads directly');
+    assert.equal(Object.keys(seen[0].query).length, 2, 'no personal data in the handover URL');
   });
 
   await t.test('a reload does not re-count the same booking', async () => {
-    await b.S('Page.navigate', { url: `${base}/meta` });
-    await sleep(1600);
+    await reload();
     await post(scheduled);
-    await sleep(250);
+    await sleep(300);
     assert.equal((await purchases()).length, 0, 'already counted before the reload');
   });
 
   await t.test('a different booking is counted separately', async () => {
+    await reload();
     const other = JSON.parse(JSON.stringify(scheduled));
-    other.payload.invitee.uri = 'https://api.calendly.com/scheduled_events/x/invitees/99999999-8888-4777-8666-555555555555';
+    other.payload.invitee.uri =
+      'https://api.calendly.com/scheduled_events/Z/invitees/99999999-8888-4777-8666-555555555555';
+    other.payload.event.uri = 'https://api.calendly.com/scheduled_events/Z';
     await post(other);
-    await sleep(250);
+    await sleep(300);
     const p = await purchases();
     assert.equal(p.length, 1);
     assert.equal(p[0][3].eventID, '99999999-8888-4777-8666-555555555555');
   });
 
-  await t.test('a broken Pixel (ad blocker, blocked script) does not break booking', async () => {
-    await b.S('Page.navigate', { url: `${base}/meta` });
-    await sleep(1500);
+  await t.test('a broken Pixel (ad blocker) breaks neither booking nor handover', async () => {
+    await reload();
     await ev(`window.__errs = [];
       window.addEventListener('error', e => window.__errs.push(String(e.message)));
       window.onunhandledrejection = e => window.__errs.push(String(e.reason));
@@ -201,14 +226,23 @@ test('Meta Purchase rules on /meta', async (t) => {
 
     const fresh = JSON.parse(JSON.stringify(scheduled));
     fresh.payload.invitee.uri =
-      'https://api.calendly.com/scheduled_events/y/invitees/11111111-2222-4333-8444-555555555555';
+      'https://api.calendly.com/scheduled_events/Y/invitees/11111111-2222-4333-8444-555555555555';
+    fresh.payload.event.uri = 'https://api.calendly.com/scheduled_events/Y';
     await post(fresh);
-    await sleep(250);
-
-    assert.deepEqual(await ev('JSON.stringify(window.__errs)').then(JSON.parse), [],
+    await sleep(300); // read the page's own error log before it navigates away
+    assert.deepEqual(await ev('JSON.stringify(window.__errs || [])').then(JSON.parse), [],
       'a throwing fbq must be swallowed, not surfaced');
-    assert.equal(await ev("document.querySelector('.hero .btn').textContent.trim()"), 'Book for $109.99',
-      'the page is still intact');
+
+    await sleep(1100); // now let the handover happen
+    assert.equal(nav().length, 1, 'the customer still reaches their confirmation');
+  });
+
+  await t.test('a scheduled message with no invitee uri does not strand the customer', async () => {
+    await reload();
+    await post({ event: 'calendly.event_scheduled', payload: { event: { uri: 'x' } } });
+    await sleep(1300);
+    assert.deepEqual(nav(), [],
+      'nothing to verify, so stay on Calendly’s own confirmation rather than bounce to /meta');
   });
 });
 

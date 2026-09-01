@@ -13,6 +13,7 @@
 
 const cfg = require('../_lib/config');
 const { verifyBooking, CalendlyUnavailable, isUuid } = require('../_lib/calendly');
+const { pendingPage } = require('../_lib/confirmation-view');
 const S = require('../_lib/session');
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
@@ -39,6 +40,10 @@ function redirect(res, location, cookies = []) {
 module.exports = async function handler(req, res) {
   const q = req.query || {};
   const inviteeUuid = String(q.invitee_uuid || '');
+  // Optional, and from the same Calendly identifier family: when present the
+  // booking is read directly instead of searched for. Not a second identifier
+  // scheme — invitee_uuid remains the one that matters.
+  const eventUuid = String(q.event_uuid || '');
   const startTime = String(q.event_start_time || '');
   const inviteeEmail = String(q.invitee_email || '');
   const secure = (req.headers['x-forwarded-proto'] || 'https') === 'https';
@@ -48,14 +53,20 @@ module.exports = async function handler(req, res) {
 
   const secret = cfg.secret();
   if (!secret) {
-    // Fail closed: without a signing key we cannot issue a trustworthy session,
-    // and we will not fake one. Calendly's own confirmation still reaches them.
+    /* Still fail closed — no session is issued and nothing about the booking is
+       confirmed — but someone who has just paid should not be bounced back onto
+       the sales page. The holding page claims nothing and points at Calendly's
+       email, which is the same thing a stranger hitting this URL would see. */
     console.error('[cooking/confirm] CONFIRMATION_SECRET is not set');
-    return redirect(res, cfg.FALLBACK_PATH);
+    res.setHeader('Content-Type', 'text/html; charset=utf-8');
+    res.setHeader('Cache-Control', 'no-store, private');
+    res.setHeader('X-Robots-Tag', 'noindex, nofollow');
+    res.statusCode = 200;
+    return res.end(pendingPage());
   }
 
   try {
-    const result = await verifyWithRetry({ inviteeUuid, inviteeEmail, startTime });
+    const result = await verifyWithRetry({ inviteeUuid, eventUuid, inviteeEmail, startTime });
 
     if (!result.ok) {
       console.warn('[cooking/confirm] rejected:', result.reason);
@@ -83,7 +94,11 @@ module.exports = async function handler(req, res) {
     // confirmation page retries and shows a calm recovery state meanwhile.
     // Only non-personal values go in the cookie.
     console.error('[cooking/confirm] calendly unavailable:', err.message);
-    const pending = S.sign({ i: inviteeUuid, st: startTime }, secret, S.TTL_PENDING);
+    const pending = S.sign(
+      { i: inviteeUuid, e: eventUuid || undefined, st: startTime },
+      secret,
+      S.TTL_PENDING
+    );
     return redirect(res, cfg.CONFIRMED_PATH, [
       S.cookie(S.PENDING_COOKIE, pending, S.TTL_PENDING, { secure }),
     ]);

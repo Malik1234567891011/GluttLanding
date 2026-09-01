@@ -106,6 +106,26 @@ succeeds, so that message is the moment money has changed hands. Parameters are
 Guarded three ways against firing twice: an in-memory set, a `localStorage` key
 per booking so a reload cannot re-count, and Meta's own `eventID` handling.
 
+**After a successful booking /meta hands the customer over** to the verified
+confirmation instead of leaving them on Calendly's own "You are scheduled!"
+panel. The Purchase fires first, then the navigation is held ~800ms so the
+beacon leaves before the page unloads, then:
+
+```
+/api/cooking/confirm?invitee_uuid=<uuid>&event_uuid=<uuid>
+   → verifies against Calendly, issues the signed cookie
+   → 302 /cooking/confirmed          (clean URL, no personal data)
+```
+
+`/cooking/confirmed` takes no query parameters — it reads the cookie — so
+`/api/cooking/confirm` is the entry point, and `invitee_uuid` is the
+identifier it expects. `event_uuid` is optional and from the same message; it
+lets verification read the booking directly instead of searching for it. The
+handover uses `location.replace`, so Back does not return to a completed
+booking form. If a scheduled message somehow carries no invitee uri, nothing
+redirects — Calendly's own confirmation is a better place to leave someone than
+a page that would bounce them.
+
 **`/cooking/confirmed` sends no Pixel event at all** — the rendered page
 contains no `<script>` tag. Two browser Pixel events sharing an `eventID` is
 not a deduplication path Meta documents: `eventID` is specified for pairing a

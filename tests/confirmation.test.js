@@ -222,7 +222,9 @@ test('a verified booking renders the confirmation with real details', async () =
   assert.match(res.body, /Butter Chicken/);
   assert.match(res.body, /Saturday, September 12/);
   assert.match(res.body, /6:00 PM|6:00 PM/);
-  assert.match(res.body, /Paid · \$109\.99 · ingredients included/);
+  assert.match(res.body, /class="paid"/, 'the paid endorsement is rendered');
+  assert.match(res.body, /Paid · \$109\.99/);
+  assert.match(res.body, /Your home · ingredients included/);
   assert.equal(res.headers['x-robots-tag'], 'noindex, nofollow');
   assert.match(res.headers['cache-control'], /no-store/);
   assert.ok(res.cookies.some((c) => c.includes('HttpOnly') && c.includes('SameSite=Lax')));
@@ -248,8 +250,11 @@ test('no payment on the event type → no money is claimed', async () => {
   const res = mockRes();
   await confirmed(reqWith(validCookie()), res);
   assert.equal(res.statusCode, 200);
-  assert.doesNotMatch(res.body, /Paid ·/);
-  assert.match(res.body, /Ingredients included/);
+  assert.doesNotMatch(res.body, /Paid ·/, 'no money is claimed');
+  assert.doesNotMatch(res.body, /class="paid"/, 'no paid endorsement at all');
+  // this fixture does have a recipe, so the card still leads with it
+  assert.match(res.body, /Butter Chicken/);
+  assert.match(res.body, /Your home · ingredients included/);
 });
 
 test('an unsuccessful payment is not treated as paid', async () => {
@@ -257,6 +262,17 @@ test('an unsuccessful payment is not treated as paid', async () => {
   const res = mockRes();
   await confirmed(reqWith(validCookie()), res);
   assert.doesNotMatch(res.body, /Paid ·/);
+});
+
+test('with no recipe, the card leads with the verified event name', async () => {
+  useCalendly(fixtures({ invitee: { questions_and_answers: [] } }));
+  const res = mockRes();
+  await confirmed(reqWith(validCookie()), res);
+  assert.equal(res.statusCode, 200);
+  // real verified data, not a placeholder, so the layout still reads deliberately
+  assert.match(res.body, /class="card__what">Private cooking session</);
+  assert.match(res.body, /Your cooking session is booked for/);
+  assert.match(res.body, /Saturday, September 12/);
 });
 
 test('a recipe answer that is a URL is never dumped into the headline', async () => {

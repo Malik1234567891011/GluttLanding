@@ -206,9 +206,15 @@ function initCalendly() {
 const PURCHASE_KEY = 'glutt_purchase';
 const firedPurchases = new Set();
 
-function inviteeIdFrom(payload) {
-  const uri = payload?.invitee?.uri;
-  return typeof uri === 'string' ? uri.split('/').filter(Boolean).pop() || '' : '';
+const uuidFromUri = (uri) =>
+  typeof uri === 'string' ? uri.split('/').filter(Boolean).pop() || '' : '';
+
+/** Both identifiers travel in the same event_scheduled message. */
+function idsFrom(payload) {
+  return {
+    invitee: uuidFromUri(payload?.invitee?.uri),
+    event: uuidFromUri(payload?.event?.uri),
+  };
 }
 
 function alreadyCounted(key) {
@@ -229,8 +235,7 @@ function markCounted(key) {
   }
 }
 
-function recordPurchase(payload) {
-  const id = inviteeIdFrom(payload);
+function recordPurchase(id) {
   const key = id || 'unidentified-booking';
 
   // once per booking, however many times the listener or the page runs
@@ -243,6 +248,43 @@ function recordPurchase(payload) {
   if (!id) {
     console.warn('[glutt] event_scheduled carried no invitee uri — Purchase sent without an eventID');
   }
+}
+
+/* ------------------------- handover to confirmation -----------------------
+   Calendly's own "You are scheduled!" panel is the end of the road inside the
+   iframe; we send the customer to our verified confirmation instead.
+
+   /cooking/confirmed reads a signed cookie and takes no query parameters, so
+   the entry point is /api/cooking/confirm, which verifies the booking against
+   the Calendly API, issues that cookie, and redirects on to the clean URL. The
+   invitee uuid is the identifier it expects; the event uuid is optional and
+   lets it read the booking directly instead of searching for it.
+
+   The navigation is held briefly so the Purchase beacon leaves first — fbq
+   sends asynchronously and an immediate navigation can cancel it in flight.
+------------------------------------------------------------------------- */
+
+const HANDOVER_DELAY_MS = 800;
+let handingOver = false;
+
+function goToConfirmation(ids) {
+  if (handingOver) return;
+
+  // Without the invitee uuid the confirmation endpoint cannot verify anything
+  // and would bounce the customer to /meta. Calendly's own confirmation panel
+  // is the better place to leave them.
+  if (!ids.invitee) {
+    console.warn('[glutt] event_scheduled carried no invitee uri — staying on Calendly\'s confirmation');
+    return;
+  }
+
+  handingOver = true;
+  const url = new URL('/api/cooking/confirm', location.origin);
+  url.searchParams.set('invitee_uuid', ids.invitee);
+  if (ids.event) url.searchParams.set('event_uuid', ids.event);
+
+  // replace, not assign: a completed booking should not be reachable with Back
+  setTimeout(() => location.replace(url.toString()), HANDOVER_DELAY_MS);
 }
 
 /* --------------------------- Calendly events ----------------------------
@@ -263,8 +305,10 @@ function initCalendlyEvents() {
       pixel('InitiateCheckout', { value: PRICE_VALUE, currency: 'USD' });
     }
     if (name === 'calendly.event_scheduled') {
+      const ids = idsFrom(e.data?.payload);
       track('meta_booking_scheduled');
-      recordPurchase(e.data?.payload);
+      recordPurchase(ids.invitee); // fires the one browser Purchase, once
+      goToConfirmation(ids); // …then hands over
     }
   });
 }

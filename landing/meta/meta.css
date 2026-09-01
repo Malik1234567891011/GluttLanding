@@ -9,30 +9,8 @@
    390px first.
    ========================================================================== */
 
-:root {
-  /* Background and text are the exact values the Calendly widget is
-     configured with, so the embed reads as page rather than iframe. */
-  --bg: #f7f3ee;
-  --surface: #ffffff;
-  --ink: #1b1917;
-  --muted: #6b635b;
-  --line: #e3dbd0;
-  --green: #1f6b45;
-  --green-ink: #17573a;
-  --green-soft: #e6f0e9;
-
-  --r-sm: 12px;
-  --r: 18px;
-  --r-lg: 24px;
-
-  --pad: 20px;
-  --tap: 52px;
-
-  --e: cubic-bezier(0.22, 0.61, 0.36, 1);
-
-  --safe-b: env(safe-area-inset-bottom, 0px);
-  --safe-t: env(safe-area-inset-top, 0px);
-}
+/* Palette lives in tokens.css, linked before this file and shared with the
+   server-rendered confirmation page. */
 
 *,
 *::before,
