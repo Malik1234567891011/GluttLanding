@@ -42,7 +42,7 @@ function fixtures(over = {}) {
     questions_and_answers: [
       { question: 'What recipe do you want to cook?', answer: 'Butter Chicken', position: 0 },
     ],
-    payment: { successful: true, amount: 100, currency: 'USD', provider: 'stripe' },
+    payment: { successful: true, amount: 109.99, currency: 'USD', provider: 'stripe' },
     ...over.invitee,
   };
   const event = {
@@ -222,7 +222,7 @@ test('a verified booking renders the confirmation with real details', async () =
   assert.match(res.body, /Butter Chicken/);
   assert.match(res.body, /Saturday, September 12/);
   assert.match(res.body, /6:00 PM|6:00 PM/);
-  assert.match(res.body, /Paid · \$100 · ingredients included/);
+  assert.match(res.body, /Paid · \$109\.99 · ingredients included/);
   assert.equal(res.headers['x-robots-tag'], 'noindex, nofollow');
   assert.match(res.headers['cache-control'], /no-store/);
   assert.ok(res.cookies.some((c) => c.includes('HttpOnly') && c.includes('SameSite=Lax')));
@@ -238,7 +238,7 @@ test('no payment on the event type → no money is claimed', async () => {
 });
 
 test('an unsuccessful payment is not treated as paid', async () => {
-  useCalendly(fixtures({ invitee: { payment: { successful: false, amount: 100, currency: 'USD' } } }));
+  useCalendly(fixtures({ invitee: { payment: { successful: false, amount: 109.99, currency: 'USD' } } }));
   const res = mockRes();
   await confirmed(reqWith(validCookie()), res);
   assert.doesNotMatch(res.body, /Paid ·/);

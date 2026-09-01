@@ -11,7 +11,7 @@
    api/_lib/config.js, which mirrors the public values for the server side.
 --------------------------------------------------------------------------- */
 
-/** The scheduling page for the $100 in-home cooking session. */
+/** The scheduling page for the in-home cooking session. */
 export const CALENDLY_BOOKING_URL = 'https://calendly.com/hi-cielpm/30min';
 
 /**
@@ -26,15 +26,16 @@ export const CALENDLY_COLORS = {
 };
 
 /**
- * The advertised price. It appears in the hero, both CTAs and the booking
- * heading; every one of those is marked [data-price] so this is the only
- * place to change it.
- *
- * ⚠ This MUST match what the Calendly event actually charges. At the time of
- * writing the event "Private Cooking Session — Miami" is configured at
- * $109.99 USD, so one of the two has to move before this page goes live.
+ * The advertised price, matching what the Calendly event "Private Cooking
+ * Session — Miami" actually charges. It appears in the hero, both CTAs and the
+ * booking heading; every one of those is marked [data-price], so this is the
+ * only place to change it. Keep it in step with Calendly — the page must never
+ * advertise a number the checkout does not charge.
  */
-export const PRICE = '$100';
+export const PRICE = '$109.99';
+
+/** The same figure as a number, for conversion values sent to Meta. */
+export const PRICE_VALUE = 109.99;
 
 /**
  * Calendly's own header repeats the name, duration, price and description we

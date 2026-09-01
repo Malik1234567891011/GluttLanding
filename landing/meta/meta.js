@@ -7,7 +7,7 @@
    useful if it never does.
 --------------------------------------------------------------------------- */
 
-import { CALENDLY_BOOKING_URL, calendlyEmbedUrl, PRICE } from './config.js';
+import { CALENDLY_BOOKING_URL, calendlyEmbedUrl, PRICE, PRICE_VALUE } from './config.js';
 import { initTracking, track, pixel, attribution } from './track.js';
 
 document.documentElement.classList.remove('no-js');
@@ -240,7 +240,7 @@ function initCalendlyEvents() {
     if (name === 'calendly.event_type_viewed') track('meta_booking_started');
     if (name === 'calendly.date_and_time_selected') {
       track('meta_booking_time_selected');
-      pixel('InitiateCheckout', { value: 100, currency: 'USD' });
+      pixel('InitiateCheckout', { value: PRICE_VALUE, currency: 'USD' });
     }
     if (name === 'calendly.event_scheduled') track('meta_booking_scheduled');
   });

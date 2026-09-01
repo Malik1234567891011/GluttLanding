@@ -22,13 +22,7 @@ tests/confirmation.test.js 23 tests, `npm test`
 
 ## ⚠️ Before this goes live
 
-**1. The price does not match.** The page advertises **$100**; the Calendly
-event *Private Cooking Session — Miami* is configured at **$109.99 USD**.
-Either lower the Calendly price to `100`, or change `PRICE` in
-`landing/meta/config.js` (it is the only place — every label is `[data-price]`).
-Shipping as-is means the ad says $100 and checkout charges $109.99.
-
-**2. Set the environment variables** in Vercel (Production + Preview). All are
+**1. Set the environment variables** in Vercel (Production + Preview). All are
 server-side; none may use a `NEXT_PUBLIC_`-style public prefix.
 
 | Variable | Purpose |
@@ -38,9 +32,9 @@ server-side; none may use a `NEXT_PUBLIC_`-style public prefix.
 | `META_PIXEL_ID` | Optional. Enables the Purchase signal on confirmation. |
 | `CALENDLY_BOOKING_URL` | Optional override; defaults to the event above. |
 
-**3. Configure the Calendly event** (Event type → Confirmation page):
+**2. Configure the Calendly event** (Event type → Confirmation page):
 redirect to `https://glutt.org/api/cooking/confirm` **with "Pass event details
-to your redirect page" enabled**. Do this *after* step 2, otherwise customers
+to your redirect page" enabled**. Do this *after* step 1, otherwise customers
 land on a route that cannot verify them and get bounced to `/meta`.
 
 ## Security model
@@ -94,6 +88,16 @@ In `landing/meta/config.js`:
   than a design one, so it is off until someone decides.
 - `HIDE_EVENT_DETAILS` — `true`. Hides Calendly's duplicate name/price/description
   header so the calendar itself is the first thing in the module.
+
+## Price
+
+The page advertises **$109.99**, matching the Calendly event. It lives in one
+place — `PRICE` (and `PRICE_VALUE` for the Meta conversion value) in
+`config.js` — and every label on the page is marked `[data-price]`. The
+confirmation page does not use it at all: that figure comes from the payment
+Calendly reports, so it cannot disagree with what was actually charged.
+
+If the price changes, change it in Calendly and in `config.js`.
 
 ## Notes
 
