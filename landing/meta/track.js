@@ -67,7 +67,7 @@ export function attribution() {
  * globally (or by a tag manager) is adopted rather than duplicated — calling
  * init twice would double-count everything.
  */
-function ensurePixel() {
+export function ensurePixel() {
   if (typeof window.fbq === 'function') return true;
   if (!META_PIXEL_ID) return false;
 
