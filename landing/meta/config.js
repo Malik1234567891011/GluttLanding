@@ -55,14 +55,15 @@ export const HIDE_CALENDLY_COOKIE_BANNER = false;
  * The Glutt *website* Pixel. Public by nature — it is visible in the source of
  * every page that loads one.
  *
- * Not to be confused with 1015291791330103, which is the Glutt app dataset
- * and must not be used for this funnel. This page installs the website Pixel
- * once for glutt.org; Calendly fires its own events from inside its iframe on
- * calendly.com, which is a separate document.
+ * Not to be confused with 1015291791330103 (the Glutt app dataset) or
+ * 1541408760532310 (a superseded website dataset); neither should carry this
+ * funnel. This page installs the website Pixel once for glutt.org; Calendly
+ * fires its own events from inside its iframe on calendly.com, which is a
+ * separate document.
  *
  * Set to '' to ship no pixel at all.
  */
-export const META_PIXEL_ID = '1541408760532310';
+export const META_PIXEL_ID = '1095750586231675';
 
 /** Builds the embed URL, carrying the invitee's campaign attribution through. */
 export function calendlyEmbedUrl(params = {}) {
