@@ -268,7 +268,7 @@ test('the Pixel is initialised exactly once', async (t) => {
 
   const inits = queue.filter((c) => c[0] === 'init');
   assert.equal(inits.length, 1, 'exactly one fbq init, never a second Pixel');
-  assert.equal(inits[0][1], '1095750586231675', 'the current website Pixel');
+  assert.equal(inits[0][1], '2198241070747099', 'the current website Pixel');
   assert.equal(queue.filter((c) => c[0] === 'track' && c[1] === 'PageView').length, 1);
   assert.equal(queue.filter((c) => c[1] === 'Purchase').length, 0, 'no Purchase merely from landing');
 });

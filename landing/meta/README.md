@@ -90,7 +90,7 @@ In `landing/meta/config.js`:
 
 ## Meta Pixel and the Purchase conversion
 
-Website Pixel `1095750586231675`, set in `landing/meta/config.js`.
+Website Pixel `2198241070747099`, set in `landing/meta/config.js`.
 
 Superseded and not to be used here: `1541408760532310` (an earlier website
 dataset) and `1015291791330103` (the Glutt **app** dataset). If the Vercel
@@ -166,7 +166,7 @@ was a code change rather than an env change. A Pixel ID is public either way.
 ⚠️ `NEXT_PUBLIC_META_PIXEL_ID` in Vercel was last known to hold a stale ID
 (the app dataset `1015291791330103`). Nothing reads it today — `api/_lib/config.js` is
 reserved for the CAPI work above — but it takes precedence over the literal
-there, so update it to `1095750586231675` or delete it before server-side
+there, so update it to `2198241070747099` or delete it before server-side
 conversions are added. Otherwise the verified Purchase would land in the app
 dataset instead of the website one.
 
