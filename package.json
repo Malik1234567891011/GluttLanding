@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "check": "node --check api/create-checkout-session.js"
+    "check": "node --check api/create-checkout-session.js",
+    "test": "node --test tests/*.test.js"
   },
   "dependencies": {
     "stripe": "latest"

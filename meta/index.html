@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f7f3ee" />
+    <title>Cook anything you want. We bring everything. — Glutt</title>
+    <meta
+      name="description"
+      content="A private cooking experience at your home in Miami. Pick any recipe, we bring the ingredients, and Glutt guides you step by step. $100, ingredients included."
+    />
+    <link rel="canonical" href="https://glutt.org/meta" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Glutt" />
+    <meta property="og:title" content="Cook anything you want. We bring everything." />
+    <meta
+      property="og:description"
+      content="A private cooking experience at your home in Miami. $100, ingredients included."
+    />
+    <meta property="og:url" content="https://glutt.org/meta" />
+    <meta property="og:image" content="https://glutt.org/assets/meta/session-poster.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f6b45'/%3E%3Ctext x='16' y='23' font-family='Helvetica, Arial, sans-serif' font-size='20' font-weight='bold' text-anchor='middle' fill='white'%3EG%3C/text%3E%3C/svg%3E"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
+    />
+    <link rel="stylesheet" href="/landing/meta/meta.css" />
+    <link rel="preload" as="image" href="/assets/meta/session-poster.webp" fetchpriority="high" />
+    <link rel="preconnect" href="https://assets.calendly.com" />
+    <link rel="preconnect" href="https://calendly.com" />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#book">Skip to booking</a>
+
+    <!-- Deliberately not the site navigation: this page exists to book, and
+         paid traffic should not be sent wandering. -->
+    <header class="bar">
+      <a class="bar__brand" href="/" aria-label="Glutt home">Glutt</a>
+      <span class="pill" aria-label="Location: Miami">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z" />
+          <circle cx="12" cy="10" r="2.6" />
+        </svg>
+        Miami
+      </span>
+    </header>
+
+    <main id="main">
+      <!-- ============================ HERO ============================ -->
+      <section class="hero">
+        <h1 class="hero__title">Cook anything you want.<br />We bring everything.</h1>
+
+        <p class="hero__sub">
+          A private cooking experience at your home, guided by Glutt&nbsp;+ Meta glasses. Pick the
+          recipe. We bring the ingredients and help you cook it step by step.
+        </p>
+
+        <!-- No autoplay attribute on purpose: the browser would honour it
+             regardless of prefers-reduced-motion. meta.js starts playback only
+             when motion is welcome, and the poster stands on its own. -->
+        <figure class="media">
+          <video
+            class="media__vid"
+            id="hero-video"
+            poster="/assets/meta/session-poster.webp"
+            preload="none"
+            muted
+            loop
+            playsinline
+            disablepictureinpicture
+            aria-hidden="true"
+            tabindex="-1"
+            width="640"
+            height="800"
+          >
+            <source src="/assets/meta/session-loop.mp4" type="video/mp4" />
+          </video>
+        </figure>
+
+        <p class="price"><strong data-price>$100</strong><span>·</span>ingredients included</p>
+
+        <a class="btn btn--primary" href="#book" data-ev="meta_booking_cta_clicked" data-cta="hero" data-price="cta">
+          Book for $100
+        </a>
+      </section>
+
+      <!-- ========================= HOW IT WORKS ========================= -->
+      <section class="steps" aria-labelledby="steps-h">
+        <h2 class="sr-only" id="steps-h">How it works</h2>
+        <ol class="steps__list">
+          <li class="step">
+            <span class="step__n">1</span>
+            <div>
+              <h3>You pick the recipe</h3>
+              <p>Anything you've been wanting to make.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__n">2</span>
+            <div>
+              <h3>We bring everything</h3>
+              <p>The ingredients come with us. No grocery run beforehand.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__n">3</span>
+            <div>
+              <h3>You do the cooking</h3>
+              <p>Glutt guides you step by step, and we're there whenever you need help.</p>
+            </div>
+          </li>
+        </ol>
+      </section>
+
+      <!-- =========================== BOOKING =========================== -->
+      <section class="book" id="book" aria-labelledby="book-h">
+        <h2 class="book__h" id="book-h">Book your cooking session</h2>
+        <p class="price price--book"><strong data-price>$100</strong><span>·</span>ingredients included</p>
+
+        <ul class="assure" aria-label="What's included">
+          <li>Miami</li>
+          <li>Private session</li>
+          <li>Ingredients included</li>
+          <li>No experience needed</li>
+        </ul>
+
+        <div class="cal" id="cal">
+          <!-- Replaced by the real scheduler the moment it initialises. Not
+               interactive: it is a loading state, not a fake calendar. -->
+          <div class="cal__skel" id="cal-skel" aria-hidden="true">
+            <p class="cal__skel-h">Select a day</p>
+            <div class="cal__skel-grid">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <p class="cal__skel-note">Loading available times…</p>
+          </div>
+        </div>
+
+        <p class="cal__help">
+          <a id="cal-direct" href="https://calendly.com/hi-cielpm/30min" data-ev="meta_booking_direct_opened"
+            >Having trouble booking? Open scheduling page</a
+          >
+        </p>
+      </section>
+
+      <!-- ============================= FAQ ============================= -->
+      <section class="faq" aria-labelledby="faq-h">
+        <h2 class="faq__h" id="faq-h">Questions</h2>
+
+        <details class="qa">
+          <summary>Can I choose any recipe?</summary>
+          <p>
+            Yes — anything you've been wanting to make. You can tell us when you book, or let us
+            know afterwards. You don't have to decide now.
+          </p>
+        </details>
+
+        <details class="qa">
+          <summary>What does the $100 include?</summary>
+          <p>
+            One private cooking session at your home and the ingredients for your recipe. We also
+            bring any specialty tools you don't have.
+          </p>
+        </details>
+
+        <details class="qa">
+          <summary>Where is this available?</summary>
+          <p>
+            Miami. If you're just outside the area, email
+            <a href="mailto:hi@cielpm.ai">hi@cielpm.ai</a> and we'll see what we can do.
+          </p>
+        </details>
+
+        <details class="qa">
+          <summary>Do I need to know how to cook?</summary>
+          <p>
+            No. You do the cooking, but Glutt walks you through every step and we're right there
+            with you the whole time.
+          </p>
+        </details>
+
+        <details class="qa">
+          <summary>What happens after I book?</summary>
+          <p>
+            You'll get a confirmation and a calendar invite. We'll reach out before your session if
+            we need anything else from you.
+          </p>
+        </details>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <span>© 2026 Glutt</span>
+      <nav aria-label="Legal">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="mailto:hi@cielpm.ai">Contact</a>
+      </nav>
+    </footer>
+
+    <!-- Appears once the hero CTA is gone, hides again over the scheduler so it
+         can never cover the date and time controls. -->
+    <div class="sticky" id="sticky" hidden>
+      <a class="btn btn--primary btn--block" href="#book" data-ev="meta_booking_cta_clicked" data-cta="sticky" data-price="cta">
+        Book for $100
+      </a>
+    </div>
+
+    <script type="module" src="/landing/meta/meta.js"></script>
+  </body>
+</html>
