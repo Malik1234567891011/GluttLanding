@@ -59,84 +59,165 @@
     <main id="main">
       <!-- ============================ HERO ============================ -->
       <section class="hero">
-        <h1 class="hero__title">Pick any recipe.<br />We bring everything.<br />You cook it.</h1>
-
-        <p class="hero__sub">
-          A private 2-hour cooking session in your Miami home, guided by a trained
-          chef&nbsp;+ Meta&nbsp;glasses.
+        <!-- Continuity for "V1 | Founder AI Glasses" traffic. Shown only when
+             utm_content identifies that ad, so everyone else sees a clean hero.
+             Purely additive: it reads the parameter, never rewrites it. -->
+        <p class="matchline" id="matchline" hidden>
+          Yes &mdash; this is the Meta glasses cooking session from the ad.
         </p>
 
-        <p class="hero__price"><strong data-price>$109.99</strong> total · ingredients included</p>
+        <h1 class="hero__title">Pick any recipe.<br />We bring every ingredient.<br />You cook it at home.</h1>
+
+        <p class="hero__sub">
+          A private 2-hour cooking session in Miami with hands-on help the whole way, plus
+          Glutt&nbsp;+ Meta&nbsp;glasses for hands-free guidance.
+        </p>
+
+        <div class="pricebox">
+          <p class="pricebox__amt"><strong data-price>$109.99</strong> total</p>
+          <ul class="pricebox__facts">
+            <li>Private 2-hour session</li>
+            <li>Ingredients included</li>
+            <li>In your own kitchen, in Miami</li>
+          </ul>
+        </div>
 
         <a class="btn btn--primary" href="#book" data-ev="meta_booking_cta_clicked" data-cta="hero">
           See available times
         </a>
 
-        <p class="hero__free">No charge to check availability.</p>
+        <p class="hero__free">No charge to check availability. You pay when you confirm the booking.</p>
 
-        <!-- Real frame from Glutt's own recipe footage: a home kitchen, no
-             identifiable face. It illustrates home cooking; it does not claim to
-             be a Glutt session, and nothing here implies it shows the founder. -->
         <figure class="shot">
           <img
             src="/assets/meta/session-cooking-800.webp"
             srcset="/assets/meta/session-cooking-800.webp 800w, /assets/meta/session-cooking-1200.webp 1200w"
             sizes="(max-width: 899px) 100vw, 46vw"
             width="1200" height="900"
-            alt="Cooking a curry in a home kitchen."
+            alt="Cooking a curry on the stove in a home kitchen."
             fetchpriority="high" decoding="async"
           />
         </figure>
       </section>
 
+      <!-- ====================== WHAT YOU GET ====================== -->
+      <section class="get" aria-labelledby="get-h">
+        <h2 class="sec-h" id="get-h">What you get</h2>
+        <ul class="get__list">
+          <li>
+            <b>Your recipe</b>
+            <span>You choose what you want to make.</span>
+          </li>
+          <li>
+            <b>The ingredients</b>
+            <span>We shop for what the recipe needs and bring it to you.</span>
+          </li>
+          <li>
+            <b>Two private hours</b>
+            <span>No group class. The session is yours.</span>
+          </li>
+          <li>
+            <b>Help while you cook</b>
+            <span>You do the cooking. Help is there whenever you need it.</span>
+          </li>
+          <li>
+            <b>Your own kitchen</b>
+            <span>No driving to a class or cooking on someone else's station.</span>
+          </li>
+          <li>
+            <b>Glutt + Meta glasses</b>
+            <span>Hands-free guidance so you can follow the recipe with your hands busy.</span>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ====================== THE EXPERIENCE ====================== -->
+      <section class="exp" aria-labelledby="exp-h">
+        <h2 class="sec-h" id="exp-h">What the session looks like</h2>
+        <div class="exp__grid">
+          <figure>
+            <img src="/assets/meta/exp-prep-640.webp"
+              srcset="/assets/meta/exp-prep-640.webp 640w, /assets/meta/exp-prep-1000.webp 1000w"
+              sizes="(max-width: 899px) 92vw, 30vw" width="1000" height="750" loading="lazy" decoding="async"
+              alt="Adding spices to the pan." />
+            <figcaption>We bring everything the recipe needs.</figcaption>
+          </figure>
+          <figure>
+            <img src="/assets/meta/exp-plate-640.webp"
+              srcset="/assets/meta/exp-plate-640.webp 640w, /assets/meta/exp-plate-1000.webp 1000w"
+              sizes="(max-width: 899px) 92vw, 30vw" width="1000" height="750" loading="lazy" decoding="async"
+              alt="Serving the finished curry with rice." />
+            <figcaption>You cook it, start to finish.</figcaption>
+          </figure>
+          <figure>
+            <img src="/assets/meta/exp-dish-640.webp"
+              srcset="/assets/meta/exp-dish-640.webp 640w, /assets/meta/exp-dish-1000.webp 1000w"
+              sizes="(max-width: 899px) 92vw, 30vw" width="1000" height="750" loading="lazy" decoding="async"
+              alt="A finished plate of hot honey chicken and rice." />
+            <figcaption>Then you eat what you made.</figcaption>
+          </figure>
+        </div>
+      </section>
+
       <!-- ========================= HOW IT WORKS ========================= -->
       <section class="steps" aria-labelledby="steps-h">
-        <h2 class="sr-only" id="steps-h">How it works</h2>
+        <h2 class="sec-h" id="steps-h">How it works</h2>
         <ol class="steps__list">
           <li class="step">
             <span class="step__n">1</span>
             <div>
-              <h3>You pick the recipe</h3>
-              <p>Anything you've been wanting to make.</p>
+              <h3>Pick a time</h3>
+              <p>Choose one of the available Miami sessions.</p>
             </div>
           </li>
           <li class="step">
             <span class="step__n">2</span>
             <div>
-              <h3>We bring everything</h3>
-              <p>All the ingredients come with us.</p>
+              <h3>Tell us the recipe</h3>
+              <p>Anything you've been wanting to make.</p>
             </div>
           </li>
           <li class="step">
             <span class="step__n">3</span>
             <div>
-              <h3>You do the cooking</h3>
-              <p>Glutt + Meta glasses guide you, and we're there whenever you need help.</p>
+              <h3>We bring the ingredients</h3>
+              <p>We shop for what your recipe needs and come to your home.</p>
+            </div>
+          </li>
+          <li class="step">
+            <span class="step__n">4</span>
+            <div>
+              <h3>You cook</h3>
+              <p>Two hours in your kitchen, with help whenever you need it.</p>
             </div>
           </li>
         </ol>
       </section>
 
-      <!-- ====================== WHAT'S INCLUDED ====================== -->
-      <section class="incl" aria-labelledby="incl-h">
-        <h2 class="incl__h" id="incl-h">Everything is included</h2>
-        <ul class="incl__list">
-          <li>2-hour private session</li>
-          <li>Ingredients for your recipe</li>
-          <li>Meta glasses</li>
-          <li>Glutt step-by-step guidance</li>
-          <li>Hands-on help whenever you need it</li>
-        </ul>
-      </section>
-
       <!-- ========================= WHO COMES ========================= -->
       <section class="who" aria-labelledby="who-h">
-        <h2 class="who__h" id="who-h">Who's coming to your home?</h2>
+        <h2 class="sec-h" id="who-h">Who's coming to your home?</h2>
         <p class="who__copy">
-          I'm Malik, founder of Glutt. I bring the ingredients and Meta glasses, stay for the full
-          session, and help whenever you need it. You do the cooking &mdash; I'm just there to make
-          sure you're never stuck.
+          I'm Malik, founder of Glutt. I personally run these Miami sessions. I bring the
+          ingredients, stay for the full two hours, and help whenever you get stuck. You do the
+          cooking &mdash; I'm there to make it easier.
         </p>
+        <p class="who__copy">
+          These are the first sessions we're running in Miami, which is why I'm the one showing up.
+        </p>
+        <p class="who__contact">
+          Questions before you book? Email <a href="mailto:hi@cielpm.ai">hi@cielpm.ai</a>.
+        </p>
+      </section>
+
+      <!-- ========================= DIFFERENT ========================= -->
+      <section class="diff" aria-labelledby="diff-h">
+        <h2 class="sec-h" id="diff-h">What this isn't</h2>
+        <ul class="diff__list">
+          <li><s>A group class</s><span>A private session, just for you</span></li>
+          <li><s>A video call</s><span>Someone actually in your kitchen</span></li>
+          <li><s>A meal kit</s><span>We shop, and we stay to help</span></li>
+        </ul>
       </section>
 
       <!-- =========================== BOOKING =========================== -->
@@ -175,34 +256,78 @@
 
       <!-- ============================= FAQ ============================= -->
       <section class="faq" aria-labelledby="faq-h">
-        <h2 class="faq__h" id="faq-h">Questions</h2>
+        <h2 class="sec-h" id="faq-h">Questions</h2>
 
         <details class="qa">
-          <summary>Does choosing a time book me?</summary>
+          <summary>Are the ingredients really included?</summary>
           <p>
-            No. You'll choose a time first, then enter your details and pay. Your session is
-            confirmed after payment.
+            Yes. The $109.99 covers the session and the ingredients for the recipe you choose.
+            There's no separate grocery bill.
           </p>
         </details>
 
         <details class="qa">
-          <summary>What's included?</summary>
+          <summary>Can I pick any recipe?</summary>
           <p>
-            A private 2-hour session, the ingredients for your selected recipe, Meta glasses, Glutt
-            guidance, and hands-on help.
+            Pick something you've always wanted to cook. If what you have in mind needs anything
+            unusual, email <a href="mailto:hi@cielpm.ai">hi@cielpm.ai</a> first and we'll sort it
+            out before you book.
           </p>
         </details>
 
         <details class="qa">
-          <summary>Do I need cooking experience?</summary>
-          <p>No. The session is designed to guide you through the recipe step by step.</p>
+          <summary>Do I need to be good at cooking?</summary>
+          <p>
+            No. You cook, and help is there the whole time. The Meta glasses can also walk you
+            through the recipe hands-free.
+          </p>
         </details>
 
         <details class="qa">
-          <summary>Where is this available?</summary>
+          <summary>Who actually comes to my home?</summary>
           <p>
-            Miami. If you're just outside the area, email
-            <a href="mailto:hi@cielpm.ai">hi@cielpm.ai</a> and we'll see what we can do.
+            Malik, the founder of Glutt. He runs these Miami sessions himself and stays for the
+            full two hours.
+          </p>
+        </details>
+
+        <details class="qa">
+          <summary>When do I pay?</summary>
+          <p>
+            Checking times costs nothing. You pay when you confirm the booking &mdash; card payment
+            is handled by Stripe through Calendly.
+          </p>
+        </details>
+
+        <details class="qa">
+          <summary>What if I need to change the time?</summary>
+          <p>
+            Your confirmation email includes links to reschedule or cancel. If anything comes up,
+            email <a href="mailto:hi@cielpm.ai">hi@cielpm.ai</a> and we'll work it out.
+          </p>
+        </details>
+
+        <details class="qa">
+          <summary>Where in Miami do you come?</summary>
+          <p>
+            Miami. If you're not sure whether you're in range, email
+            <a href="mailto:hi@cielpm.ai">hi@cielpm.ai</a> before booking and we'll confirm.
+          </p>
+        </details>
+
+        <details class="qa">
+          <summary>Do I need special equipment?</summary>
+          <p>
+            A working kitchen is enough. Tell us what you'd like to cook and we'll let you know if
+            it needs anything you might not have.
+          </p>
+        </details>
+
+        <details class="qa">
+          <summary>Any allergies or foods you avoid?</summary>
+          <p>
+            Mention it when you book, or email <a href="mailto:hi@cielpm.ai">hi@cielpm.ai</a>, and
+            we'll plan the shopping around it.
           </p>
         </details>
       </section>
@@ -221,8 +346,9 @@
     <!-- Appears once the hero CTA is gone, hides again over the scheduler so it
          can never cover the date and time controls. -->
     <div class="sticky" id="sticky" hidden>
-      <a class="btn btn--primary btn--block" href="#book" data-ev="meta_booking_cta_clicked" data-cta="sticky" data-price="sticky">
-        See available times · $109.99
+      <p class="sticky__ctx"><strong data-price>$109.99</strong> total · ingredients included</p>
+      <a class="btn btn--primary btn--block" href="#book" data-ev="meta_booking_cta_clicked" data-cta="sticky">
+        See available times
       </a>
     </div>
 

@@ -148,28 +148,48 @@ test('Meta Purchase rules on /meta', async (t) => {
   };
 
   await t.test('CTA copy is commitment-free and survives syncPrice', async () => {
-    // syncPrice() rewrites [data-price] elements. It used to force every CTA to
-    // "Book for <price>", which would silently undo the new wording, so this
-    // pins the copy that the conversion change depends on.
+    // syncPrice() rewrites [data-price] elements; it must never turn a CTA back
+    // into "Book for <price>", which would misdescribe what the click does.
     const hero = await ev(`document.querySelector('.hero .btn').textContent.trim()`);
     assert.equal(hero, 'See available times', 'hero CTA must not imply a charge');
 
     const sticky = await ev(`document.querySelector('#sticky .btn').textContent.trim()`);
-    assert.equal(sticky, 'See available times · $109.99', 'sticky keeps price inline');
+    assert.equal(sticky, 'See available times');
 
-    // price stays visible before Calendly, just not welded to the button
-    const priceShown = await ev(`document.querySelector('.hero__price').textContent.replace(/\\s+/g,' ').trim()`);
-    assert.match(priceShown, /\$109\.99 total · ingredients included/);
+    // price stays visible before Calendly, framed as a package
+    const box = await ev(`document.querySelector('.pricebox').textContent.replace(/\\s+/g,' ').trim()`);
+    assert.match(box, /\$109\.99 total/);
+    assert.match(box, /Ingredients included/);
+    assert.match(box, /Private 2-hour session/);
 
     const free = await ev(`document.querySelector('.hero__free').textContent.trim()`);
-    assert.equal(free, 'No charge to check availability.');
+    assert.match(free, /No charge to check availability/);
 
     const bookFree = await ev(`document.querySelector('.book__free').textContent.trim()`);
     assert.equal(bookFree, 'Choosing a time does not book or charge you.');
 
-    // nothing anywhere should still say "Book for"
-    const stale = await ev(`document.body.innerText.includes('Book for')`);
-    assert.equal(stale, false, 'no commitment-language CTA left on the page');
+    assert.equal(await ev(`document.body.innerText.includes('Book for')`), false,
+      'no commitment-language CTA left on the page');
+    // the unsupported credential claim must not come back
+    assert.equal(await ev(`/trained chef|professional chef/i.test(document.body.innerText)`), false,
+      'Malik is the founder, not a chef — no credential claim');
+  });
+
+  await t.test('the V1 glasses-ad continuity line is gated on utm_content', async () => {
+    // hidden for ordinary traffic
+    assert.equal(await ev(`document.getElementById('matchline').hidden`), true);
+
+    await b.S('Page.navigate', { url: `${base}/meta?utm_content=V1%20%7C%20Founder%20AI%20Glasses` });
+    await sleep(1500);
+    assert.equal(await ev(`document.getElementById('matchline').hidden`), false,
+      'shown for the glasses ad');
+    assert.match(await ev(`document.getElementById('matchline').textContent.trim()`),
+      /Meta glasses cooking session from the ad/);
+    // and it must not have eaten the attribution
+    assert.match(await ev(`decodeURIComponent(document.cookie)`), /utm_content/);
+
+    await b.S('Page.navigate', { url: `${base}/meta` });
+    await sleep(1400);
   });
 
   await t.test('adopts the existing Pixel instead of initialising another', async () => {

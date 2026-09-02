@@ -336,25 +336,32 @@ function initCtas() {
 
 /* Keeps every price label in step with PRICE in config.js. The HTML already
    ships the right number, so nothing flashes; this only matters when the price
-   changes there.
-
-   The CTA copy is deliberately NOT price-led any more — "See available times"
-   describes what the click actually does, since it only scrolls to the
-   scheduler and charges nothing. The price is stated next to the button
-   instead, so it stays transparent without reading as a commitment. Only the
-   sticky bar carries the number inline, where there is no room for a separate
-   line. */
+   changes there. The CTA copy is deliberately not price-led — "See available
+   times" describes what the click actually does, since it only scrolls to the
+   scheduler and charges nothing. */
 function syncPrice() {
   for (const el of document.querySelectorAll('[data-price]')) {
-    const next =
-      el.dataset.price === 'sticky' ? `See available times · ${PRICE}` : PRICE;
-    if (el.textContent.trim() !== next) el.textContent = next;
+    if (el.textContent.trim() !== PRICE) el.textContent = PRICE;
   }
+}
+
+/* Continuity for the "V1 | Founder AI Glasses" ad. Meta passes the ad name in
+   utm_content, so traffic from that creative gets one line confirming they
+   landed on the right thing. Everyone else never sees it. Read-only: the
+   parameter is matched, never modified, and attribution is untouched. */
+function initMatchLine() {
+  const el = $('matchline');
+  if (!el) return;
+  const content = (new URLSearchParams(location.search).get('utm_content') || '').toLowerCase();
+  // tolerant of Meta's naming: "V1 | Founder AI Glasses", "v1_founder_ai_glasses", etc.
+  const isGlassesAd = /glass/.test(content) || (/\bv1\b/.test(content) && /founder/.test(content));
+  if (isGlassesAd) el.hidden = false;
 }
 
 /* --------------------------------- boot --------------------------------- */
 
 syncPrice();
+initMatchLine();
 
 initTracking();
 initCtas();

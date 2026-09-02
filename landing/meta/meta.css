@@ -165,17 +165,61 @@ video {
   max-width: 34ch;
 }
 
-.hero__price {
-  font-size: 17px;
-  color: var(--muted);
-  margin-top: -4px;
+/* continuity line for the glasses ad — a quiet aside, never a headline */
+.matchline {
+  align-self: start;
+  padding: 7px 12px;
+  border-radius: 999px;
+  background: var(--green-soft);
+  color: var(--green-ink);
+  font-size: 13.5px;
+  font-weight: 600;
 }
 
-.hero__price strong {
-  color: var(--ink);
-  font-size: 21px;
+/* the price as a package, not a naked number */
+.pricebox {
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--surface);
+}
+
+.pricebox__amt {
+  font-size: 16px;
+  color: var(--muted);
+}
+
+.pricebox__amt strong {
+  font-size: 30px;
   font-weight: 700;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.035em;
+  color: var(--ink);
+  margin-right: 5px;
+}
+
+.pricebox__facts {
+  display: grid;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.pricebox__facts li {
+  position: relative;
+  padding-left: 22px;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.pricebox__facts li::before {
+  content: "";
+  position: absolute;
+  left: 2px;
+  top: 7px;
+  width: 10px;
+  height: 5px;
+  border-left: 1.8px solid var(--green);
+  border-bottom: 1.8px solid var(--green);
+  transform: rotate(-45deg);
 }
 
 .hero .btn {
@@ -287,6 +331,112 @@ video {
   font-size: 15px;
 }
 
+/* ============================ shared heading =========================== */
+
+.sec-h {
+  font-size: clamp(21px, 5.6vw, 26px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 14px;
+}
+
+/* ============================== what you get ========================== */
+
+.get {
+  padding: 36px var(--pad) 0;
+}
+
+.get__list {
+  display: grid;
+  gap: 1px;
+  background: var(--line);
+  border-block: 1px solid var(--line);
+}
+
+.get__list li {
+  padding: 15px 0;
+  background: var(--bg);
+}
+
+.get__list b {
+  display: block;
+  font-size: 16.5px;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 2px;
+}
+
+.get__list span {
+  color: var(--muted);
+  font-size: 15.5px;
+}
+
+/* ============================== experience ============================ */
+
+.exp {
+  padding: 36px var(--pad) 0;
+}
+
+.exp__grid {
+  display: grid;
+  gap: 14px;
+}
+
+.exp figure {
+  margin: 0;
+}
+
+.exp img {
+  width: 100%;
+  /* height:auto is required — the intrinsic height attribute would otherwise
+     win and aspect-ratio would be ignored. The attributes stay for CLS. */
+  height: auto;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: var(--r);
+  background: #eee7dd;
+}
+
+.exp figcaption {
+  margin-top: 8px;
+  font-size: 14.5px;
+  color: var(--muted);
+}
+
+/* ============================== different ============================= */
+
+.diff {
+  padding: 36px var(--pad) 0;
+}
+
+.diff__list {
+  display: grid;
+  gap: 1px;
+  background: var(--line);
+  border-block: 1px solid var(--line);
+}
+
+.diff__list li {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr);
+  gap: 12px;
+  align-items: baseline;
+  padding: 14px 0;
+  background: var(--bg);
+}
+
+.diff__list s {
+  color: var(--muted);
+  font-size: 15px;
+  text-decoration-color: rgba(107, 99, 91, 0.5);
+}
+
+.diff__list span {
+  font-size: 15.5px;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
 /* ============================== included ============================== */
 
 .incl {
@@ -345,6 +495,21 @@ video {
   font-size: 16px;
   line-height: 1.6;
   max-width: 52ch;
+}
+
+.who__copy + .who__copy {
+  margin-top: 10px;
+}
+
+.who__contact {
+  margin-top: 12px;
+  font-size: 15px;
+  color: var(--muted);
+}
+
+.who__contact a {
+  color: var(--green);
+  font-weight: 600;
 }
 
 /* =============================== booking =============================== */
@@ -627,13 +792,39 @@ video {
   bottom: 0;
   z-index: 50;
   padding: 10px var(--pad) calc(10px + var(--safe-b));
-  background: linear-gradient(to top, var(--bg) 62%, rgba(247, 243, 238, 0));
+  /* Solid, with the fade lifted into its own strip above. A gradient across the
+     bar itself left the price line sitting on semi-transparent background, so
+     page text showed through it. */
+  background: var(--bg);
   transform: translateY(140%);
   transition: transform 260ms var(--e);
 }
 
+.sticky::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 100%;
+  height: 26px;
+  background: linear-gradient(to top, var(--bg), rgba(247, 243, 238, 0));
+  pointer-events: none;
+}
+
 .sticky.is-in {
   transform: none;
+}
+
+.sticky__ctx {
+  margin: 0 0 8px;
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+.sticky__ctx strong {
+  color: var(--ink);
+  font-weight: 700;
 }
 
 .sticky[hidden] {
@@ -661,9 +852,11 @@ video {
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
     grid-template-areas:
       "hero  book"
+      "get   book"
+      "exp   book"
       "steps book"
-      "incl  book"
       "who   book"
+      "diff  book"
       "faq   book";
     align-items: start;
     column-gap: 56px;
@@ -698,8 +891,23 @@ video {
     padding: 26px 0 0;
   }
 
-  .incl {
-    grid-area: incl;
+  .get {
+    grid-area: get;
+    padding: 30px 0 0;
+  }
+
+  .exp {
+    grid-area: exp;
+    padding: 30px 0 0;
+  }
+
+  .exp__grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px;
+  }
+
+  .diff {
+    grid-area: diff;
     padding: 30px 0 0;
   }
 
