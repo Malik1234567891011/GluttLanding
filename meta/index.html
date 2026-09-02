@@ -4,18 +4,18 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="theme-color" content="#f7f3ee" />
-    <title>Cook anything you want. We bring everything. — Glutt</title>
+    <title>Pick any recipe. We bring everything. You cook it. — Glutt</title>
     <meta
       name="description"
-      content="A private cooking experience at your home in Miami. Pick any recipe, we bring the ingredients, and Glutt guides you step by step. $109.99, ingredients included."
+      content="A private 2-hour cooking session in your Miami home. Pick any recipe, we bring the ingredients, and Glutt + Meta glasses guide you. $109.99, ingredients included."
     />
     <link rel="canonical" href="https://glutt.org/meta" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Glutt" />
-    <meta property="og:title" content="Cook anything you want. We bring everything." />
+    <meta property="og:title" content="Pick any recipe. We bring everything. You cook it." />
     <meta
       property="og:description"
-      content="A private cooking experience at your home in Miami. $109.99, ingredients included."
+      content="A private 2-hour cooking session in your Miami home. $109.99, ingredients included."
     />
     <meta property="og:url" content="https://glutt.org/meta" />
     <meta property="og:image" content="https://glutt.org/assets/meta/share.jpg" />
@@ -59,18 +59,34 @@
     <main id="main">
       <!-- ============================ HERO ============================ -->
       <section class="hero">
-        <h1 class="hero__title">Cook anything you want.<br />We bring everything.</h1>
+        <h1 class="hero__title">Pick any recipe.<br />We bring everything.<br />You cook it.</h1>
 
-        <!-- Deliberately short: "pick the recipe / we bring the ingredients /
-             you cook" is said properly by the three steps below, and saying it
-             twice was the biggest block of text on the page. -->
         <p class="hero__sub">
-          A private cooking experience at your home, guided by Glutt&nbsp;+ Meta&nbsp;glasses.
+          A private 2-hour cooking session in your Miami home, guided by Glutt&nbsp;+
+          Meta&nbsp;glasses.
         </p>
 
-        <a class="btn btn--primary" href="#book" data-ev="meta_booking_cta_clicked" data-cta="hero" data-price="cta">
-          Book for $109.99
+        <p class="hero__price"><strong data-price>$109.99</strong> total · ingredients included</p>
+
+        <a class="btn btn--primary" href="#book" data-ev="meta_booking_cta_clicked" data-cta="hero">
+          See available times
         </a>
+
+        <p class="hero__free">No charge to check availability.</p>
+
+        <!-- Real frame from Glutt's own recipe footage: a home kitchen, no
+             identifiable face. It illustrates home cooking; it does not claim to
+             be a Glutt session, and nothing here implies it shows the founder. -->
+        <figure class="shot">
+          <img
+            src="/assets/meta/session-cooking-800.webp"
+            srcset="/assets/meta/session-cooking-800.webp 800w, /assets/meta/session-cooking-1200.webp 1200w"
+            sizes="(max-width: 899px) 100vw, 46vw"
+            width="1200" height="900"
+            alt="Cooking a curry in a home kitchen."
+            fetchpriority="high" decoding="async"
+          />
+        </figure>
       </section>
 
       <!-- ========================= HOW IT WORKS ========================= -->
@@ -88,29 +104,53 @@
             <span class="step__n">2</span>
             <div>
               <h3>We bring everything</h3>
-              <p>The ingredients come with us. No grocery run beforehand.</p>
+              <p>All the ingredients come with us.</p>
             </div>
           </li>
           <li class="step">
             <span class="step__n">3</span>
             <div>
               <h3>You do the cooking</h3>
-              <p>Glutt guides you step by step, and we're there whenever you need help.</p>
+              <p>Glutt + Meta glasses guide you, and we're there whenever you need help.</p>
             </div>
           </li>
         </ol>
       </section>
 
+      <!-- ====================== WHAT'S INCLUDED ====================== -->
+      <section class="incl" aria-labelledby="incl-h">
+        <h2 class="incl__h" id="incl-h">Everything is included</h2>
+        <ul class="incl__list">
+          <li>2-hour private session</li>
+          <li>Ingredients for your recipe</li>
+          <li>Meta glasses</li>
+          <li>Glutt step-by-step guidance</li>
+          <li>Hands-on help whenever you need it</li>
+        </ul>
+      </section>
+
+      <!-- ========================= WHO COMES ========================= -->
+      <section class="who" aria-labelledby="who-h">
+        <h2 class="who__h" id="who-h">Who's coming to your home?</h2>
+        <p class="who__copy">
+          I'm Malik, founder of Glutt. I bring the ingredients and Meta glasses, stay for the full
+          session, and help whenever you need it. You do the cooking &mdash; I'm just there to make
+          sure you're never stuck.
+        </p>
+      </section>
+
       <!-- =========================== BOOKING =========================== -->
       <section class="book" id="book" aria-labelledby="book-h">
-        <h2 class="book__h" id="book-h">Book your cooking session</h2>
-        <p class="book__meta"><strong data-price>$109.99</strong> · ingredients included</p>
+        <h2 class="book__h" id="book-h">See available times</h2>
+        <p class="book__meta"><strong data-price>$109.99</strong> · 2 hours · ingredients included</p>
 
-        <ul class="assure" aria-label="What's included">
-          <li>Miami</li>
-          <li>Private session</li>
-          <li>No experience needed</li>
-        </ul>
+        <ol class="prog" aria-label="How booking works">
+          <li><span>1</span>Choose a time</li>
+          <li><span>2</span>Add your details</li>
+          <li><span>3</span>Pay &amp; confirm</li>
+        </ol>
+
+        <p class="book__free">Choosing a time does not book or charge you.</p>
 
         <div class="cal" id="cal">
           <!-- Replaced by the real scheduler the moment it initialises. Not
@@ -138,19 +178,24 @@
         <h2 class="faq__h" id="faq-h">Questions</h2>
 
         <details class="qa">
-          <summary>Can I choose any recipe?</summary>
+          <summary>Does choosing a time book me?</summary>
           <p>
-            Yes — anything you've been wanting to make. You can tell us when you book, or let us
-            know afterwards. You don't have to decide now.
+            No. You'll choose a time first, then enter your details and pay. Your session is
+            confirmed after payment.
           </p>
         </details>
 
         <details class="qa">
-          <summary>What does the price include?</summary>
+          <summary>What's included?</summary>
           <p>
-            One private cooking session at your home and the ingredients for your recipe. We also
-            bring any specialty tools you don't have.
+            A private 2-hour session, the ingredients for your selected recipe, Meta glasses, Glutt
+            guidance, and hands-on help.
           </p>
+        </details>
+
+        <details class="qa">
+          <summary>Do I need cooking experience?</summary>
+          <p>No. The session is designed to guide you through the recipe step by step.</p>
         </details>
 
         <details class="qa">
@@ -160,23 +205,8 @@
             <a href="mailto:hi@cielpm.ai">hi@cielpm.ai</a> and we'll see what we can do.
           </p>
         </details>
-
-        <details class="qa">
-          <summary>Do I need to know how to cook?</summary>
-          <p>
-            No. You do the cooking, but Glutt walks you through every step and we're right there
-            with you the whole time.
-          </p>
-        </details>
-
-        <details class="qa">
-          <summary>What happens after I book?</summary>
-          <p>
-            You'll get a confirmation and a calendar invite. We'll reach out before your session if
-            we need anything else from you.
-          </p>
-        </details>
       </section>
+
     </main>
 
     <footer class="foot">
@@ -191,8 +221,8 @@
     <!-- Appears once the hero CTA is gone, hides again over the scheduler so it
          can never cover the date and time controls. -->
     <div class="sticky" id="sticky" hidden>
-      <a class="btn btn--primary btn--block" href="#book" data-ev="meta_booking_cta_clicked" data-cta="sticky" data-price="cta">
-        Book for $109.99
+      <a class="btn btn--primary btn--block" href="#book" data-ev="meta_booking_cta_clicked" data-cta="sticky" data-price="sticky">
+        See available times · $109.99
       </a>
     </div>
 

@@ -35,7 +35,10 @@ function initSticky() {
   const read = () => {
     raf = 0;
     const heroGone = heroCta.getBoundingClientRect().bottom < 0;
-    const calArrived = cal.getBoundingClientRect().top < window.innerHeight * 0.4;
+    // Retreat as soon as the scheduler reaches the strip the bar occupies, so
+    // it can never sit over the date controls at any scroll position.
+    const barH = bar.offsetHeight || 82;
+    const calArrived = cal.getBoundingClientRect().top < window.innerHeight - barH;
     bar.classList.toggle('is-in', heroGone && !calArrived);
   };
   const schedule = () => {
@@ -140,8 +143,16 @@ function initCalendly() {
         track('meta_calendar_viewed');
       };
 
+      /* Wait for the scheduler to actually paint. The iframe's load event fires
+         while Calendly is still rendering, and its first postMessage arrives
+         earlier still — settling on either left a blank panel. Calendly emits
+         event_type_viewed once the scheduling page is on screen, which is the
+         honest signal. (Presentation only: the tracking listener is separate
+         and untouched, and the timeouts below still cover a missed message.) */
       window.addEventListener('message', (e) => {
-        if (e.origin === 'https://calendly.com' && typeof e.data?.event === 'string') settle();
+        if (e.origin === 'https://calendly.com' && e.data?.event === 'calendly.event_type_viewed') {
+          settle();
+        }
       });
 
       /* The fallback is guarded: removing the skeleton on a bare timer pulls
@@ -153,9 +164,10 @@ function initCalendly() {
       };
 
       const attach = (f) => {
-        f.addEventListener('load', settle, { once: true });
-        setTimeout(settleIfPainted, 4000);
-        setTimeout(settleIfPainted, 8000);
+        // not settle() on load — Calendly is still rendering at that point
+        f.addEventListener('load', () => setTimeout(settleIfPainted, 1200), { once: true });
+        setTimeout(settleIfPainted, 5000);
+        setTimeout(settleIfPainted, 9000);
       };
 
       const frame = host.querySelector('iframe');
@@ -322,11 +334,20 @@ function initCtas() {
   });
 }
 
-/* The HTML ships the correct price already, so there is never a flash; this
-   only matters when someone changes PRICE in config.js. */
+/* Keeps every price label in step with PRICE in config.js. The HTML already
+   ships the right number, so nothing flashes; this only matters when the price
+   changes there.
+
+   The CTA copy is deliberately NOT price-led any more — "See available times"
+   describes what the click actually does, since it only scrolls to the
+   scheduler and charges nothing. The price is stated next to the button
+   instead, so it stays transparent without reading as a commitment. Only the
+   sticky bar carries the number inline, where there is no room for a separate
+   line. */
 function syncPrice() {
   for (const el of document.querySelectorAll('[data-price]')) {
-    const next = (el.dataset.price === 'cta' ? `Book for ${PRICE}` : PRICE);
+    const next =
+      el.dataset.price === 'sticky' ? `See available times · ${PRICE}` : PRICE;
     if (el.textContent.trim() !== next) el.textContent = next;
   }
 }

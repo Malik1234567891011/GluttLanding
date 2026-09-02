@@ -165,8 +165,43 @@ video {
   max-width: 34ch;
 }
 
+.hero__price {
+  font-size: 17px;
+  color: var(--muted);
+  margin-top: -4px;
+}
+
+.hero__price strong {
+  color: var(--ink);
+  font-size: 21px;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+}
+
 .hero .btn {
   margin-top: 2px;
+}
+
+/* the quiet line that removes commitment anxiety under the CTA */
+.hero__free {
+  margin-top: -8px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.shot {
+  margin-top: 6px;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: #eee7dd;
+  /* reserved from the intrinsic width/height too, so there is no CLS */
+  aspect-ratio: 4 / 3;
+}
+
+.shot img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* =============================== buttons =============================== */
@@ -252,6 +287,66 @@ video {
   font-size: 15px;
 }
 
+/* ============================== included ============================== */
+
+.incl {
+  padding: 34px var(--pad) 0;
+}
+
+.incl__h {
+  font-size: clamp(21px, 5.6vw, 25px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 14px;
+}
+
+.incl__list {
+  display: grid;
+  gap: 1px;
+  background: var(--line);
+  border-block: 1px solid var(--line);
+}
+
+.incl__list li {
+  padding: 13px 0 13px 26px;
+  background: var(--bg);
+  font-size: 16px;
+  position: relative;
+}
+
+/* a hairline tick, not a marketing icon */
+.incl__list li::before {
+  content: "";
+  position: absolute;
+  left: 3px;
+  top: 20px;
+  width: 11px;
+  height: 6px;
+  border-left: 1.8px solid var(--green);
+  border-bottom: 1.8px solid var(--green);
+  transform: rotate(-45deg);
+}
+
+/* ================================ who ================================ */
+
+.who {
+  padding: 34px var(--pad) 0;
+}
+
+.who__h {
+  font-size: clamp(21px, 5.6vw, 25px);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  margin-bottom: 10px;
+}
+
+.who__copy {
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 52ch;
+}
+
 /* =============================== booking =============================== */
 
 .book {
@@ -279,28 +374,52 @@ video {
   font-weight: 700;
 }
 
-.assure {
+/* three steps so the visitor knows payment is not the next click */
+.prog {
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
-  margin-top: 14px;
+  gap: 8px 14px;
+  margin-top: 16px;
 }
 
-.assure li {
-  padding: 7px 12px;
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  background: var(--surface);
+.prog li {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 14.5px;
   color: var(--muted);
-  font-size: 13.5px;
-  font-weight: 500;
+}
+
+.prog span {
+  display: grid;
+  place-items: center;
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  background: var(--green-soft);
+  color: var(--green);
+  font-size: 12px;
+  font-weight: 700;
+  flex: none;
+}
+
+.book__free {
+  margin-top: 14px;
+  padding: 11px 13px;
+  border-radius: var(--r-sm);
+  background: var(--green-soft);
+  color: var(--green-ink);
+  font-size: 14.5px;
+  font-weight: 600;
 }
 
 .cal {
+  position: relative;
   margin-top: 16px;
-  /* never let the section collapse between the skeleton leaving and the
-     scheduler painting */
-  min-height: 620px;
+  /* Reserve the height the scheduler will settle at, so the hand-off from
+     skeleton to iframe moves nothing. On desktop the calendar is in view from
+     the start, where an unreserved box is a measurable layout shift. */
+  min-height: 790px;
   border-radius: var(--r);
   overflow: hidden;
   background: var(--bg);
@@ -318,7 +437,15 @@ video {
   border-radius: var(--r);
 }
 
+/* Overlaid rather than stacked: Calendly injects its iframe as a sibling, so a
+   skeleton in normal flow would push the iframe down and then let it snap back
+   when removed — a visible layout shift on desktop, where the scheduler is on
+   screen from the start. */
 .cal__skel {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: var(--bg);
   padding: 22px 18px 26px;
   border: 1px solid var(--line);
   border-radius: var(--r);
@@ -535,6 +662,8 @@ video {
     grid-template-areas:
       "hero  book"
       "steps book"
+      "incl  book"
+      "who   book"
       "faq   book";
     align-items: start;
     column-gap: 56px;
@@ -569,9 +698,23 @@ video {
     padding: 26px 0 0;
   }
 
+  .incl {
+    grid-area: incl;
+    padding: 30px 0 0;
+  }
+
+  .who {
+    grid-area: who;
+    padding: 30px 0 0;
+  }
+
   .faq {
     grid-area: faq;
-    padding: 26px 0 0;
+    padding: 30px 0 0;
+  }
+
+  .shot {
+    aspect-ratio: 16 / 10;
   }
 
   .book {
@@ -581,7 +724,9 @@ video {
     padding: 10px 0 0;
   }
 
+  .cal,
   .cal.is-live {
+    min-height: 720px;
     height: 720px;
   }
 

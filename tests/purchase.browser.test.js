@@ -147,6 +147,31 @@ test('Meta Purchase rules on /meta', async (t) => {
     await sleep(1500);
   };
 
+  await t.test('CTA copy is commitment-free and survives syncPrice', async () => {
+    // syncPrice() rewrites [data-price] elements. It used to force every CTA to
+    // "Book for <price>", which would silently undo the new wording, so this
+    // pins the copy that the conversion change depends on.
+    const hero = await ev(`document.querySelector('.hero .btn').textContent.trim()`);
+    assert.equal(hero, 'See available times', 'hero CTA must not imply a charge');
+
+    const sticky = await ev(`document.querySelector('#sticky .btn').textContent.trim()`);
+    assert.equal(sticky, 'See available times · $109.99', 'sticky keeps price inline');
+
+    // price stays visible before Calendly, just not welded to the button
+    const priceShown = await ev(`document.querySelector('.hero__price').textContent.replace(/\\s+/g,' ').trim()`);
+    assert.match(priceShown, /\$109\.99 total · ingredients included/);
+
+    const free = await ev(`document.querySelector('.hero__free').textContent.trim()`);
+    assert.equal(free, 'No charge to check availability.');
+
+    const bookFree = await ev(`document.querySelector('.book__free').textContent.trim()`);
+    assert.equal(bookFree, 'Choosing a time does not book or charge you.');
+
+    // nothing anywhere should still say "Book for"
+    const stale = await ev(`document.body.innerText.includes('Book for')`);
+    assert.equal(stale, false, 'no commitment-language CTA left on the page');
+  });
+
   await t.test('adopts the existing Pixel instead of initialising another', async () => {
     assert.equal((await calls()).filter((c) => c[0] === 'init').length, 0, 'must never call fbq init');
   });
