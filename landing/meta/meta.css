@@ -490,6 +490,29 @@ video {
   margin-bottom: 10px;
 }
 
+/* Photo above the copy, not floated beside it: at 390px a float left roughly
+   200px of text column, which read as ragged and stranded a one-word line
+   under the image. Stacked keeps full measure for the paragraph. */
+.who__photo {
+  width: 172px;
+  margin: 0 0 16px;
+}
+
+.who__photo img {
+  width: 100%;
+  height: auto;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  border-radius: var(--r);
+  background: #eee7dd;
+}
+
+.who__photo figcaption {
+  margin-top: 8px;
+  font-size: 13px;
+  color: var(--muted);
+}
+
 .who__copy {
   color: var(--muted);
   font-size: 16px;
@@ -914,6 +937,24 @@ video {
   .who {
     grid-area: who;
     padding: 30px 0 0;
+    display: grid;
+    grid-template-columns: 172px minmax(0, 1fr);
+    grid-template-areas: "head head";
+    column-gap: 22px;
+  }
+
+  .who .sec-h {
+    grid-area: head;
+  }
+
+  .who__photo {
+    grid-column: 1;
+    align-self: start;
+    margin-bottom: 0;
+  }
+
+  .who__text {
+    grid-column: 2;
   }
 
   .faq {
