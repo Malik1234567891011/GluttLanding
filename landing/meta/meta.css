@@ -271,6 +271,20 @@ video {
   margin-top: 2px;
 }
 
+/* Secondary to the CTA and to the "no payment" line above it: the price is
+   disclosed before anyone books, but it must not read as the first thing to
+   object to. Smaller and lighter than everything around it. */
+.hero__price-note {
+  margin-top: -10px;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+.hero__price-note strong {
+  color: var(--ink);
+  font-weight: 600;
+}
+
 /* the quiet line that removes commitment anxiety under the CTA */
 .hero__free {
   margin-top: -8px;
