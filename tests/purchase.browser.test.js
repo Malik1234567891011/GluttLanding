@@ -95,7 +95,7 @@ async function browser(port) {
 
 /* -------------------------------- suite -------------------------------- */
 
-test('Meta Purchase rules on /meta', async (t) => {
+test('Meta Purchase rules on the paid booking page', async (t) => {
   const server = await serve();
   const base = `http://127.0.0.1:${server.address().port}`;
   const b = await browser(9361);
@@ -111,7 +111,7 @@ test('Meta Purchase rules on /meta', async (t) => {
              window.fbq = function () { window.__fbq.push(Array.from(arguments)); };`,
   });
 
-  await b.S('Page.navigate', { url: `${base}/meta` });
+  await b.S('Page.navigate', { url: `${base}/cooking/book` });
   await sleep(1800);
 
   const ev = async (expr) => {
@@ -143,35 +143,29 @@ test('Meta Purchase rules on /meta', async (t) => {
   const nav = () => confirmRequests.slice();
   const reload = async () => {
     confirmRequests.length = 0;
-    await b.S('Page.navigate', { url: `${base}/meta` });
+    await b.S('Page.navigate', { url: `${base}/cooking/book` });
     await sleep(1500);
   };
 
   await t.test('CTA copy is commitment-free and survives syncPrice', async () => {
+    await b.S('Page.navigate', { url: `${base}/meta` });
+    await sleep(1600);
     // syncPrice() rewrites [data-price] elements; it must never turn a CTA back
     // into "Book for <price>", which would misdescribe what the click does.
     const hero = await ev(`document.querySelector('.hero .btn').textContent.trim()`);
-    assert.equal(hero, 'See available times', 'hero CTA must not imply a charge');
+    assert.equal(hero, 'Book a free 10-minute call', 'the cold CTA books the free call');
 
     const sticky = await ev(`document.querySelector('#sticky .btn').textContent.trim()`);
-    assert.equal(sticky, 'See available times');
-
-    // price stays visible before Calendly, framed as a package
-    const box = await ev(`document.querySelector('.pricebox').textContent.replace(/\\s+/g,' ').trim()`);
-    assert.match(box, /\$109\.99 total/);
-    assert.match(box, /Ingredients included/);
-    assert.match(box, /Private 2-hour session/);
+    assert.equal(sticky, 'Book a free 10-minute call');
 
     const free = await ev(`document.querySelector('.hero__free').textContent.trim()`);
-    assert.match(free, /No charge to check availability/);
+    assert.match(free, /No payment/);
 
-    const bookFree = await ev(`document.querySelector('.book__free').textContent.trim()`);
-    assert.equal(bookFree, 'Choosing a time does not book or charge you.');
+    // the eventual price stays visible so the lead knows what they are considering
+    assert.match(await ev(`document.body.innerText`), /\$109\.99/);
 
-    assert.equal(await ev(`document.body.innerText.includes('Book for')`), false,
-      'no commitment-language CTA left on the page');
-    // the unsupported credential claim must not come back
-    assert.equal(await ev(`/trained chef|professional chef/i.test(document.body.innerText)`), false,
+    assert.equal(await ev(`document.body.innerText.includes('Book for')`), false);
+    assert.equal(await ev(`/trained chef|professional chef|\\bchef\\b/i.test(document.body.innerText)`), false,
       'Malik is the founder, not a chef — no credential claim');
   });
 
@@ -188,8 +182,9 @@ test('Meta Purchase rules on /meta', async (t) => {
     // and it must not have eaten the attribution
     assert.match(await ev(`decodeURIComponent(document.cookie)`), /utm_content/);
 
-    await b.S('Page.navigate', { url: `${base}/meta` });
-    await sleep(1400);
+    // back to the page this suite is about
+    await b.S('Page.navigate', { url: `${base}/cooking/book` });
+    await sleep(1500);
   });
 
   await t.test('adopts the existing Pixel instead of initialising another', async () => {
@@ -291,6 +286,100 @@ test('Meta Purchase rules on /meta', async (t) => {
   });
 });
 
+test('the free intro call fires Schedule and never Purchase', async (t) => {
+  const server = await serve();
+  const base = `http://127.0.0.1:${server.address().port}`;
+  const b = await browser(9363);
+  t.after(() => { b.close(); server.close(); });
+
+  await b.S('Page.enable');
+  await b.S('Runtime.enable');
+  await b.S('Page.addScriptToEvaluateOnNewDocument', {
+    source: `window.__fbq = [];
+             window.fbq = function () { window.__fbq.push(Array.from(arguments)); };`,
+  });
+
+  const ev = async (expr) => {
+    const r = await b.S('Runtime.evaluate', { expression: expr, returnByValue: true, awaitPromise: true });
+    if (r.exceptionDetails) throw new Error(r.exceptionDetails.text);
+    return r.result.value;
+  };
+  const calls = () => ev(`JSON.stringify(window.__fbq)`).then(JSON.parse);
+  const post = (data, origin = 'https://calendly.com') =>
+    ev(`window.dispatchEvent(new MessageEvent('message', {
+      data: ${JSON.stringify(data)}, origin: ${JSON.stringify(origin)} })); 0`);
+
+  const INV = 'aaaa1111-2222-4333-8444-555566667777';
+  const scheduled = {
+    event: 'calendly.event_scheduled',
+    payload: {
+      event: { uri: 'https://api.calendly.com/scheduled_events/INTRO1' },
+      invitee: { uri: `https://api.calendly.com/scheduled_events/INTRO1/invitees/${INV}` },
+    },
+  };
+
+  confirmRequests.length = 0;
+  await b.S('Page.navigate', { url: `${base}/meta` });
+  await sleep(1800);
+
+  await t.test('the page declares itself an intro booking', async () => {
+    assert.equal(await ev(`document.getElementById('cal').dataset.booking`), 'intro');
+  });
+
+  await t.test('picking a time does not fire InitiateCheckout on a free call', async () => {
+    await post({ event: 'calendly.date_and_time_selected' });
+    await sleep(200);
+    assert.equal((await calls()).filter((c) => c[1] === 'InitiateCheckout').length, 0);
+  });
+
+  await t.test('a completed intro booking fires Schedule once, with the invitee uuid', async () => {
+    await post(scheduled);
+    await post(scheduled);
+    await post(scheduled);
+    await sleep(300);
+    const sch = (await calls()).filter((c) => c[1] === 'Schedule');
+    assert.equal(sch.length, 1, 'once per booking');
+    assert.deepEqual(sch[0][2], {}, 'no value or currency on a free call');
+    assert.deepEqual(sch[0][3], { eventID: INV });
+  });
+
+  await t.test('MOST IMPORTANT: no Purchase is ever fired by the intro call', async () => {
+    const all = await calls();
+    assert.equal(all.filter((c) => c[1] === 'Purchase').length, 0);
+    assert.equal(JSON.stringify(all).includes('109.99'), false, 'no paid value anywhere');
+  });
+
+  await t.test('it hands over to the free confirmation, not the paid one', async () => {
+    await sleep(1200);
+    assert.deepEqual(confirmRequests, [], 'never touches /api/cooking/confirm');
+    assert.match(await ev('location.pathname'), /\/intro\/confirmed/);
+  });
+
+  await t.test('a spoofed origin fires nothing', async () => {
+    await b.S('Page.navigate', { url: `${base}/meta` });
+    await sleep(1500);
+    await post({ ...scheduled, payload: { invitee: { uri: 'x/invitees/bbbb1111-2222-4333-8444-555566667777' } } }, 'https://evil.example');
+    await sleep(1200);
+    assert.equal((await calls()).filter((c) => c[1] === 'Schedule' || c[1] === 'Purchase').length, 0);
+  });
+
+  await t.test('a reload does not re-count the same intro booking', async () => {
+    await b.S('Page.navigate', { url: `${base}/meta` });
+    await sleep(1500);
+    await post(scheduled);
+    await sleep(300);
+    assert.equal((await calls()).filter((c) => c[1] === 'Schedule').length, 0, 'already counted');
+  });
+
+  await t.test('UTMs survive the intro funnel', async () => {
+    await b.S('Page.navigate', { url: `${base}/meta?utm_source=ig&utm_medium=paid_social&utm_campaign=c&utm_content=a&utm_term=s&placement=feed&campaign_id=1&ad_id=2` });
+    await sleep(1600);
+    const attr = await ev(`decodeURIComponent(document.cookie.split('; ').find(c=>c.startsWith('glutt_attr='))?.slice(11)||'{}')`);
+    for (const k of ['utm_source','utm_medium','utm_campaign','utm_content','utm_term'])
+      assert.match(attr, new RegExp(k), `${k} preserved`);
+  });
+});
+
 test('the Pixel is initialised exactly once', async (t) => {
   const server = await serve();
   const base = `http://127.0.0.1:${server.address().port}`;
@@ -303,7 +392,7 @@ test('the Pixel is initialised exactly once', async (t) => {
   // hold the real Pixel script so every call stays queued and countable
   await b.S('Network.setBlockedURLs', { urls: ['*connect.facebook.net*'] });
 
-  await b.S('Page.navigate', { url: `${base}/meta` });
+  await b.S('Page.navigate', { url: `${base}/cooking/book` });
   await sleep(1800);
 
   const queue = await b.S('Runtime.evaluate', {

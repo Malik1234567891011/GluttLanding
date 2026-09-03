@@ -7,12 +7,58 @@
    useful if it never does.
 --------------------------------------------------------------------------- */
 
-import { CALENDLY_BOOKING_URL, calendlyEmbedUrl, PRICE, PRICE_VALUE } from './config.js';
+import {
+  CALENDLY_BOOKING_URL,
+  CALENDLY_INTRO_URL,
+  calendlyEmbedUrl,
+  PRICE,
+  PRICE_VALUE,
+} from './config.js';
 import { initTracking, track, pixel, attribution } from './track.js';
 
 document.documentElement.classList.remove('no-js');
 
 const $ = (id) => document.getElementById(id);
+
+/* ------------------------- which booking is this? -------------------------
+   A page hosts exactly one Calendly event and declares which via data-booking
+   on #cal. Everything downstream — the Meta event, the dedupe key, the
+   confirmation route — reads from this one table, so a single booking can
+   never fire both Schedule and Purchase. There is no default: an unrecognised
+   value books nothing rather than guessing.
+
+     intro : the FREE 10-minute call  -> Schedule, no value, never Purchase
+     paid  : the $109.99 session      -> Purchase 109.99 USD
+------------------------------------------------------------------------- */
+
+const BOOKINGS = {
+  intro: {
+    url: CALENDLY_INTRO_URL,
+    metaEvent: 'Schedule',
+    // deliberately no value/currency: nothing is charged for an intro call
+    params: {},
+    dedupeKey: 'glutt_intro_scheduled',
+    trackName: 'meta_intro_call_scheduled',
+    confirmPath: () => '/intro/confirmed',
+  },
+  paid: {
+    url: CALENDLY_BOOKING_URL,
+    metaEvent: 'Purchase',
+    params: { value: PRICE_VALUE, currency: 'USD' },
+    dedupeKey: 'glutt_purchase',
+    trackName: 'meta_booking_scheduled',
+    // the server verifies the payment and issues the signed cookie
+    confirmPath: (ids) => {
+      const u = new URL('/api/cooking/confirm', location.origin);
+      u.searchParams.set('invitee_uuid', ids.invitee);
+      if (ids.event) u.searchParams.set('event_uuid', ids.event);
+      return u.toString();
+    },
+  },
+};
+
+const bookingKind = document.getElementById('cal')?.dataset.booking || '';
+const BOOKING = BOOKINGS[bookingKind] || null;
 
 /* ------------------------------ sticky CTA ------------------------------
    Appears once the hero action has scrolled away, and gets out of the way
@@ -79,9 +125,21 @@ function showFailure(host, skel) {
   box.className = 'cal__fail';
   box.innerHTML =
     '<p>We couldn’t load available times.</p>' +
-    `<a class="btn btn--primary" href="${CALENDLY_BOOKING_URL}" target="_blank" rel="noopener">Open booking calendar</a>`;
+    `<a class="btn btn--primary" href="${BOOKING.url}" target="_blank" rel="noopener">Open booking page</a>`;
   host.appendChild(box);
   track('meta_calendar_failed');
+}
+
+/* Shown when the intro event has not been created in Calendly yet, so the page
+   states the situation plainly instead of rendering an empty box. */
+function showUnconfigured(host, skel) {
+  skel?.remove();
+  const box = document.createElement('div');
+  box.className = 'cal__fail';
+  box.innerHTML =
+    '<p>Booking is not open yet. Email <a href="mailto:hi@cielpm.ai">hi@cielpm.ai</a> and we will set up a time.</p>';
+  host.appendChild(box);
+  console.warn('[glutt] CALENDLY_INTRO_URL is not set in landing/meta/config.js');
 }
 
 function loadScript(src) {
@@ -108,8 +166,15 @@ function initCalendly() {
   const direct = $('cal-direct');
   if (!host) return;
 
-  const embedUrl = calendlyEmbedUrl();
-  if (direct) direct.href = CALENDLY_BOOKING_URL;
+  if (!BOOKING) return; // page declares no booking; nothing to embed
+
+  const embedUrl = calendlyEmbedUrl(BOOKING.url);
+  if (direct) direct.href = BOOKING.url;
+
+  if (!BOOKING.url) {
+    showUnconfigured(host, skel);
+    return;
+  }
 
   let started = false;
 
@@ -199,24 +264,21 @@ function initCalendly() {
   document.querySelectorAll('a[href="#book"]').forEach((a) => a.addEventListener('click', boot));
 }
 
-/* --------------------------- Purchase conversion --------------------------
-   The embedded event is the paid Private Cooking Session — Miami, which cannot
-   be scheduled unless its Stripe payment succeeds. So calendly.event_scheduled
-   is the moment money has actually changed hands, and the only moment we count
-   a Purchase — never on opening the scheduler, picking a time, reaching the
-   payment step, or reloading.
+/* --------------------------- the conversion --------------------------------
+   Fired only on a completed booking — never on opening the scheduler, picking
+   a day or a time, reaching payment, or reloading.
 
-   The eventID is the Calendly invitee uuid, which is exactly what the
-   server-verified confirmation page sends. Meta collapses the two into a single
-   conversion, so reporting it from both places is redundancy rather than
-   double counting — and the conversion still lands if the customer closes the
-   tab before the confirmation page, or if that redirect is not configured yet.
+   Which Meta event goes out is decided entirely by BOOKING, which comes from
+   the page's data-booking attribute. The free intro call sends Schedule with
+   no value; the paid session sends Purchase at 109.99 USD. Neither page can
+   send the other's event, because neither page hosts the other's embed.
 
-   Nothing personal is sent: value, currency, and an opaque booking id.
+   eventID is the Calendly invitee uuid. For the paid session that is also what
+   the server-verified confirmation reports, so Meta collapses the pair into one
+   conversion. Nothing personal is sent: value, currency and an opaque id.
 ------------------------------------------------------------------------- */
 
-const PURCHASE_KEY = 'glutt_purchase';
-const firedPurchases = new Set();
+const firedBookings = new Set();
 
 const uuidFromUri = (uri) =>
   typeof uri === 'string' ? uri.split('/').filter(Boolean).pop() || '' : '';
@@ -230,73 +292,68 @@ function idsFrom(payload) {
 }
 
 function alreadyCounted(key) {
-  if (firedPurchases.has(key)) return true;
+  if (firedBookings.has(key)) return true;
   try {
-    return localStorage.getItem(`${PURCHASE_KEY}:${key}`) === '1';
+    return localStorage.getItem(key) === '1';
   } catch {
     return false; // storage blocked; the in-memory guard and eventID still hold
   }
 }
 
 function markCounted(key) {
-  firedPurchases.add(key);
+  firedBookings.add(key);
   try {
-    localStorage.setItem(`${PURCHASE_KEY}:${key}`, '1');
+    localStorage.setItem(key, '1');
   } catch {
     /* ignore */
   }
 }
 
-function recordPurchase(id) {
-  const key = id || 'unidentified-booking';
+function recordConversion(id) {
+  if (!BOOKING) return;
+  const key = `${BOOKING.dedupeKey}:${id || 'unidentified-booking'}`;
 
   // once per booking, however many times the listener or the page runs
   if (alreadyCounted(key)) return;
   markCounted(key);
 
-  track('meta_booking_completed', id ? { booking_id: id } : {});
-  pixel('Purchase', { value: PRICE_VALUE, currency: 'USD' }, id || undefined);
+  track(BOOKING.trackName, id ? { booking_id: id } : {});
+  pixel(BOOKING.metaEvent, BOOKING.params, id || undefined);
 
   if (!id) {
-    console.warn('[glutt] event_scheduled carried no invitee uri — Purchase sent without an eventID');
+    console.warn(
+      `[glutt] event_scheduled carried no invitee uri — ${BOOKING.metaEvent} sent without an eventID`
+    );
   }
 }
 
 /* ------------------------- handover to confirmation -----------------------
    Calendly's own "You are scheduled!" panel is the end of the road inside the
-   iframe; we send the customer to our verified confirmation instead.
+   iframe; we send the customer to our own confirmation instead. Where that is
+   depends on the booking kind: the free call goes to a static page, the paid
+   session goes through server-side verification first.
 
-   /cooking/confirmed reads a signed cookie and takes no query parameters, so
-   the entry point is /api/cooking/confirm, which verifies the booking against
-   the Calendly API, issues that cookie, and redirects on to the clean URL. The
-   invitee uuid is the identifier it expects; the event uuid is optional and
-   lets it read the booking directly instead of searching for it.
-
-   The navigation is held briefly so the Purchase beacon leaves first — fbq
-   sends asynchronously and an immediate navigation can cancel it in flight.
+   The navigation is held briefly so the Meta beacon leaves first — fbq sends
+   asynchronously and an immediate navigation can cancel it in flight.
 ------------------------------------------------------------------------- */
 
 const HANDOVER_DELAY_MS = 800;
 let handingOver = false;
 
 function goToConfirmation(ids) {
-  if (handingOver) return;
+  if (handingOver || !BOOKING) return;
 
-  // Without the invitee uuid the confirmation endpoint cannot verify anything
-  // and would bounce the customer to /meta. Calendly's own confirmation panel
-  // is the better place to leave them.
-  if (!ids.invitee) {
+  // Without the invitee uuid the paid confirmation cannot verify anything and
+  // would bounce the customer to /meta, so leave them on Calendly's own panel.
+  if (!ids.invitee && bookingKind === 'paid') {
     console.warn('[glutt] event_scheduled carried no invitee uri — staying on Calendly\'s confirmation');
     return;
   }
 
   handingOver = true;
-  const url = new URL('/api/cooking/confirm', location.origin);
-  url.searchParams.set('invitee_uuid', ids.invitee);
-  if (ids.event) url.searchParams.set('event_uuid', ids.event);
-
+  const target = BOOKING.confirmPath(ids);
   // replace, not assign: a completed booking should not be reachable with Back
-  setTimeout(() => location.replace(url.toString()), HANDOVER_DELAY_MS);
+  setTimeout(() => location.replace(target), HANDOVER_DELAY_MS);
 }
 
 /* --------------------------- Calendly events ----------------------------
@@ -314,13 +371,15 @@ function initCalendlyEvents() {
     if (name === 'calendly.event_type_viewed') track('meta_booking_started');
     if (name === 'calendly.date_and_time_selected') {
       track('meta_booking_time_selected');
-      pixel('InitiateCheckout', { value: PRICE_VALUE, currency: 'USD' });
+      // only the paid session is a checkout; picking a time for a free call is not
+      if (bookingKind === 'paid') {
+        pixel('InitiateCheckout', { value: PRICE_VALUE, currency: 'USD' });
+      }
     }
     if (name === 'calendly.event_scheduled') {
       const ids = idsFrom(e.data?.payload);
-      track('meta_booking_scheduled');
-      recordPurchase(ids.invitee); // fires the one browser Purchase, once
-      goToConfirmation(ids); // …then hands over
+      recordConversion(ids.invitee); // Schedule or Purchase — never both
+      goToConfirmation(ids);
     }
   });
 }

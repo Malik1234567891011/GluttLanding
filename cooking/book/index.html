@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f7f3ee" />
+    <title>Book your cooking session — Glutt</title>
+    <meta
+      name="description"
+      content="Book a free 10-minute call with Malik, founder of Glutt. Private 2-hour cooking sessions in your Miami home — you pick the recipe, ingredients included, $109.99 total."
+    />
+    <link rel="canonical" href="https://glutt.org/cooking/book" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Glutt" />
+    <meta property="og:title" content="Cook with Meta glasses that can see what you're doing." />
+    <meta
+      property="og:description"
+      content="Book a free 10-minute call with Malik, founder of Glutt. Private 2-hour cooking sessions in your Miami home — you pick the recipe, ingredients included, $109.99 total."
+    />
+    <meta property="og:url" content="https://glutt.org/meta" />
+    <meta property="og:image" content="https://glutt.org/assets/meta/share.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Hot honey chicken and rice in a home kitchen." />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%231f6b45'/%3E%3Ctext x='16' y='23' font-family='Helvetica, Arial, sans-serif' font-size='20' font-weight='bold' text-anchor='middle' fill='white'%3EG%3C/text%3E%3C/svg%3E"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap"
+    />
+    <link rel="stylesheet" href="/landing/meta/tokens.css" />
+    <link rel="stylesheet" href="/landing/meta/meta.css" />
+    <link rel="preconnect" href="https://assets.calendly.com" />
+    <link rel="preconnect" href="https://calendly.com" />
+  </head>
+
+  <body>
+    <a class="skip-link" href="#book">Skip to booking</a>
+
+    <header class="bar">
+      <a class="bar__brand" href="/" aria-label="Glutt home">Glutt</a>
+      <span class="pill" aria-label="Location: Miami">
+        <svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11Z" /><circle cx="12" cy="10" r="2.6" />
+        </svg>
+        Miami
+      </span>
+    </header>
+
+    <main id="main">
+      <!-- The paid $109.99 session. Reached after the intro call, not from cold
+           traffic — /meta books the free call. This is the only page that hosts
+           the paid Calendly event, and therefore the only one that can fire a
+           Purchase. -->
+      <section class="book" id="book" aria-labelledby="book-h">
+        <h2 class="book__h" id="book-h">Book your cooking session</h2>
+        <p class="book__meta"><strong data-price>$109.99</strong> &middot; 2 hours &middot; ingredients included</p>
+
+        <ol class="prog" aria-label="How booking works">
+          <li><span>1</span>Choose a time</li>
+          <li><span>2</span>Add your details</li>
+          <li><span>3</span>Pay &amp; confirm</li>
+        </ol>
+
+        <p class="book__free">Choosing a time does not book or charge you.</p>
+
+        <div class="cal" id="cal" data-booking="paid">
+          <div class="cal__skel" id="cal-skel" aria-hidden="true">
+            <p class="cal__skel-h">Select a day</p>
+            <div class="cal__skel-grid">
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+              <i></i><i></i><i></i><i></i><i></i><i></i><i></i>
+            </div>
+            <p class="cal__skel-note">Loading available times&hellip;</p>
+          </div>
+        </div>
+
+        <p class="cal__help">
+          <a id="cal-direct" href="#" data-ev="meta_booking_direct_opened">Having trouble booking? Open scheduling page</a>
+        </p>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <span>&copy; 2026 Glutt</span>
+      <nav aria-label="Legal">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="mailto:hi@cielpm.ai">Contact</a>
+      </nav>
+    </footer>
+
+    <script type="module" src="/landing/meta/meta.js"></script>
+  </body>
+</html>

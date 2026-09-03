@@ -11,8 +11,21 @@
    api/_lib/config.js, which mirrors the public values for the server side.
 --------------------------------------------------------------------------- */
 
-/** The scheduling page for the in-home cooking session. */
+/**
+ * The PAID $109.99 in-home cooking session. This is the money event: booking it
+ * requires a successful Stripe payment, and it is the only event that may ever
+ * fire a Purchase. It lives on /cooking/book, not on the cold landing page.
+ */
 export const CALENDLY_BOOKING_URL = 'https://calendly.com/hi-cielpm/30min';
+
+/**
+ * The FREE 10-minute intro call — the cold funnel's conversion. Nothing is
+ * charged, so a completed booking fires Schedule and never Purchase.
+ *
+ * If this is ever emptied, /meta shows a plain notice in place of the
+ * scheduler rather than an empty box.
+ */
+export const CALENDLY_INTRO_URL = 'https://calendly.com/hi-cielpm/glutt-10-minute-intro-call';
 
 /**
  * Widget colours. Background and text match this page exactly so the embed
@@ -65,8 +78,14 @@ export const HIDE_CALENDLY_COOKIE_BANNER = false;
 export const META_PIXEL_ID = '2198241070747099';
 
 /** Builds the embed URL, carrying the invitee's campaign attribution through. */
-export function calendlyEmbedUrl(params = {}) {
-  const url = new URL(CALENDLY_BOOKING_URL);
+/**
+ * @param {string} base which Calendly event to embed — pass CALENDLY_INTRO_URL
+ *        or CALENDLY_BOOKING_URL explicitly so a page can never embed the wrong
+ *        one by defaulting.
+ */
+export function calendlyEmbedUrl(base, params = {}) {
+  if (!base) return '';
+  const url = new URL(base);
   const all = {
     ...CALENDLY_COLORS,
     ...(HIDE_EVENT_DETAILS ? { hide_event_type_details: '1' } : {}),
