@@ -371,6 +371,18 @@ test('the free intro call fires Schedule and never Purchase', async (t) => {
     assert.equal((await calls()).filter((c) => c[1] === 'Schedule').length, 0, 'already counted');
   });
 
+  await t.test('absent UTMs are not passed to Calendly as "undefined"', async () => {
+    // Calendly serialises a missing value as the literal string "undefined",
+    // which then shows up in their attribution as a campaign name.
+    await b.S('Page.navigate', { url: `${base}/meta?utm_source=instagram` });
+    await sleep(1600);
+    await ev(`document.documentElement.style.scrollBehavior='auto';document.querySelector('a[href="#book"]').click();0`);
+    await sleep(5000);
+    const src = await ev(`document.querySelector('#cal iframe')?.src || ''`);
+    assert.ok(src.includes('utm_source=instagram'), 'the one we have is passed');
+    assert.equal(/utm_\w+=undefined/.test(src), false, 'no "undefined" campaign values');
+  });
+
   await t.test('UTMs survive the intro funnel', async () => {
     await b.S('Page.navigate', { url: `${base}/meta?utm_source=ig&utm_medium=paid_social&utm_campaign=c&utm_content=a&utm_term=s&placement=feed&campaign_id=1&ad_id=2` });
     await sleep(1600);

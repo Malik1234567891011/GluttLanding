@@ -109,13 +109,20 @@ const LOAD_TIMEOUT = 12000;
 
 function utmFromAttribution() {
   const a = attribution();
-  return {
+  const map = {
     utmSource: a.utm_source,
     utmMedium: a.utm_medium,
     utmCampaign: a.utm_campaign,
     utmContent: a.utm_content,
     utmTerm: a.utm_term,
   };
+  /* Drop the keys we do not have. Calendly serialises a missing value as the
+     literal string "undefined" into the embed URL, which then lands in their
+     attribution as a real campaign name. Only send what actually arrived. */
+  for (const k of Object.keys(map)) {
+    if (!map[k]) delete map[k];
+  }
+  return map;
 }
 
 function showFailure(host, skel) {
