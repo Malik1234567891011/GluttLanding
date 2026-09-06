@@ -151,6 +151,12 @@ const FRAGMENTS = [
    invisible. The transformation reads as "in it goes, out comes a recipe". */
 const ABSORBED = { x: 0, y: 0, z: 40, r: 0, s: 0.34, o: 0 };
 
+/* The glass is at the centre of the frame on desktop, but sits high on a phone
+   so the copy can own the lower half. Fragments have to converge on wherever it
+   actually is, or they cross the headline on their way to a point it no longer
+   occupies. */
+const ABSORBED_MOBILE = { ...ABSORBED, y: -10 };
+
 /* --------------------------- phone poses per act -------------------------- */
 
 const POSE = {
@@ -170,12 +176,15 @@ const POSE = {
     finalB: { x: -12, y: 4, z: 10, ry: 0, rx: 0, s: 0.66 },
   },
   mobile: {
+    /* On a phone the copy and the device share one column, so the device is
+       kept out of the lower half where the beat text lives. Desktop keeps its
+       occlusion — there the text sits to the left of the device. */
     heroA: { x: 0, y: 34, z: 0, ry: -4, rx: 1.5, s: 1 },
-    heroB: { x: 0, y: 31, z: 30, ry: -3, rx: 1, s: 1.02 },
-    saveA: { x: 0, y: 28, z: 40, ry: -2, rx: 1, s: 1.03 },
-    saveB: { x: 0, y: 14, z: 90, ry: 0, rx: 0, s: 1.06 },
-    planA: { x: 0, y: 14, z: 90, ry: 0, rx: 0, s: 1.06 },
-    planB: { x: 0, y: -22, z: -120, ry: 0, rx: 10, s: 0.62 },
+    heroB: { x: 0, y: 18, z: 30, ry: -3, rx: 1, s: 1.02 },
+    saveA: { x: 0, y: -6, z: 40, ry: -2, rx: 1, s: 1 },
+    saveB: { x: 0, y: -13, z: 90, ry: 0, rx: 0, s: 1.02 },
+    planA: { x: 0, y: -13, z: 90, ry: 0, rx: 0, s: 1.02 },
+    planB: { x: 0, y: -24, z: -120, ry: 0, rx: 10, s: 0.62 },
     portalA: { x: 0, y: -22, z: -120, ry: 0, rx: 10, s: 0.62 },
     portalB: { x: 0, y: 4, z: -260, ry: 0, rx: 44, s: 0.5 },
     cookA: { x: 0, y: 15, z: -40, ry: 0, rx: 0, s: 1.02 },
@@ -402,14 +411,21 @@ export function createWorld({ onScreen, onCookProgress, onTone } = {}) {
     }
 
     if (p.plan > 0) {
-      const from = d.absorb != null ? ABSORBED : HERO;
+      const from = d.absorb != null ? (isMobile() ? ABSORBED_MOBILE : ABSORBED) : HERO;
       return blendFrag(from, PLAN, ease.inOut(range(p.plan, 0.05, 0.85)));
     }
 
     if (p.save > 0 && d.absorb != null) {
       // each source type crosses the glass at its own moment
       const t = ease.inOut(range(p.save, d.absorb, d.absorb + 0.2));
-      return blendFrag(HERO, ABSORBED, t);
+      const q = blendFrag(HERO, isMobile() ? ABSORBED_MOBILE : ABSORBED, t);
+      if (isMobile()) {
+        /* The device sits high and the copy owns the lower half, so a fragment
+           travelling up to the glass crosses the headline. It still reads as
+           being drawn in — it just finishes fading before it gets there. */
+        q.o = HERO.o * (1 - ease.out(range(p.save, d.absorb, d.absorb + 0.09)));
+      }
+      return q;
     }
 
     if (p.save > 0) {
@@ -472,10 +488,19 @@ export function createWorld({ onScreen, onCookProgress, onTone } = {}) {
       `rotateY(${pose.ry.toFixed(2)}deg) rotateX(${pose.rx.toFixed(2)}deg) scale(${pose.s.toFixed(3)})`;
 
     // we travel through the aperture, so the device goes with the old scene
+    /* The aperture swallows the device as we pass through it. On a phone the
+       portal is shorter and the cook copy arrives while the fade is still
+       running, which left a blank screen with a headline on it — so the fade
+       there is later and briefer, and the recovery is immediate. */
+    const fadeOut = mobile ? range(p.portal, 0.55, 0.9) : range(p.portal, 0.24, 0.58);
+    /* Bring the device back as the cooking act comes up, not once it is pinned.
+       On a phone its copy is on screen before p.cook starts moving, which left
+       a headline over an empty frame. */
+    const cookIn = mobile ? approachOf('cook') : 0;
     const phoneOp =
       p.cook > 0 || p.fin > 0
-        ? Math.max(range(p.cook, 0, 0.1), p.fin > 0 ? 1 : 0)
-        : 1 - range(p.portal, 0.24, 0.58);
+        ? Math.max(range(p.cook, 0, mobile ? 0.02 : 0.1), p.fin > 0 ? 1 : 0)
+        : Math.max(1 - fadeOut, cookIn);
     phone.style.opacity = phoneOp.toFixed(3);
 
     // a second, softer tilt so the glass has its own inertia
@@ -687,7 +712,7 @@ export function createWorld({ onScreen, onCookProgress, onTone } = {}) {
         } else if (name === 'hero') {
           q = HERO;
         } else if (name === 'save') {
-          q = d.absorb != null ? ABSORBED : { ...HERO, o: 0.32 };
+          q = d.absorb != null ? (mobile ? ABSORBED_MOBILE : ABSORBED) : { ...HERO, o: 0.32 };
         } else if (name === 'plan' || name === 'portal') {
           q = PLAN;
         } else {

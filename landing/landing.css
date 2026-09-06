@@ -2191,23 +2191,32 @@ body.intro-done .intro {
     transform: translate3d(0, 16vh, 0) rotateY(-4deg) rotateX(1.5deg);
   }
 
+  /* The headline sits BELOW the device on desktop so the glass occludes it.
+     On a phone they share one column, so that same rule buried the copy —
+     here the content sits above the world instead. */
+  .act__pin {
+    z-index: 3;
+  }
+
+  /* Shorter acts: the desktop lengths left dead scroll on a phone, where the
+     camera has less distance to travel. */
   .act--hero {
-    height: 165vh;
+    height: 135vh;
   }
   .act--save {
-    height: 200vh;
-  }
-  .act--plan {
     height: 175vh;
   }
+  .act--plan {
+    height: 160vh;
+  }
   .act--portal {
-    height: 140vh;
+    height: 125vh;
   }
   .act--cook {
-    height: 205vh;
+    height: 175vh;
   }
   .act--final {
-    height: 150vh;
+    height: 140vh;
   }
 
   /* Mobile hero is its own composition: type and the call to action own the
@@ -2274,7 +2283,7 @@ body.intro-done .intro {
 
   .act--save .beat,
   .act--plan .beat {
-    padding-bottom: clamp(2rem, 8vh, 4rem);
+    padding-bottom: clamp(2.5rem, 9vh, 4.5rem);
   }
 
   .beat--right {
