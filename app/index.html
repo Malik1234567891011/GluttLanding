@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#F8F3EA" />
+    <title>Glutt — a little chef on your shoulder</title>
+    <meta
+      name="description"
+      content="Put on your Meta glasses and cook whatever you were already making. Glutt watches, keeps track, and speaks up only when something's about to go wrong. Free on iPhone."
+    />
+    <link rel="canonical" href="https://glutt.org/app" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="A little chef on your shoulder." />
+    <meta
+      property="og:description"
+      content="Glutt watches while you cook and speaks up only when something's about to go wrong. Free on iPhone."
+    />
+    <meta property="og:url" content="https://glutt.org/app" />
+    <meta property="og:image" content="https://glutt.org/assets/app/hero-poster.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%232F5233'/%3E%3Ctext x='16' y='23' font-family='Helvetica, Arial, sans-serif' font-size='20' font-weight='bold' text-anchor='middle' fill='white'%3EG%3C/text%3E%3C/svg%3E"
+    />
+
+    <!-- The poster must paint before anything else: it is the hero's LCP, and
+         the video is only allowed to replace it once it is buffered. -->
+    <link rel="preload" as="image" href="/assets/app/hero-poster.webp" fetchpriority="high" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Fonts must not block first paint: a cross-origin round trip to
+         googleapis then gstatic was costing ~650ms before anything rendered.
+         Loaded as a stylesheet only once it arrives; display=swap means the
+         system stack paints immediately and Nunito swaps in. -->
+    <link
+      rel="preload"
+      as="style"
+      href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+      onload="this.onload=null;this.rel='stylesheet'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap"
+      />
+    </noscript>
+    <link rel="stylesheet" href="/landing/app/app.css" />
+  </head>
+
+  <body>
+    <a class="skip" href="#main">Skip to content</a>
+
+    <!-- No nav menu on purpose: this page has one action. -->
+    <header class="bar">
+      <span class="bar__brand">Glutt</span>
+    </header>
+
+    <main id="main">
+      <!-- ============================== HERO ============================== -->
+      <section class="hero">
+        <p class="eyebrow">AI cooking copilot</p>
+        <h1 class="hero__h1">A little chef on your shoulder.</h1>
+        <p class="hero__sub">
+          Put on your Meta glasses and cook whatever you were already making. Glutt watches, keeps
+          track, and speaks up only when something's about to go wrong. Free on iPhone.
+        </p>
+
+        <a class="cta" href="https://apps.apple.com/app/id6780553556" data-store data-placement="hero">Get Glutt — Free</a>
+        <p class="cta__micro">Free · iOS · No card required</p>
+
+        <ul class="trust" aria-label="At a glance">
+          <li><b>Free</b> to download</li>
+          <li>No account needed</li>
+          <li>iPhone · iOS&nbsp;17.2+</li>
+        </ul>
+
+        <figure class="phone phone--hero">
+          <div class="phone__screen">
+            <video
+              id="hero-video"
+              poster="/assets/app/hero-poster.webp"
+              preload="none"
+              muted
+              loop
+              playsinline
+              disablepictureinpicture
+              aria-label="Screen recording of Glutt guiding a recipe step by step"
+              width="444"
+              height="876"
+            >
+              <source src="/assets/app/hero-video.mp4" type="video/mp4" />
+            </video>
+          </div>
+          <img class="bear bear--hero" src="/assets/app/bear-chef.webp" alt="" width="220" height="317" />
+        </figure>
+      </section>
+
+      <!-- ============================ GLASSES ============================ -->
+      <section class="sec sec--glasses">
+        <p class="eyebrow">⚡ Early access</p>
+        <h2>It sees what you see.</h2>
+        <p class="lede">
+          Heat creeping too high. Chicken going past done. The thing still in the oven you forgot
+          about. Glutt notices and says something — before it costs you dinner.
+        </p>
+        <p class="lede">
+          And when you want a second opinion, just ask out loud: <em>"Does this look right?"</em>
+          <em>"Should I flip this yet?"</em>
+        </p>
+        <p class="note">
+          Glasses support is rolling out in early access — join the waitlist right inside the app.
+        </p>
+
+        <div class="duo">
+          <figure class="phone">
+            <div class="phone__screen">
+              <img src="/assets/app/voice-cookmode-560.webp"
+                srcset="/assets/app/voice-cookmode-560.webp 560w, /assets/app/voice-cookmode-900.webp 900w"
+                sizes="(max-width: 700px) 44vw, 260px" width="560" height="1214"
+                loading="lazy" decoding="async" alt="Cook mode showing the current step, with voice help available." />
+            </div>
+          </figure>
+          <figure class="phone">
+            <div class="phone__screen">
+              <img src="/assets/app/glasses-toggle-560.webp"
+                srcset="/assets/app/glasses-toggle-560.webp 560w, /assets/app/glasses-toggle-900.webp 900w"
+                sizes="(max-width: 700px) 44vw, 260px" width="560" height="1214"
+                loading="lazy" decoding="async" alt="Skills screen with the Meta glasses toggle." />
+            </div>
+          </figure>
+        </div>
+
+        <a class="cta" href="https://apps.apple.com/app/id6780553556" data-store data-placement="glasses">Get Glutt — Free</a>
+        <p class="cta__micro">Free · iOS · No card required</p>
+      </section>
+
+      <!-- ============================= PROOF ============================= -->
+      <section class="sec">
+        <h2>Your whole kitchen, already in the app.</h2>
+        <div class="tiles">
+          <article class="tile">
+            <figure class="phone phone--sm">
+              <div class="phone__screen">
+                <img src="/assets/app/cookmode-video-560.webp"
+                  srcset="/assets/app/cookmode-video-560.webp 560w, /assets/app/cookmode-video-900.webp 900w"
+                  sizes="(max-width: 700px) 42vw, 220px" width="560" height="1214"
+                  loading="lazy" decoding="async" alt="Cook mode playing a short technique clip." />
+              </div>
+            </figure>
+            <h3>Cook mode you can talk to</h3>
+            <p>Steps read out, timers set hands-free, and a clip when a technique needs showing.</p>
+          </article>
+
+          <article class="tile">
+            <figure class="phone phone--sm">
+              <div class="phone__screen">
+                <img src="/assets/app/chefs-row-560.webp"
+                  srcset="/assets/app/chefs-row-560.webp 560w, /assets/app/chefs-row-900.webp 900w"
+                  sizes="(max-width: 700px) 42vw, 220px" width="560" height="1214"
+                  loading="lazy" decoding="async" alt="Recipes from Gordon Ramsay inside Glutt." />
+              </div>
+            </figure>
+            <h3>Recipes from chefs you know</h3>
+            <p>Recipes from Gordon Ramsay, Nick DiGiovanni and Joshua Weissman, built into the app.</p>
+          </article>
+
+          <article class="tile">
+            <figure class="phone phone--sm">
+              <div class="phone__screen">
+                <img class="shot--polly" src="/assets/app/ask-polly-560.webp"
+                  srcset="/assets/app/ask-polly-560.webp 560w, /assets/app/ask-polly-900.webp 900w"
+                  sizes="(max-width: 700px) 42vw, 220px" width="560" height="1127"
+                  loading="lazy" decoding="async" alt="Ask Polly chat about a recipe." />
+              </div>
+            </figure>
+            <h3>Ask about any recipe</h3>
+            <p>Missing an ingredient, need it lighter or cheaper — ask, and the recipe changes.</p>
+          </article>
+
+          <article class="tile">
+            <figure class="phone phone--sm">
+              <div class="phone__screen">
+                <img src="/assets/app/grocery-list-560.webp"
+                  srcset="/assets/app/grocery-list-560.webp 560w, /assets/app/grocery-list-900.webp 900w"
+                  sizes="(max-width: 700px) 42vw, 220px" width="560" height="1214"
+                  loading="lazy" decoding="async" alt="Grocery list generated from your recipes." />
+              </div>
+            </figure>
+            <h3>Pantry in, grocery list out</h3>
+            <p>Glutt knows what you have, so the list is only what you're actually missing.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- =========================== HOW IT WORKS ======================== -->
+      <section class="sec sec--steps">
+        <h2>How it works</h2>
+        <ol class="steps">
+          <li>
+            <span class="steps__n">1</span>
+            <div>
+              <h3>Download it</h3>
+              <p>Free, and you can look around before making an account.</p>
+            </div>
+            <figure class="phone phone--xs"><div class="phone__screen">
+              <img src="/assets/app/discover-feed-560.webp" width="560" height="1214"
+                loading="lazy" decoding="async" alt="Discover feed of recipes." /></div></figure>
+          </li>
+          <li>
+            <span class="steps__n">2</span>
+            <div>
+              <h3>Cook like normal</h3>
+              <p>Pick anything — yours, a chef's, or something you saved.</p>
+            </div>
+            <figure class="phone phone--xs"><div class="phone__screen">
+              <img src="/assets/app/recipe-detail-560.webp" width="560" height="1214"
+                loading="lazy" decoding="async" alt="Recipe detail for Beef Wellington." /></div></figure>
+          </li>
+          <li>
+            <span class="steps__n">3</span>
+            <div>
+              <h3>Glutt helps when it matters</h3>
+              <p>Quiet while it's going well. Speaks up when it isn't.</p>
+            </div>
+            <figure class="phone phone--xs"><div class="phone__screen">
+              <img src="/assets/app/skills-lesson-560.webp" width="560" height="1214"
+                loading="lazy" decoding="async" alt="A knife skills lesson in Glutt." /></div></figure>
+          </li>
+        </ol>
+      </section>
+
+      <!-- ============================ FINAL CTA ========================== -->
+      <section class="sec sec--final">
+        <img class="bear" src="/assets/app/bear-chef.webp" alt="" width="220" height="317" loading="lazy" />
+        <h2>Cook like someone's got your back.</h2>
+        <a class="cta" href="https://apps.apple.com/app/id6780553556" data-store data-placement="final">Get Glutt — Free</a>
+        <p class="cta__micro">Free · iOS · No card required</p>
+      </section>
+    </main>
+
+    <footer class="foot">
+      <nav aria-label="Legal">
+        <a href="/privacy">Privacy</a>
+        <a href="/terms">Terms</a>
+        <a href="mailto:hi@cielpm.ai">Contact</a>
+      </nav>
+      <span>© 2026 Glutt</span>
+    </footer>
+
+    <div class="sticky" id="sticky" hidden>
+      <a class="cta cta--sticky" href="https://apps.apple.com/app/id6780553556" data-store data-placement="sticky">Get Glutt — Free</a>
+      <p class="sticky__micro">Free · iOS · No account needed</p>
+    </div>
+
+    <script type="module" src="/landing/app/app.js"></script>
+  </body>
+</html>

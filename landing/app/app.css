@@ -1,0 +1,567 @@
+/* ==========================================================================
+   /app — install page for paid Meta traffic.
+
+   Mobile is the design, not a breakpoint: every value below was set at 390px
+   first. Self-contained — shares nothing with the other routes, so it cannot
+   regress them and they cannot bloat it.
+   ========================================================================== */
+
+:root {
+  --cream: #f8f3ea;
+  --cream-2: #fffdf8;
+  --ink: #1b1a17;
+  --muted: #6b6459;
+  --line: #e6ddcd;
+  --green: #2f5233;
+  --green-lit: #3d6b43;
+  --mint: #8fd6a4;
+  --char: #222420;
+
+  --r: 16px;
+  --r-lg: 24px;
+  --pad: 20px;
+  --tap: 52px;
+  --e: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --safe-b: env(safe-area-inset-bottom, 0px);
+  --safe-t: env(safe-area-inset-top, 0px);
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: Nunito, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  /* room for the sticky bar so it never covers the footer */
+  padding-bottom: calc(96px + var(--safe-b));
+}
+
+h1,
+h2,
+h3,
+p,
+ol,
+ul,
+figure {
+  margin: 0;
+}
+
+ol,
+ul {
+  padding: 0;
+  list-style: none;
+}
+
+img,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+a {
+  color: inherit;
+}
+
+:focus-visible {
+  outline: 3px solid var(--green);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
+.skip {
+  position: fixed;
+  top: calc(8px + var(--safe-t));
+  left: 8px;
+  z-index: 60;
+  padding: 12px 16px;
+  border-radius: 999px;
+  background: var(--ink);
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(-200%);
+  transition: transform 180ms var(--e);
+}
+
+.skip:focus-visible {
+  transform: none;
+}
+
+/* ================================= bar ================================= */
+
+.bar {
+  padding: calc(16px + var(--safe-t)) var(--pad) 4px;
+}
+
+.bar__brand {
+  font-size: 20px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+/* ================================ shared =============================== */
+
+.eyebrow {
+  font-size: 12.5px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--green);
+}
+
+h1,
+h2 {
+  letter-spacing: -0.035em;
+  line-height: 1.06;
+  text-wrap: balance;
+}
+
+.hero__h1 {
+  font-size: clamp(34px, 9.6vw, 44px);
+  font-weight: 800;
+}
+
+h2 {
+  font-size: clamp(26px, 7vw, 32px);
+  font-weight: 800;
+}
+
+h3 {
+  font-size: 17px;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+}
+
+.lede {
+  color: var(--muted);
+  font-size: 16.5px;
+}
+
+.lede em {
+  color: var(--ink);
+  font-style: normal;
+  font-weight: 600;
+}
+
+/* ================================= CTA ================================= */
+
+.cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: var(--tap);
+  padding: 0 24px;
+  border-radius: 999px;
+  background: var(--green);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  box-shadow: 0 8px 20px -10px rgba(47, 82, 51, 0.9);
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 120ms var(--e), background 160ms var(--e);
+}
+
+.cta:active {
+  transform: scale(0.985);
+  background: var(--green-lit);
+}
+
+.cta__micro {
+  margin-top: 10px;
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+/* ================================ hero ================================= */
+
+.hero {
+  display: grid;
+  gap: 14px;
+  padding: 10px var(--pad) 0;
+}
+
+.hero__sub {
+  color: var(--muted);
+  font-size: 16.5px;
+  max-width: 38ch;
+}
+
+.trust {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 2px;
+}
+
+.trust li {
+  padding: 6px 11px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--cream-2);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.trust b {
+  color: var(--ink);
+  font-weight: 800;
+}
+
+/* ============================= phone frame =============================
+   One reusable frame. The screen keeps the source aspect so nothing is ever
+   stretched, and width/height on every child reserves the space up front.
+   ====================================================================== */
+
+.phone {
+  position: relative;
+  width: 100%;
+  max-width: 260px;
+  margin: 0 auto;
+  padding: 8px;
+  border-radius: 34px;
+  background: linear-gradient(160deg, #2a2a28, #131312);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.16) inset,
+    0 18px 40px -20px rgba(30, 26, 20, 0.55);
+}
+
+.phone__screen {
+  position: relative;
+  border-radius: 27px;
+  overflow: hidden;
+  background: #efe9dd;
+  aspect-ratio: 1290 / 2796;
+}
+
+.phone__screen > img,
+.phone__screen > video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 0;
+}
+
+/* the notch, so the frame reads as a device rather than a rounded rectangle */
+.phone::after {
+  content: "";
+  position: absolute;
+  top: 14px;
+  left: 50%;
+  width: 34%;
+  height: 18px;
+  translate: -50% 0;
+  border-radius: 999px;
+  background: #131312;
+  pointer-events: none;
+}
+
+.phone--hero {
+  max-width: 250px;
+  margin-top: 4px;
+}
+
+/* the hero recording is a 444x876 crop, not a full screen grab */
+.phone--hero .phone__screen {
+  aspect-ratio: 444 / 876;
+}
+
+/* Tiles show the top of each screen rather than the whole 19.5:9 slab —
+   full-length frames made the section three screens long on a phone and the
+   detail was too small to read anyway. */
+.phone--sm {
+  max-width: 190px;
+}
+
+.phone--sm .phone__screen {
+  aspect-ratio: 1290 / 1780;
+}
+
+.phone--sm .phone__screen > img {
+  object-position: 50% 7%;
+}
+
+/* already cropped at source, so it starts at its own top */
+.phone--sm .phone__screen > .shot--polly {
+  object-position: 50% 0;
+}
+
+.phone--xs {
+  max-width: 92px;
+  padding: 5px;
+  border-radius: 18px;
+}
+
+.phone--xs .phone__screen {
+  border-radius: 14px;
+}
+
+.phone--xs::after {
+  display: none;
+}
+
+/* ================================ bear =================================
+   The mascot is presented as a small badge rather than a cutout. It was lifted
+   from a screenshot where it sits on a subtle gradient, so a clean alpha mask
+   is not reliable — and the white chef hat is the same value as the
+   background, which defeats colour keying. A rounded chip reads as deliberate
+   and survives any backdrop.
+   ====================================================================== */
+
+.bear {
+  width: 64px;
+  height: auto;
+  border-radius: 18px;
+  background: #eef1f2;
+  box-shadow: 0 0 0 1px var(--line), 0 6px 16px -8px rgba(40, 32, 20, 0.35);
+}
+
+.bear--hero {
+  position: absolute;
+  right: -14px;
+  bottom: 18px;
+  width: 62px;
+}
+
+/* =============================== sections ============================== */
+
+.sec {
+  display: grid;
+  gap: 14px;
+  padding: 44px var(--pad) 0;
+}
+
+.note {
+  padding: 12px 14px;
+  border-radius: var(--r);
+  background: #e9f2ea;
+  color: #24512e;
+  font-size: 14.5px;
+  font-weight: 700;
+}
+
+.duo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.duo .phone {
+  max-width: none;
+}
+
+/* ================================ tiles ================================ */
+
+.tiles {
+  display: grid;
+  gap: 26px;
+  margin-top: 4px;
+}
+
+.tile {
+  display: grid;
+  gap: 10px;
+  justify-items: center;
+  text-align: center;
+}
+
+.tile p {
+  color: var(--muted);
+  font-size: 15.5px;
+  max-width: 34ch;
+}
+
+/* ================================ steps ================================ */
+
+.steps {
+  display: grid;
+  gap: 2px;
+  margin-top: 4px;
+}
+
+.steps li {
+  display: grid;
+  grid-template-columns: 30px minmax(0, 1fr) 92px;
+  gap: 14px;
+  align-items: center;
+  padding: 16px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.steps li:last-child {
+  border-bottom: 0;
+}
+
+.steps__n {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  background: #e9f2ea;
+  color: var(--green);
+  font-size: 14px;
+  font-weight: 800;
+}
+
+.steps p {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+/* ============================== final CTA ============================== */
+
+.sec--final {
+  justify-items: center;
+  text-align: center;
+  margin-top: 18px;
+  padding: 36px var(--pad) 40px;
+  background: var(--cream-2);
+  border-top: 1px solid var(--line);
+}
+
+.sec--final .cta {
+  max-width: 420px;
+}
+
+/* ================================ footer =============================== */
+
+.foot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 20px var(--pad);
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 13.5px;
+}
+
+.foot nav {
+  display: flex;
+  gap: 4px;
+}
+
+.foot a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 0 10px;
+  text-decoration: none;
+}
+
+.foot a:hover {
+  color: var(--ink);
+}
+
+/* ============================== sticky bar ============================= */
+
+.sticky {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 50;
+  padding: 10px var(--pad) calc(10px + var(--safe-b));
+  background: var(--char);
+  transform: translateY(140%);
+  transition: transform 260ms var(--e);
+}
+
+.sticky.is-in {
+  transform: none;
+}
+
+.sticky[hidden] {
+  display: block;
+}
+
+.cta--sticky {
+  background: var(--mint);
+  color: #16301c;
+  box-shadow: none;
+}
+
+.cta--sticky:active {
+  background: #7dc994;
+}
+
+.sticky__micro {
+  margin-top: 7px;
+  text-align: center;
+  font-size: 12.5px;
+  color: #b9b5ab;
+}
+
+/* ================================ wider ================================ */
+
+@media (min-width: 700px) {
+  .hero,
+  .sec,
+  .foot {
+    max-width: 1040px;
+    margin-inline: auto;
+  }
+
+  .hero {
+    grid-template-columns: minmax(0, 1fr) 300px;
+    grid-template-areas:
+      "eyebrow phone"
+      "h1      phone"
+      "sub     phone"
+      "cta     phone"
+      "micro   phone"
+      "trust   phone";
+    column-gap: 48px;
+    align-items: start;
+    padding-top: 24px;
+  }
+
+  .hero .eyebrow { grid-area: eyebrow; }
+  .hero__h1 { grid-area: h1; font-size: clamp(44px, 4.6vw, 58px); }
+  .hero__sub { grid-area: sub; font-size: 18px; }
+  .hero .cta { grid-area: cta; max-width: 340px; }
+  .hero .cta__micro { grid-area: micro; text-align: left; }
+  .hero .trust { grid-area: trust; }
+  .phone--hero { grid-area: phone; max-width: 300px; margin-top: 0; }
+
+  .duo { max-width: 560px; }
+  .tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+  .tile p { font-size: 15px; }
+  .steps li { grid-template-columns: 34px minmax(0, 1fr) 110px; }
+  .phone--xs { max-width: 110px; }
+
+  /* desktop always shows a CTA in the flow, so the bar is mobile-only */
+  .sticky { display: none; }
+  body { padding-bottom: 0; }
+}
+
+/* ============================ reduced motion =========================== */
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
