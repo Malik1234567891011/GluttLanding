@@ -426,6 +426,89 @@ h3 {
   font-size: 15px;
 }
 
+/* ============================= social proof ============================ */
+
+.stars {
+  color: #d99b1c;
+  letter-spacing: -0.06em;
+}
+
+.sec--proof {
+  justify-items: center;
+  text-align: center;
+}
+
+.rating {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+}
+
+.rating__num {
+  font-size: 46px;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  line-height: 1;
+}
+
+.rating__stars {
+  color: #d99b1c;
+  font-size: 19px;
+  letter-spacing: 0.06em;
+}
+
+.rating__meta {
+  color: var(--muted);
+  font-size: 14px;
+}
+
+.reviews {
+  display: grid;
+  gap: 12px;
+  width: 100%;
+  margin-top: 6px;
+}
+
+.review {
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--r);
+  background: var(--cream-2);
+  text-align: left;
+}
+
+.review__stars {
+  color: #d99b1c;
+  font-size: 13px;
+  letter-spacing: 0.06em;
+}
+
+.review h3 {
+  margin-top: 3px;
+}
+
+.review__body {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 15.5px;
+}
+
+.review__who {
+  margin-top: 8px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.proof__shot {
+  margin-top: 22px;
+}
+
+.proof__cap {
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 14.5px;
+}
+
 /* ============================== final CTA ============================== */
 
 .sec--final {
@@ -545,6 +628,7 @@ h3 {
 
   .duo { max-width: 560px; }
   .tiles { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+  .reviews { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: 900px; }
   .tile p { font-size: 15px; }
   .steps li { grid-template-columns: 34px minmax(0, 1fr) 110px; }
   .phone--xs { max-width: 110px; }
