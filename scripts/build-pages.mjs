@@ -36,6 +36,8 @@ function humanDate(iso) {
   });
 }
 
+const isoStamp = (d) => (d.length === 10 ? `${d}T12:00:00+00:00` : d);
+
 function readingMinutes(html) {
   const words = stripTags(html).split(' ').length;
   return Math.max(2, Math.round(words / 230));
@@ -181,8 +183,9 @@ function pageGraph(page, breadcrumbLd) {
     description: page.description,
     inLanguage: 'en-US',
     isPartOf: { '@id': WEBSITE_ID },
-    datePublished: page.published,
-    dateModified: page.updated,
+    // Google wants a full ISO 8601 datetime with a timezone, not a bare date.
+    datePublished: isoStamp(page.published),
+    dateModified: isoStamp(page.updated),
     image: SITE.origin + (page.image || SITE.ogImage),
     breadcrumb: { '@id': breadcrumbLd['@id'] },
     publisher: { '@id': ORG_ID },
@@ -421,7 +424,7 @@ async function main() {
   ];
   const entries = [];
   for (const h of handWritten) entries.push({ loc: SITE.origin + h.path, lastmod: await lastModified(h.file) });
-  for (const p of pages) entries.push({ loc: SITE.origin + p.path, lastmod: `${p.updated}T12:00:00+00:00` });
+  for (const p of pages) entries.push({ loc: SITE.origin + p.path, lastmod: isoStamp(p.updated) });
 
   const sitemap = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
