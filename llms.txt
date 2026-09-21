@@ -1,0 +1,34 @@
+# Glutt
+
+> Glutt is an iPhone cooking app with Polly, a live voice AI chef that talks you through any recipe hands-free, answers questions out loud, runs your timers and can look at your pan through the camera. It saves recipes from TikTok, Instagram, YouTube and any website, and works with Ray-Ban Meta glasses for audio.
+
+Glutt: Recipes & AI Chef is an iPhone app (iOS 17.2 or later; not iPad) made by CielPM, Inc.. It launched on the App Store on July 15, 2026. It is free to download; full use needs a Glutt Premium subscription, which starts with a free trial.
+
+Key facts:
+- App Store: https://apps.apple.com/app/id6780553556
+- Website: https://glutt.org/
+- Polly is Glutt's live voice AI chef. Say "Chef" (or "Hey Chef") and ask out loud; she answers, runs timers, walks through each step and can look through the iPhone camera at the pan.
+- Works with Ray-Ban Meta and Oakley Meta glasses as a Bluetooth headset: when the glasses are connected, Glutt uses their microphones and open-ear speakers for Polly, so the phone can stay on the counter. Seeing through the glasses' camera is not available yet; Meta's toolkit for third-party apps is still in developer preview.
+- Imports recipes from TikTok, Instagram, YouTube, Reddit, any recipe website and screenshots, including methods that are only spoken in a video.
+- Knows your fridge, pantry and equipment; shows missing ingredients and substitutes; builds grocery lists.
+- Cook mode with large type, automatic timers and serving scaling; calories and protein per serving.
+- Skills: a map of 75 cooking techniques across 9 regions, photo-checked by the AI chef, with nine Cook Ranks from Prep Cook to Head Chef.
+- Support: hi@cielpm.ai
+
+## Guides
+
+- [Cooking with Meta glasses](https://glutt.org/guides/cooking-with-meta-glasses): How to cook hands-free with Ray-Ban Meta or Oakley Meta glasses: what Meta AI does, how to use Glutt's AI chef through the glasses, setup and limits.
+- [Polly, Glutt's AI chef](https://glutt.org/ai-chef): Polly is the live voice AI chef in Glutt for iPhone. Say "Chef," ask out loud, and she walks you through every step, runs timers and can look at your pan.
+- [Hands-free cooking, explained](https://glutt.org/guides/hands-free-cooking): How to follow a recipe without touching your phone: voice cooking apps, AI chefs, Siri and Alexa, smart glasses and gestures compared, with setup tips.
+- [Save recipes from TikTok, Instagram and YouTube](https://glutt.org/guides/save-recipes-from-tiktok-instagram): How to save recipes from TikTok, Instagram Reels, YouTube and websites, even videos where the recipe is only spoken, and turn them into dinner.
+- [The best AI cooking apps in 2026](https://glutt.org/best-ai-cooking-apps): An honest comparison of 13 AI cooking apps in 2026: voice AI chefs, recipe organizers and recipe finders, and what each is best for. From the makers of Glutt.
+- [Glutt FAQ](https://glutt.org/faq): Answers about Glutt: Recipes & AI Chef: pricing, supported iPhones, Polly the AI chef, Meta glasses and AirPods, recipe imports, privacy and support.
+- [About Glutt](https://glutt.org/about): About Glutt: Recipes & AI Chef, the iPhone cooking app by CielPM, Inc. What it is, who makes it, when it launched, and the key facts for press and partners.
+
+## Product
+
+- [Homepage](https://glutt.org/): What Glutt is and how it works.
+- [Full product overview](https://glutt.org/features): Every feature, in detail.
+- [Support](https://glutt.org/support): How to contact us.
+- [Privacy Policy](https://glutt.org/privacy)
+- [Terms of Service](https://glutt.org/terms)

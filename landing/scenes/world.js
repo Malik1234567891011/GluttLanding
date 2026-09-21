@@ -8,7 +8,7 @@
 --------------------------------------------------------------------------- */
 
 import { onTick, Damped, MASS, REDUCED, clamp, lerp, range, ease } from '../core/motion.js';
-import { registerAct, sample, progressOf, approachOf, isActive, measure } from '../core/scroll.js';
+import { registerAct, sample, progressOf, approachOf, isActive, pastOf, measure } from '../core/scroll.js';
 import { pointer, hasFinePointer } from '../core/pointer.js';
 import { createHeatField } from '../gl/heat.js';
 
@@ -448,6 +448,19 @@ export function createWorld({ onScreen, onCookProgress, onTone } = {}) {
 
   let visible = true;
 
+  /* The finale is the last act and only the footer follows it. Once the page
+     scrolls past the act, its pinned copy scrolls up with the page while the
+     fixed world would stay put, leaving the phone over the CTA. So the world
+     rides up with the page by exactly the amount the footer has risen. */
+  let lift = -1;
+  function followPage() {
+    const next = Math.round(pastOf('final'));
+    if (next === lift) return;
+    lift = next;
+    const t = next ? `translate3d(0, ${-next}px, 0)` : '';
+    worlds.forEach((w) => (w.style.transform = t));
+  }
+
   function frame(dt) {
     time += dt;
     sample();
@@ -458,6 +471,7 @@ export function createWorld({ onScreen, onCookProgress, onTone } = {}) {
     p.fin = (approachOf('final') + p.final) / 2;
 
     const anyActive = ACTS.some((a) => isActive(a));
+    followPage();
     // stop all rendering once the flat chapters own the screen
     if (!anyActive) {
       if (visible) {
@@ -738,6 +752,7 @@ export function createWorld({ onScreen, onCookProgress, onTone } = {}) {
 
       // the world only exists while one of the acts owns the screen
       const any = ACTS.some((a) => isActive(a));
+      followPage();
       worlds.forEach((w) => w.style.setProperty('--world-op', any ? '1' : '0'));
       if (!any) return;
 

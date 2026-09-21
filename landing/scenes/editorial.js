@@ -11,7 +11,7 @@ import { onTick, REDUCED, clamp } from '../core/motion.js';
 
 export function createEditorial() {
   const reveals = document.querySelectorAll(
-    '.ed__display, .ed__standfirst, .ed__sub, .ed__item, .ed__deflist > div, .ed__aside > *, .ed__rule > span, .book__title, .book__copy, .plan'
+    '.ed__display, .ed__standfirst, .ed__sub, .ed__item, .ed__deflist > div, .ed__aside > *, .ed__rule > span'
   );
 
   reveals.forEach((el, i) => {

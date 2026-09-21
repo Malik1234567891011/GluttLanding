@@ -1,0 +1,9 @@
+# Source and notes that were being served publicly as /4ai.md, /docs/..., etc.
+# The site itself is plain static HTML; none of this is needed at runtime.
+*.md
+docs/
+content/
+scripts/
+node_modules/
+package.json
+package-lock.json

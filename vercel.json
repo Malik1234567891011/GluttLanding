@@ -1,6 +1,28 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
-  "rewrites": [
-    { "source": "/cooking/confirmed", "destination": "/api/cooking-confirmed" }
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [{ "type": "host", "value": "www.glutt.org" }],
+      "destination": "https://glutt.org/:path*",
+      "permanent": true
+    },
+    { "source": "/classic", "destination": "/features", "permanent": true },
+    { "source": "/meta", "destination": "/app", "permanent": true },
+    { "source": "/cooking/:path*", "destination": "/", "permanent": true },
+    { "source": "/intro/:path*", "destination": "/", "permanent": true },
+    { "source": "/checkout/:path*", "destination": "/", "permanent": true }
+  ],
+  "headers": [
+    {
+      "source": "/(sitemap.xml|robots.txt|llms.txt)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }]
+    },
+    {
+      "source": "/assets/(.*)",
+      "headers": [{ "key": "Cache-Control", "value": "public, max-age=86400, stale-while-revalidate=604800" }]
+    }
   ]
 }

@@ -80,8 +80,8 @@ function initNav() {
 }
 
 /* --------------------------- in-page anchors -----------------------------
-   Legacy deep links (/#features, /#how-it-works, /#book) are all still real
-   targets on this page. Very long smooth scrolls are turned into jumps so a
+   Legacy deep links (/#features, /#how-it-works) are both still real targets
+   on this page. Very long smooth scrolls are turned into jumps so a
    click never leaves someone watching the page slide for five seconds.
 -------------------------------------------------------------------------- */
 

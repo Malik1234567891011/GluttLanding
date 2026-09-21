@@ -16,7 +16,7 @@ let vh = window.innerHeight;
 let docReady = false;
 
 export function registerAct(name, el) {
-  acts.set(name, { el, top: 0, height: 0, span: 1, progress: 0, approach: 0, active: false });
+  acts.set(name, { el, top: 0, height: 0, span: 1, progress: 0, approach: 0, past: 0, active: false });
 }
 
 export function measure() {
@@ -49,6 +49,16 @@ export function approachOf(name) {
   return a ? a.approach : 0;
 }
 
+/**
+ * Pixels of page that have scrolled into view below the act's end. The finale
+ * is the last act, and only the footer follows it, so this is how far the
+ * footer has risen into the viewport.
+ */
+export function pastOf(name) {
+  const a = acts.get(name);
+  return a ? a.past : 0;
+}
+
 export function isActive(name) {
   const a = acts.get(name);
   return a ? a.active : false;
@@ -61,6 +71,7 @@ export function sample() {
   for (const a of acts.values()) {
     a.progress = clamp((y - a.top) / a.span);
     a.approach = clamp((y + vh - a.top) / vh);
+    a.past = Math.max(0, y + vh - (a.top + a.height));
     // "active" spans the whole time any part of the act is on screen
     a.active = y + vh > a.top && y < a.top + a.height;
   }
