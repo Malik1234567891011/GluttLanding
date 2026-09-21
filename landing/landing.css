@@ -1877,7 +1877,7 @@ body.intro-done .intro {
   align-content: start;
 }
 
-.ft__col h4 {
+.ft__col h3 {
   font-size: var(--fs-meta);
   font-weight: 600;
   letter-spacing: 0.16em;
