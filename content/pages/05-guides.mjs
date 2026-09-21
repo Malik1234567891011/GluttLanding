@@ -3,6 +3,7 @@ const HUB = [
   'ai-chef',
   'guides/hands-free-cooking',
   'guides/save-recipes-from-tiktok-instagram',
+  'guides/mealime-alternatives',
   'best-ai-cooking-apps',
   'faq',
 ];
