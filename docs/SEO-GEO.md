@@ -74,27 +74,27 @@ site looks.
 - No prices on the site. Four conflicting price sets are public; the App Store is the source of truth.
 - No celebrity-chef names (licensing risk), and no aggregate ratings in markup.
 
-## Not done: needs Malik (ranked by impact)
+## Done on 2026-09-21 (second pass)
 
-1. **Search Console + Bing Webmaster Tools.** Verify glutt.org, submit the sitemap, request indexing of
-   the new URLs, and check Settings → "Search generative AI" = Include. Bing: import from GSC.
-2. **App Store listing** (biggest GEO lever). Subtitle → something like "AI Chef for Hands-Free
-   Cooking". Add a Meta glasses line to the description, use the same definitional sentence as the site,
-   and put the current headline feature in Promotional Text. Fix the conflicting in-app purchase prices.
-   Ask for a review after a successful cook: 0 US ratings is the single weakest signal.
-3. **The public GitHub repo `Malik1234567891011/Glutt`** is the #1 result for "Glutt recipes". Its README
-   describes an old app (local-first, no accounts, glutt-sable.vercel.app). Rewrite its top paragraph
-   and link glutt.org, or make it private.
-4. **cielpm.ai** still shows a stale Glutt pre-launch page ("Get manually invited through TestFlight",
-   different prices, indexed as "SaaSCraft | Framer Template"). Redirect it to glutt.org or rewrite it.
-5. **YouTube**: 3–5 short videos (Polly talking you through a dish, the glasses POV, TikTok import). Embed
-   the best one on the glasses guide.
-6. **Listings**: Product Hunt launch, AlternativeTo (as an alternative to ReciMe, Paprika, Crouton,
-   Pestle, Mealime), SaaSHub. These need accounts in Malik's name.
-7. **Reddit** (answer existing threads honestly: r/RaybanMeta, r/MetaGlasses, r/Cooking, r/iosapps),
-   and pitch the handful of independent "best AI recipe app" lists.
-8. **Mealime shuts down 2026-10-21** (reported by Plan to Eat and MealThinker). A "Mealime alternative"
-   page could ride that, but only if Glutt's planner holds up in that comparison.
+- **Google Search Console** on Malik's gmail: glutt.org is verified (HTML meta tag in `index.html`;
+  don't remove it), the sitemap was read successfully, and indexing was requested for 9 URLs (the daily
+  cap): the glasses guide, /ai-chef, /, /best-ai-cooking-apps, the hands-free guide, the import guide,
+  /faq and /about. "Search generative AI" is left at the default, Include.
+- **`/guides/mealime-alternatives`**. Mealime's own closing page says it is discontinued on 2026-10-21 and
+  personal data is deleted. The guide shows how to import its public recipe pages before then, and
+  compares alternatives honestly. Pushed to IndexNow.
+
+## Still open: needs Malik
+
+Everything below is in [`ready-to-paste.md`](ready-to-paste.md) with final text:
+- **Bing Webmaster Tools**: sign in with Google, then "Import from GSC" (the sign-in page can't be
+  automated, and it creates a Bing account).
+- **Search Console, tomorrow**: request indexing for /guides/mealime-alternatives, /features and /guides.
+- **App Store listing**: subtitle, keywords, promo text, a glasses paragraph, the price mismatch, and
+  review prompts.
+- **GitHub `Glutt` README intro and homepage URL**: blocked for the assistant because it is Omar's repo too.
+- **AlternativeTo, Product Hunt, YouTube, Reddit**: need accounts in Malik's name.
+- **cielpm.ai**: still shows the stale Glutt pre-launch page. Left alone, per "don't use Ciel for anything".
 
 ## How to re-measure
 
