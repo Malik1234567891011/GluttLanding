@@ -43,3 +43,53 @@ crawling until it is added.
 - **1–2 months:** long-tail AI citations ("Meta glasses cooking app", "hands-free AI chef").
 - **3–6+ months:** head terms ("best AI cooking app"). These depend mostly on App Store ratings, YouTube
   and third-party lists, not on the website.
+
+---
+
+## Check-in 2026-09-24 (day 4)
+
+**Google is the big change.**
+
+| | 2026-09-20 | 2026-09-24 |
+| --- | --- | --- |
+| Pages indexed | 1 (homepage) | **8** |
+| Impressions (Search Console) | none (no property) | **66**, 1 click, avg position 6.1 |
+| Structured data | not seen | Breadcrumbs report now active in Search Console |
+
+All 8 indexed pages are the ones submitted on Sunday: `/`, the Meta glasses guide, `/ai-chef`,
+the hands-free guide, `/best-ai-cooking-apps`, the TikTok import guide, `/faq`, `/about`. The
+remaining 7 are "Discovered – currently not indexed"; indexing was requested today for
+`/guides/mealime-alternatives`, `/features` and `/guides`.
+
+First queries Glutt appears for (impressions, average position):
+- "can ai glasses help with food and cooking tips?" — position 11
+- "ray-ban rice cooker" — position 6 (2 impressions)
+- "ai recipe app" — 39 · "ai cooking apps" — 48 · "the glutt" — 1
+
+**Ranking on page 1 already:** for `app to cook hands free with ray-ban meta glasses`, the Meta glasses
+guide sits around #6, under Meta's own pages. Google is also pulling the "Short answer" boxes as the
+text fragments it highlights.
+
+**Perplexity now recommends Glutt** for the Meta glasses question, and cites
+`glutt.org/guides/cooking-with-meta-glasses` alongside meta.com and Engadget:
+
+> Following one exact recipe step by step — **Glutt with Polly (iPhone only)**: it retains the specific
+> recipe, servings, current step, and active timers, and routes conversational audio through connected
+> Ray-Ban Meta glasses.
+
+That is the first AI answer to recommend Glutt unprompted. Baseline: absent from all 6.
+
+**Still absent:**
+- ChatGPT (temporary + unpersonalized) for the same question: cites only Meta and Ray-Ban pages. Bing
+  has served 3 impressions and 0 AI citations so far, and ChatGPT search leans on Bing.
+- Perplexity for the generic "AI chef that talks you through recipes" question: it lists Suvio,
+  Hands! AI Chef, Cookie and ChefChef, all of which compete on App Store listings. This is the cluster
+  the App Store listing rewrite in `ready-to-paste.md` is for.
+
+**Competitive notes from this round**
+- **New York Times Cooking is coming to Meta AI glasses** (ranking for the glasses queries now).
+- Meta's glasses web-app platform names cooking guides as a target use case, and a "Fond" cooking app
+  for Meta Ray-Ban Display showed up on Reddit. The category is filling fast; the glasses guide should
+  be kept current.
+- "mealime alternative" is already crowded (Pann, MealThinker, Spiceful, Fond, Plan to Eat). Our page
+  was only submitted today, and Mealime closes Oct 21, so it has about four weeks to earn a position.
