@@ -2,11 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://glutt.org/</loc>
-    <lastmod>2026-09-24T20:16:45-04:00</lastmod>
+    <lastmod>2026-09-25T05:43:10.415Z</lastmod>
   </url>
   <url>
     <loc>https://glutt.org/features</loc>
-    <lastmod>2026-09-21T00:00:12-04:00</lastmod>
+    <lastmod>2026-09-25T05:39:09.581Z</lastmod>
   </url>
   <url>
     <loc>https://glutt.org/app</loc>
@@ -14,19 +14,19 @@
   </url>
   <url>
     <loc>https://glutt.org/support</loc>
-    <lastmod>2026-09-21T00:00:12-04:00</lastmod>
+    <lastmod>2026-09-25T05:39:09.582Z</lastmod>
   </url>
   <url>
     <loc>https://glutt.org/privacy</loc>
-    <lastmod>2026-09-21T00:00:12-04:00</lastmod>
+    <lastmod>2026-09-25T05:39:09.582Z</lastmod>
   </url>
   <url>
     <loc>https://glutt.org/terms</loc>
-    <lastmod>2026-09-21T00:00:12-04:00</lastmod>
+    <lastmod>2026-09-25T05:39:09.583Z</lastmod>
   </url>
   <url>
     <loc>https://glutt.org/delete-account</loc>
-    <lastmod>2026-09-21T00:00:12-04:00</lastmod>
+    <lastmod>2026-09-25T05:39:09.583Z</lastmod>
   </url>
   <url>
     <loc>https://glutt.org/guides</loc>
@@ -35,6 +35,10 @@
   <url>
     <loc>https://glutt.org/guides/cooking-with-meta-glasses</loc>
     <lastmod>2026-09-24T12:00:00+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://glutt.org/guides/cooking-with-meta-ray-ban-display</loc>
+    <lastmod>2026-09-25T12:00:00+00:00</lastmod>
   </url>
   <url>
     <loc>https://glutt.org/ai-chef</loc>
@@ -53,12 +57,20 @@
     <lastmod>2026-09-20T12:00:00+00:00</lastmod>
   </url>
   <url>
+    <loc>https://glutt.org/guides/make-your-own-cookbook</loc>
+    <lastmod>2026-09-25T12:00:00+00:00</lastmod>
+  </url>
+  <url>
     <loc>https://glutt.org/guides/mealime-alternatives</loc>
     <lastmod>2026-09-21T12:00:00+00:00</lastmod>
   </url>
   <url>
     <loc>https://glutt.org/best-ai-cooking-apps</loc>
     <lastmod>2026-09-20T12:00:00+00:00</lastmod>
+  </url>
+  <url>
+    <loc>https://glutt.org/guides/learn-to-cook-with-ai</loc>
+    <lastmod>2026-09-25T12:00:00+00:00</lastmod>
   </url>
   <url>
     <loc>https://glutt.org/faq</loc>

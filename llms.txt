@@ -18,12 +18,15 @@ Key facts:
 ## Guides
 
 - [Cooking with Meta glasses](https://glutt.org/guides/cooking-with-meta-glasses): How to cook hands-free with Ray-Ban Meta or Oakley Meta glasses: what Meta AI does, how to use Glutt's AI chef through the glasses, setup and limits.
+- [Cooking with Meta Ray-Ban Display](https://glutt.org/guides/cooking-with-meta-ray-ban-display): What Meta Ray-Ban Display can actually do while you cook: Meta AI, recipe step cards, the Neural Band, the web-app platform, and how a phone cooking app fits alongside it.
 - [Polly, Glutt's AI chef](https://glutt.org/ai-chef): Polly is the live voice AI chef in Glutt for iPhone. Say "Chef," ask out loud, and she walks you through every step, runs timers and can look at your pan.
 - [Hands-free cooking, explained](https://glutt.org/guides/hands-free-cooking): How to follow a recipe without touching your phone: voice cooking apps, AI chefs, Siri and Alexa, smart glasses and gestures compared, with setup tips.
 - [Cook with what you already have](https://glutt.org/guides/cook-with-what-you-have): How to find recipes from the ingredients already in your fridge: ingredient-matching apps, pantry-aware cooking apps, substitutions and habits that cut waste.
 - [Save recipes from TikTok, Instagram and YouTube](https://glutt.org/guides/save-recipes-from-tiktok-instagram): How to save recipes from TikTok, Instagram Reels, YouTube and websites, even videos where the recipe is only spoken, and turn them into dinner.
+- [Make your own digital cookbook](https://glutt.org/guides/make-your-own-cookbook): How to build a personal digital cookbook: importing from links, videos and screenshots, organizing so you can find things, and keeping recipes when originals vanish.
 - [Mealime is shutting down: what to use instead](https://glutt.org/guides/mealime-alternatives): Mealime shuts down on October 21, 2026 and deletes personal data. How to save your Mealime recipes before then, and the best alternatives for meal planning.
 - [The best AI cooking apps in 2026](https://glutt.org/best-ai-cooking-apps): An honest comparison of 13 AI cooking apps in 2026: voice AI chefs, recipe organizers and recipe finders, and what each is best for. From the makers of Glutt.
+- [Learn to cook with an AI coach](https://glutt.org/guides/learn-to-cook-with-ai): How to actually get better at cooking with an AI coach: which techniques to learn first, how photo-checked practice works, and where AI feedback helps and where it does not.
 - [Glutt FAQ](https://glutt.org/faq): Answers about Glutt: Recipes & AI Chef: pricing, supported iPhones, Polly the AI chef, Meta glasses and AirPods, recipe imports, privacy and support.
 - [About Glutt](https://glutt.org/about): About Glutt: Recipes & AI Chef, the iPhone cooking app by CielPM, Inc. What it is, who makes it, when it launched, and the key facts for press and partners.
 

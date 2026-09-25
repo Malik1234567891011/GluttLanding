@@ -291,7 +291,6 @@ function render(page, all) {
     <script type="application/ld+json">
 ${pageGraph(page, bc.ld)}
     </script>
-    <script type="module" src="/landing/core/pixel.js"></script>
   </head>
 
   <body class="gd">

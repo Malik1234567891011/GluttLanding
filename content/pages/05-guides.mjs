@@ -1,9 +1,12 @@
 const HUB = [
   'guides/cooking-with-meta-glasses',
+  'guides/cooking-with-meta-ray-ban-display',
   'ai-chef',
   'guides/hands-free-cooking',
   'guides/cook-with-what-you-have',
+  'guides/learn-to-cook-with-ai',
   'guides/save-recipes-from-tiktok-instagram',
+  'guides/make-your-own-cookbook',
   'guides/mealime-alternatives',
   'best-ai-cooking-apps',
   'faq',

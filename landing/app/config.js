@@ -10,8 +10,6 @@
 /** Glutt: Recipes & AI Chef — verified live via Apple's lookup API. */
 export const APP_STORE_URL = 'https://apps.apple.com/app/id6780553556';
 
-/** The Glutt Miami website dataset, same as the rest of the site. */
-export const PIXEL_ID = '2198241070747099';
 
 /**
  * Tracking is skipped anywhere that is not the live domain, so local work and
