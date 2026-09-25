@@ -93,3 +93,38 @@ That is the first AI answer to recommend Glutt unprompted. Baseline: absent from
   be kept current.
 - "mealime alternative" is already crowded (Pann, MealThinker, Spiceful, Fond, Plan to Eat). Our page
   was only submitted today, and Mealime closes Oct 21, so it has about four weeks to earn a position.
+
+### Same day, later: another pass (2026-09-24)
+
+Meta Connect landed on Sept 23–24, which is why the glasses queries moved. Changes made in response,
+all live:
+
+- **The glasses guide now covers Connect.** The camera-free **Ray-Ban Meta Audio** ($349, preorder
+  Oct 13), **Ray-Ban Meta (Gen 3)**, and **NYT Cooking's hands-free mode** (narrated steps, swipeable
+  cards on Display, "later this fall"), with a straight answer about when theirs is the better pick.
+  The camera-free frames are a genuine angle: Glutt only needs mic and speakers, so it loses nothing
+  where Meta's own live AI vision cannot work at all. Three new FAQs answer queries Search Console
+  shows people arriving on (cooking tips, timers, camera-free frames).
+- **New guide `/guides/cook-with-what-you-have`** for the "what can I make with what's in my fridge"
+  cluster, which the site had nothing for. Sources the EPA food-waste figure; gives SuperCook and
+  Cooklist their due.
+- **`/ai-chef` now has a 12-second cook-mode video** with VideoObject markup. Rich Results Test:
+  4 valid items including Videos. The clip is trimmed past an older build's "Connecting your glasses"
+  screen, since the same site says the glasses camera is not shipping.
+- **Fonts self-hosted.** Same files Google served, so nothing looks different.
+- **Homepage footer** now links `/guides` and `/about`, which had no link from the strongest page.
+
+**Speed, same Lighthouse harness as the 2026-09-20 baseline:**
+
+| Page | Before | After |
+| --- | --- | --- |
+| `/` performance | 64 | **99** |
+| `/` LCP | 3.6 s | **1.9 s** |
+| `/` total blocking time | 840 ms | **60 ms** |
+| `/ai-chef` | n/a | 99, LCP 1.5 s |
+
+Best Practices sits at 79 on both, entirely from the Meta Pixel's third-party cookies. That is the
+ads attribution working as intended, so it stays.
+
+Indexing requested today (6 of ~10 daily): mealime, features, guides, the new pantry guide, and the two
+updated pages (glasses guide, ai-chef). IndexNow pinged after each deploy.

@@ -73,6 +73,26 @@ camera travel, shader, steam and drift. With JS disabled the hero is a finished
 static composition — the intro overlay is `display:none` until JS opts in, so it
 can never trap the page.
 
+## Fonts are self-hosted
+
+`landing.css` and `guide.css` start with `@font-face` rules pointing at
+`assets/fonts/*.woff2`. They are the same files fonts.googleapis.com served, so the
+pages look identical; it just removes the googleapis + gstatic round trips before
+text can paint. The homepage went from Lighthouse performance 64 to 99 on the same
+harness, mostly from this and from dropping the old PNG screenshots.
+
+To refresh them (only needed if a family or weight changes):
+
+```bash
+curl -A "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 \
+  (KHTML, like Gecko) Chrome/149.0.0.0 Safari/537.36" \
+  "https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Instrument+Serif:ital@1&display=swap"
+```
+
+Take the `latin` and `latin-ext` `@font-face` blocks, download each `woff2` into
+`assets/fonts/`, and keep the `unicode-range` lines exactly as Google wrote them.
+`/app` still loads Nunito from Google; it has its own design and its own loader.
+
 ## SEO pages and structured data
 
 `node scripts/build-pages.mjs` writes the guide/FAQ/about pages, `sitemap.xml`,
