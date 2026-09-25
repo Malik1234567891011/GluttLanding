@@ -14,7 +14,7 @@ export default {
   lede:
     'Ray-Ban Meta and Oakley Meta glasses are good at one thing every cook needs: they keep your hands free. Here is what they can do in the kitchen on their own, and how to turn them into a proper recipe coach with Glutt.',
   published: '2026-09-20',
-  updated: '2026-09-20',
+  updated: '2026-09-24',
   image: '/assets/app/voice-cookmode-900.webp',
   imageAlt: 'Glutt cook mode showing the current recipe step with voice help from Polly.',
   mentionsApp: true,
@@ -45,6 +45,35 @@ export default {
               know which recipe you saved last week, which step you are on, how many servings you are
               making, or what is in your fridge. For a quick question that is fine. For cooking a whole dish,
               that missing context is where things go wrong.
+            </p>
+
+            <h2>What Meta announced at Connect, September 2026</h2>
+            <p>Two of the announcements change what cooking with the glasses looks like.</p>
+            <ul>
+              <li>
+                <strong>Ray-Ban Meta Audio: no camera at all.</strong> A camera-free pair from $349,
+                43 grams, up to 12 hours of battery (48 with the case), open for preorder on October 13.
+                <sup><a href="#src-h">4</a></sup> Anything that depends on the glasses seeing your food
+                does not apply to these. Voice guidance still does, which is the part Glutt uses.
+              </li>
+              <li>
+                <strong>Ray-Ban Meta (Gen 3).</strong> The new camera pair, with a 12&nbsp;MP camera, 3K
+                video and up to nine hours of battery, in Wayfarer, Aviator and Zena styles.
+                <sup><a href="#src-h">4</a></sup>
+              </li>
+              <li>
+                <strong>New York Times Cooking is getting a hands-free mode</strong> that narrates recipe
+                steps through the glasses, with swipeable step cards on Meta Ray-Ban Display. The Times' AJ
+                Chavar described "a system to restructure lengthy steps into brief audio instructions."
+                It rolls out later this fall. <sup><a href="#src-h">5</a></sup>
+              </li>
+            </ul>
+            <h3>What about New York Times Cooking?</h3>
+            <p>
+              If you cook from NYT Cooking and subscribe to it, that hands-free mode will be a good fit once
+              it ships: their editors shaped how each step is read out. It reads <em>their</em> recipes.
+              Glutt works from the recipes <em>you</em> saved, wherever they came from, and answers questions
+              back, which a narrator does not do. Different jobs, and plenty of people will want both.
             </p>
 
             <h2>How to use Glutt's AI chef through your Meta glasses</h2>
@@ -112,9 +141,11 @@ export default {
             <p>
               Glutt uses the glasses the way your iPhone does for phone calls: as a Bluetooth headset with a
               microphone. It recognizes Ray-Ban Meta and Oakley Meta frames by name and prefers them for
-              Polly's audio. That covers Ray-Ban Meta (Gen 1 and Gen 2), Oakley Meta HSTN and Oakley Meta
-              Vanguard. Any other Bluetooth headset, including AirPods, works too. On Meta Ray-Ban Display,
-              Glutt uses the audio only. It does not draw anything on the display.
+              Polly's audio. That covers Ray-Ban Meta (Gen 1, Gen 2 and the new Gen 3), Oakley Meta HSTN and
+              Oakley Meta Vanguard. It also covers the camera-free <strong>Ray-Ban Meta Audio</strong>: Glutt
+              only needs the microphones and speakers, so a pair with no camera loses nothing here. Any other
+              Bluetooth headset, including AirPods, works too. On Meta Ray-Ban Display, Glutt uses the audio
+              only. It does not draw anything on the display.
             </p>
 
             <h2>What about Polly seeing through the glasses' camera?</h2>
@@ -158,6 +189,18 @@ export default {
       a: 'For audio, yes: Glutt treats the glasses as a Bluetooth headset. Glutt does not show anything on the Display\'s screen.',
     },
     {
+      q: 'Can AI glasses help with cooking tips?',
+      a: 'Yes. Meta AI on the glasses answers cooking questions out loud, suggests substitutions and sets timers, and with live AI it can comment on what the camera sees. What it cannot do is follow the specific recipe you saved, which is the gap a cooking app like Glutt fills.',
+    },
+    {
+      q: 'Can Ray-Ban Meta glasses set kitchen timers?',
+      a: 'Yes, by voice through Meta AI. In Glutt the timers belong to the step you are on, so "Chef, start the timer" runs the countdown that step actually needs.',
+    },
+    {
+      q: 'Does Glutt work with the camera-free Ray-Ban Meta Audio?',
+      a: 'Yes. Glutt only uses the glasses as a microphone and speakers, so a camera-free pair loses nothing. If you want Polly to look at the pan, she uses the iPhone camera either way.',
+    },
+    {
       q: 'Is Glutt made by Meta?',
       a: 'No. Glutt is an independent app made by CielPM, Inc. It is not affiliated with or endorsed by Meta Platforms or EssilorLuxottica. Ray-Ban and Oakley are trademarks of their owners.',
     },
@@ -167,6 +210,8 @@ export default {
     { title: 'Meta: Cooking with AI glasses', url: 'https://www.meta.com/ai-glasses/cooking/' },
     { title: 'Meta AI Glasses Help: How to use live AI on AI glasses', url: 'https://www.meta.com/help/ai-glasses/894093646030348/' },
     { title: 'Meta for Developers: Wearables Device Access Toolkit FAQ', url: 'https://developers.meta.com/wearables/faq/' },
+    { title: 'TechCrunch: Meta introduces camera-free AI glasses', url: 'https://techcrunch.com/2026/09/23/meta-introduces-camera-free-ai-glasses/', note: 'September 23, 2026' },
+    { title: 'Engadget: New York Times Cooking is coming to Meta\'s AI and display glasses', url: 'https://www.engadget.com/2268183/new-york-times-cooking-is-coming-to-metas-ai-and-display-glasses/', note: 'September 24, 2026' },
   ],
   related: ['ai-chef', 'guides/hands-free-cooking', 'best-ai-cooking-apps'],
   ctaTitle: 'Put a chef in <em>your glasses.</em>',

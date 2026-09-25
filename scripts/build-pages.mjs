@@ -157,6 +157,25 @@ function relatedBlock(page, all) {
         </nav>`;
 }
 
+/** A self-hosted demo clip. Poster first, video only fetched if the reader plays it. */
+function videoBlock(v) {
+  if (!v) return '';
+  return `<figure class="demo">
+              <video
+                controls
+                playsinline
+                preload="none"
+                poster="${v.poster}"
+                width="${v.width}"
+                height="${v.height}"
+                aria-label="${esc(v.name)}"
+              >
+                <source src="${v.src}" type="video/mp4" />
+              </video>
+              <figcaption>${v.caption}</figcaption>
+            </figure>`;
+}
+
 function ctaBlock(page) {
   const title = page.ctaTitle || 'Cook it with <em>someone on your side.</em>';
   return `<section class="cta" aria-label="Get Glutt">
@@ -199,6 +218,22 @@ function pageGraph(page, breadcrumbLd) {
   if (main['@type'] === 'AboutPage' || main['@type'] === 'CollectionPage') delete main.headline;
   if (page.hasPart) main.hasPart = page.hasPart;
   graph.push(main, breadcrumbLd);
+
+  if (page.video) {
+    const v = page.video;
+    graph.push({
+      '@type': 'VideoObject',
+      '@id': url + '#video',
+      name: v.name,
+      description: v.description,
+      thumbnailUrl: [SITE.origin + v.posterAbs],
+      uploadDate: v.uploadDate,
+      duration: v.duration,
+      contentUrl: SITE.origin + v.src,
+      isPartOf: { '@id': url + '#main' },
+      publisher: { '@id': ORG_ID },
+    });
+  }
 
   if (page.faqSchema && page.faq?.length) {
     graph.push({
@@ -250,12 +285,8 @@ function render(page, all) {
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Instrument+Serif:ital@1&display=swap"
-    />
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/instrument-serif-italic-latin.woff2" crossorigin />
     <link rel="stylesheet" href="/landing/guide.css" />
     <script type="application/ld+json">
 ${pageGraph(page, bc.ld)}
@@ -280,6 +311,7 @@ ${pageGraph(page, bc.ld)}
 
           <div class="doc__body">
             ${page.answer ? `<div class="answer"><strong>Short answer</strong><p>${page.answer}</p></div>` : ''}
+            ${videoBlock(page.video)}
             ${typeof page.body === 'function' ? page.body(all) : page.body}
             ${faqBlock(page.faq)}
             ${sourcesBlock(page.sources)}
@@ -335,7 +367,6 @@ async function main() {
     <meta name="robots" content="noindex" />
     <title>Page not found | Glutt</title>
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700&family=Instrument+Serif:ital@1&display=swap" />
     <link rel="stylesheet" href="/landing/guide.css" />
   </head>
   <body class="gd">

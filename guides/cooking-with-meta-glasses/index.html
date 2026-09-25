@@ -18,12 +18,8 @@
     <link rel="icon" href="/favicon.ico" sizes="48x48" />
     <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&family=Instrument+Serif:ital@1&display=swap"
-    />
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/instrument-serif-italic-latin.woff2" crossorigin />
     <link rel="stylesheet" href="/landing/guide.css" />
     <script type="application/ld+json">
 {
@@ -136,7 +132,7 @@
         "@id": "https://glutt.org/#website"
       },
       "datePublished": "2026-09-20T12:00:00+00:00",
-      "dateModified": "2026-09-20T12:00:00+00:00",
+      "dateModified": "2026-09-24T12:00:00+00:00",
       "image": "https://glutt.org/assets/app/voice-cookmode-900.webp",
       "breadcrumb": {
         "@id": "https://glutt.org/guides/cooking-with-meta-glasses#breadcrumb"
@@ -243,6 +239,30 @@
         },
         {
           "@type": "Question",
+          "name": "Can AI glasses help with cooking tips?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Meta AI on the glasses answers cooking questions out loud, suggests substitutions and sets timers, and with live AI it can comment on what the camera sees. What it cannot do is follow the specific recipe you saved, which is the gap a cooking app like Glutt fills."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can Ray-Ban Meta glasses set kitchen timers?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, by voice through Meta AI. In Glutt the timers belong to the step you are on, so \"Chef, start the timer\" runs the countdown that step actually needs."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Does Glutt work with the camera-free Ray-Ban Meta Audio?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. Glutt only uses the glasses as a microphone and speakers, so a camera-free pair loses nothing. If you want Polly to look at the pan, she uses the iPhone camera either way."
+          }
+        },
+        {
+          "@type": "Question",
           "name": "Is Glutt made by Meta?",
           "acceptedAnswer": {
             "@type": "Answer",
@@ -280,14 +300,15 @@
             <h1>Cooking with Meta glasses: <em>a hands-free AI chef in your ear.</em></h1>
             <p class="lede">Ray-Ban Meta and Oakley Meta glasses are good at one thing every cook needs: they keep your hands free. Here is what they can do in the kitchen on their own, and how to turn them into a proper recipe coach with Glutt.</p>
             <p class="byline">
-            <span>Updated <time datetime="2026-09-20">September 20, 2026</time></span>
+            <span>Updated <time datetime="2026-09-24">September 24, 2026</time></span>
             <span>By Malik Shourbaji, founder of Glutt</span>
-            <span>5 min read</span>
+            <span>6 min read</span>
           </p>
           </header>
 
           <div class="doc__body">
             <div class="answer"><strong>Short answer</strong><p>Yes, you can cook with Meta glasses. Meta AI on Ray-Ban Meta and Oakley Meta glasses can answer cooking questions and set timers. For step-by-step help with a specific recipe, <a href="/ai-chef">Glutt's AI chef, Polly</a>, works through the glasses: when your glasses are connected to your iPhone, Glutt automatically uses their microphones and open-ear speakers, so you talk to Polly with the phone on the counter. Polly can see your pan through the iPhone camera; seeing through the glasses' own camera is not available yet.</p></div>
+            
             
             <h2>What Meta glasses can do in the kitchen on their own</h2>
             <p>
@@ -308,6 +329,35 @@
               know which recipe you saved last week, which step you are on, how many servings you are
               making, or what is in your fridge. For a quick question that is fine. For cooking a whole dish,
               that missing context is where things go wrong.
+            </p>
+
+            <h2>What Meta announced at Connect, September 2026</h2>
+            <p>Two of the announcements change what cooking with the glasses looks like.</p>
+            <ul>
+              <li>
+                <strong>Ray-Ban Meta Audio: no camera at all.</strong> A camera-free pair from $349,
+                43 grams, up to 12 hours of battery (48 with the case), open for preorder on October 13.
+                <sup><a href="#src-h">4</a></sup> Anything that depends on the glasses seeing your food
+                does not apply to these. Voice guidance still does, which is the part Glutt uses.
+              </li>
+              <li>
+                <strong>Ray-Ban Meta (Gen 3).</strong> The new camera pair, with a 12&nbsp;MP camera, 3K
+                video and up to nine hours of battery, in Wayfarer, Aviator and Zena styles.
+                <sup><a href="#src-h">4</a></sup>
+              </li>
+              <li>
+                <strong>New York Times Cooking is getting a hands-free mode</strong> that narrates recipe
+                steps through the glasses, with swipeable step cards on Meta Ray-Ban Display. The Times' AJ
+                Chavar described "a system to restructure lengthy steps into brief audio instructions."
+                It rolls out later this fall. <sup><a href="#src-h">5</a></sup>
+              </li>
+            </ul>
+            <h3>What about New York Times Cooking?</h3>
+            <p>
+              If you cook from NYT Cooking and subscribe to it, that hands-free mode will be a good fit once
+              it ships: their editors shaped how each step is read out. It reads <em>their</em> recipes.
+              Glutt works from the recipes <em>you</em> saved, wherever they came from, and answers questions
+              back, which a narrator does not do. Different jobs, and plenty of people will want both.
             </p>
 
             <h2>How to use Glutt's AI chef through your Meta glasses</h2>
@@ -375,9 +425,11 @@
             <p>
               Glutt uses the glasses the way your iPhone does for phone calls: as a Bluetooth headset with a
               microphone. It recognizes Ray-Ban Meta and Oakley Meta frames by name and prefers them for
-              Polly's audio. That covers Ray-Ban Meta (Gen 1 and Gen 2), Oakley Meta HSTN and Oakley Meta
-              Vanguard. Any other Bluetooth headset, including AirPods, works too. On Meta Ray-Ban Display,
-              Glutt uses the audio only. It does not draw anything on the display.
+              Polly's audio. That covers Ray-Ban Meta (Gen 1, Gen 2 and the new Gen 3), Oakley Meta HSTN and
+              Oakley Meta Vanguard. It also covers the camera-free <strong>Ray-Ban Meta Audio</strong>: Glutt
+              only needs the microphones and speakers, so a pair with no camera loses nothing here. Any other
+              Bluetooth headset, including AirPods, works too. On Meta Ray-Ban Display, Glutt uses the audio
+              only. It does not draw anything on the display.
             </p>
 
             <h2>What about Polly seeing through the glasses' camera?</h2>
@@ -411,6 +463,12 @@
           <p>Not yet. Third-party access to the glasses' camera goes through Meta's Wearables Device Access Toolkit, which is still a developer preview without public distribution. Polly can see your food through the iPhone camera today.</p>
           <h3>Does Glutt work with Meta Ray-Ban Display?</h3>
           <p>For audio, yes: Glutt treats the glasses as a Bluetooth headset. Glutt does not show anything on the Display's screen.</p>
+          <h3>Can AI glasses help with cooking tips?</h3>
+          <p>Yes. Meta AI on the glasses answers cooking questions out loud, suggests substitutions and sets timers, and with live AI it can comment on what the camera sees. What it cannot do is follow the specific recipe you saved, which is the gap a cooking app like Glutt fills.</p>
+          <h3>Can Ray-Ban Meta glasses set kitchen timers?</h3>
+          <p>Yes, by voice through Meta AI. In Glutt the timers belong to the step you are on, so "Chef, start the timer" runs the countdown that step actually needs.</p>
+          <h3>Does Glutt work with the camera-free Ray-Ban Meta Audio?</h3>
+          <p>Yes. Glutt only uses the glasses as a microphone and speakers, so a camera-free pair loses nothing. If you want Polly to look at the pan, she uses the iPhone camera either way.</p>
           <h3>Is Glutt made by Meta?</h3>
           <p>No. Glutt is an independent app made by CielPM, Inc. It is not affiliated with or endorsed by Meta Platforms or EssilorLuxottica. Ray-Ban and Oakley are trademarks of their owners.</p>
         </section>
@@ -420,6 +478,8 @@
             <li><a href="https://www.meta.com/ai-glasses/cooking/" rel="noopener">Meta: Cooking with AI glasses</a></li>
             <li><a href="https://www.meta.com/help/ai-glasses/894093646030348/" rel="noopener">Meta AI Glasses Help: How to use live AI on AI glasses</a></li>
             <li><a href="https://developers.meta.com/wearables/faq/" rel="noopener">Meta for Developers: Wearables Device Access Toolkit FAQ</a></li>
+            <li><a href="https://techcrunch.com/2026/09/23/meta-introduces-camera-free-ai-glasses/" rel="noopener">TechCrunch: Meta introduces camera-free AI glasses</a> — September 23, 2026</li>
+            <li><a href="https://www.engadget.com/2268183/new-york-times-cooking-is-coming-to-metas-ai-and-display-glasses/" rel="noopener">Engadget: New York Times Cooking is coming to Meta's AI and display glasses</a> — September 24, 2026</li>
           </ol>
         </aside>
           </div>
