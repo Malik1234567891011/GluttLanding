@@ -128,3 +128,11 @@ ads attribution working as intended, so it stays.
 
 Indexing requested today (6 of ~10 daily): mealime, features, guides, the new pantry guide, and the two
 updated pages (glasses guide, ai-chef). IndexNow pinged after each deploy.
+
+### 2026-09-25: third pass
+
+- Pixel gone. Lighthouse homepage: **performance 100, best practices 100, SEO 100**, accessibility 96
+  (muted-text contrast, by design). `/app`: 99 / 100 / 100 / 100.
+- Three new guides live and submitted. `/guides/cooking-with-meta-ray-ban-display` was **indexed by
+  Google within the hour**; the skills and cookbook guides are requested.
+- Site is now 20 URLs, 11 of them guides/answers pages.

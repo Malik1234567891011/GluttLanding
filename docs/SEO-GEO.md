@@ -84,6 +84,20 @@ site looks.
   personal data is deleted. The guide shows how to import its public recipe pages before then, and
   compares alternatives honestly. Pushed to IndexNow.
 
+## Done on 2026-09-25 (third pass)
+
+- **Meta Pixel removed** from every page, plus the `_fbc` cookie `/app` wrote. Malik: the ads it
+  reported on are not running. It was the only third-party cookie on the site, and the only thing
+  keeping Lighthouse Best Practices at 79. Homepage is now 100 / 100 / 100 with accessibility 96
+  (the one flag is muted-text contrast, which is the design).
+- **Three guides**, chosen to cover what the app does and what people will search after Connect:
+  `/guides/cooking-with-meta-ray-ban-display`, `/guides/learn-to-cook-with-ai` (Skills),
+  `/guides/make-your-own-cookbook` (recipe saving and organizing).
+- Accuracy note: the shipping App Store build (1.2.3, from the `apple-ready` branch) has **no glasses
+  code**, and Skills checks are scored from an **iPhone photo**. The glasses-verified skill flow exists
+  only on a demo branch, so the site says photo. `/app` still shows a "Meta glasses toggle" screenshot
+  and an in-app waitlist that the shipping build does not have — worth a look.
+
 ## Still open: needs Malik
 
 Everything below is in [`ready-to-paste.md`](ready-to-paste.md) with final text:
