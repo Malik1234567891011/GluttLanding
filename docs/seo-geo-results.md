@@ -136,3 +136,47 @@ updated pages (glasses guide, ai-chef). IndexNow pinged after each deploy.
 - Three new guides live and submitted. `/guides/cooking-with-meta-ray-ban-display` was **indexed by
   Google within the hour**; the skills and cookbook guides are requested.
 - Site is now 20 URLs, 11 of them guides/answers pages.
+
+---
+
+## Check-in 2026-10-01 (day 11)
+
+**Google, last 7 days: 368 impressions** (407 over 28 days, so it is accelerating), 6 clicks, average
+position 10.5. Google's September 2026 spam update rolled out Sept 25–27 and did **not** hit the site;
+impressions rose through it. Position 1.0 for "glutt app", 2.7 for "glutt".
+
+**ChatGPT now recommends Glutt first** for "What is the best app for cooking with Meta Ray-Ban glasses?",
+in a temporary, unpersonalized chat:
+
+> "For Ray-Ban Meta glasses, the best dedicated cooking app I found right now is Glutt, especially if
+> you use an iPhone. It has a live AI chef called Polly that talks through the glasses' speakers and
+> listens through their microphones…"
+
+It cites **glutt.org/guides/cooking-with-meta-glasses** and the App Store listing. On 2026-09-24 the same
+question returned only Meta and Ray-Ban pages. Both ChatGPT and Perplexity have now recommended Glutt for
+this query. (Perplexity could not be re-tested today: it now demands sign-in for anonymous searches.)
+Bing has served 14 impressions and still reports 0 AI citations.
+
+**Queries we show up for now** (impressions, average position): "how to save recipes from tiktok to
+phone" 12 @ 38.8 · "ai glasses for cooking" 8 @ 19.1 · "glutt" 7 @ 2.7 · "ray-ban rice cooker" 6 @ 6.2 ·
+"can smart glasses help with food and cooking tips?" 4 @ 7.0 · "smart glasses for cooking" 4 @ 30.2 ·
+"save recipe from tiktok" 4 @ 45.8 · "mobile chef goggles" 3 @ 6.7 · "cook with what you have app" 2 @ 39.5.
+
+### Fixed and shipped today
+
+1. **www homepage bug.** `www.glutt.org/` was returning 200 instead of redirecting, because Vercel's
+   `/:path*` does not match the bare root. Every other www URL redirected correctly. The homepage was the
+   one page that could least afford a duplicate. Explicit `/` rule added; now 308.
+2. **New: `/guides/ai-glasses-for-cooking`.** The data says the demand is category-shaped ("ai glasses
+   for cooking" at 19, "smart glasses for cooking" at 30), and page one for both is a category
+   discussion, not a Meta how-to. Compares Ray-Ban Meta Gen 2/3, Ray-Ban Meta Audio, Oakley Meta,
+   Display and Solos AirGo, and debunks Traeger's MEAT-AI glasses (an April Fools page that ranks for
+   these queries).
+3. **Toolkit status corrected everywhere.** Meta shipped Wearables Device Access Toolkit 1.0 on
+   2026-09-30. Submissions for publishing did **not** open with it. Six pages said "developer preview";
+   they now say what actually changed, and the Meta glasses guide carries a dated status table.
+4. **Import guide** now opens with the three ways to save a TikTok recipe, because
+   "how to save recipes from tiktok to phone" was arriving at a page that never answered it plainly.
+
+Unchanged and still worth watching: NYT Cooking hands-free mode has not shipped ("later this fall", no
+date). Mealime still closes Oct 21. Ray-Ban Meta Audio ships Oct 13.
