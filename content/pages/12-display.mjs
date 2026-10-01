@@ -131,6 +131,6 @@ export default {
     },
     { title: 'Meta for Developers: Wearables Device Access Toolkit FAQ', url: 'https://developers.meta.com/wearables/faq/' },
   ],
-  related: ['guides/cooking-with-meta-glasses', 'ai-chef', 'guides/hands-free-cooking'],
+  related: ['guides/cooking-with-meta-glasses', 'guides/ai-glasses-for-cooking', 'ai-chef'],
   ctaTitle: 'Bring <em>your own recipes</em> to the glasses.',
 };

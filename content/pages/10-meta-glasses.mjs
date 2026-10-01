@@ -213,6 +213,6 @@ export default {
     { title: 'TechCrunch: Meta introduces camera-free AI glasses', url: 'https://techcrunch.com/2026/09/23/meta-introduces-camera-free-ai-glasses/', note: 'September 23, 2026' },
     { title: 'Engadget: New York Times Cooking is coming to Meta\'s AI and display glasses', url: 'https://www.engadget.com/2268183/new-york-times-cooking-is-coming-to-metas-ai-and-display-glasses/', note: 'September 24, 2026' },
   ],
-  related: ['ai-chef', 'guides/hands-free-cooking', 'best-ai-cooking-apps'],
+  related: ['guides/ai-glasses-for-cooking', 'guides/cooking-with-meta-ray-ban-display', 'ai-chef'],
   ctaTitle: 'Put a chef in <em>your glasses.</em>',
 };

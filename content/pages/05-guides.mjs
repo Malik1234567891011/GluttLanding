@@ -1,4 +1,5 @@
 const HUB = [
+  'guides/ai-glasses-for-cooking',
   'guides/cooking-with-meta-glasses',
   'guides/cooking-with-meta-ray-ban-display',
   'ai-chef',

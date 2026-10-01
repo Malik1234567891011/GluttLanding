@@ -18,6 +18,7 @@ Key facts:
 ## Guides
 
 - [Cooking with Meta glasses](https://glutt.org/guides/cooking-with-meta-glasses): How to cook hands-free with Ray-Ban Meta or Oakley Meta glasses: what Meta AI does, how to use Glutt's AI chef through the glasses, setup and limits.
+- [AI glasses for cooking, compared](https://glutt.org/guides/ai-glasses-for-cooking): Which AI and smart glasses are worth wearing in a kitchen in 2026: Ray-Ban Meta, Oakley Meta, Meta Ray-Ban Display and Solos, and what none of them do yet.
 - [Cooking with Meta Ray-Ban Display](https://glutt.org/guides/cooking-with-meta-ray-ban-display): What Meta Ray-Ban Display can actually do while you cook: Meta AI, recipe step cards, the Neural Band, the web-app platform, and how a phone cooking app fits alongside it.
 - [Polly, Glutt's AI chef](https://glutt.org/ai-chef): Polly is the live voice AI chef in Glutt for iPhone. Say "Chef," ask out loud, and she walks you through every step, runs timers and can look at your pan.
 - [Hands-free cooking, explained](https://glutt.org/guides/hands-free-cooking): How to follow a recipe without touching your phone: voice cooking apps, AI chefs, Siri and Alexa, smart glasses and gestures compared, with setup tips.

@@ -14,7 +14,7 @@ export default {
   lede:
     'The average saved-recipe folder is a graveyard: reels you liked, screenshots you never opened, links that now lead nowhere. Here is how to get recipes out of social media and into a form you can cook from.',
   published: '2026-09-20',
-  updated: '2026-09-20',
+  updated: '2026-10-01',
   image: '/assets/screens/recipes-900.webp',
   imageAlt: 'The Glutt recipes screen with saved meals, collections and a pantry match.',
   mentionsApp: true,
@@ -28,6 +28,27 @@ export default {
               and numbered steps, not a 45-second clip to scrub through with wet hands. And a surprising number
               of cooking videos never write the recipe down at all: the quantities are said out loud once, over
               music.
+            </p>
+
+            <h2>Three ways to save a TikTok recipe to your phone</h2>
+            <p>
+              "Saving it to your phone" can mean three different things, and they are not equally useful
+              later:
+            </p>
+            <div class="table">
+              <table>
+                <thead><tr><th scope="col">Method</th><th scope="col">What you end up with</th><th scope="col">Good for</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Favourite it in TikTok</th><td>A video in a list, still inside TikTok</td><td>Nothing, really. This is where recipes go to be forgotten</td></tr>
+                  <tr><th scope="row">Screenshot or download the video</th><td>An image or clip in your camera roll</td><td>Keeping it if the post gets deleted, but you still have to read it back</td></tr>
+                  <tr><th scope="row">Share it to a recipe app</th><td>Ingredients, steps and timings as text you can cook from</td><td>Actually cooking it. This is the one worth doing</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              On an iPhone, all three start from the same <strong>Share</strong> button on the video. On
+              Android the share sheet looks different but works the same way; the limitation is which apps
+              are installed. Glutt is iPhone only, so Android users want ReciMe or Flavorish instead.
             </p>
 
             <h2>How to save a recipe from TikTok</h2>
@@ -97,6 +118,14 @@ export default {
     {
       q: 'What app can save recipes from TikTok videos?',
       a: 'Several can, including Glutt, ReciMe, Flavorish and Pestle. In Glutt you share the TikTok to the app and it builds the recipe, and if the method is only spoken in the video, Glutt listens and writes it down.',
+    },
+    {
+      q: 'How do I save a recipe from TikTok to my phone?',
+      a: 'Tap Share on the video, then pick a recipe app from the share sheet (tap More the first time to find it). The app pulls out the ingredients and steps so you have text to cook from rather than a video to re-watch. Screenshotting also works, and a good recipe app can read the screenshot back into a recipe.',
+    },
+    {
+      q: 'How do I save TikTok recipes without saving the video?',
+      a: 'Import the recipe instead of the clip. Sharing the video to an app like Glutt stores the ingredients, steps and timings as text, which survives the post being deleted and is readable while you cook.',
     },
     {
       q: 'Can an app get a recipe from a video with no written recipe?',
