@@ -87,9 +87,9 @@ export default {
             <div class="note">
               <p>
                 <strong>On smart glasses:</strong> checking a technique through Ray-Ban Meta glasses while
-                your hands are busy is the obvious next step, and Meta's toolkit for third-party camera
-                access is still a developer preview. Today the check is a photo from your iPhone, and the
-                glasses carry the conversation. See
+                your hands are busy is the obvious next step. Meta's toolkit for third-party camera access
+                reached 1.0 on September 30, 2026, but submissions for publishing are not open yet. Today
+                the check is a photo from your iPhone, and the glasses carry the conversation. See
                 <a href="/guides/cooking-with-meta-glasses">cooking with Meta glasses</a>.
               </p>
             </div>
@@ -118,7 +118,7 @@ export default {
     },
     {
       q: 'Does Glutt check my cooking through smart glasses?',
-      a: 'Not in the App Store version. Skill checks use a photo taken with your iPhone. Meta\'s toolkit that would let an app use the glasses camera is still a developer preview.',
+      a: 'Not in the App Store version. Skill checks use a photo taken with your iPhone. Meta\'s toolkit that would let an app use the glasses camera hit 1.0 on September 30, 2026, but publishing submissions are not open yet.',
     },
     {
       q: 'Which cooking skill should I learn first?',

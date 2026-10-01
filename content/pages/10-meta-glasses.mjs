@@ -14,7 +14,7 @@ export default {
   lede:
     'Ray-Ban Meta and Oakley Meta glasses are good at one thing every cook needs: they keep your hands free. Here is what they can do in the kitchen on their own, and how to turn them into a proper recipe coach with Glutt.',
   published: '2026-09-20',
-  updated: '2026-09-24',
+  updated: '2026-10-01',
   image: '/assets/app/voice-cookmode-900.webp',
   imageAlt: 'Glutt cook mode showing the current recipe step with voice help from Polly.',
   mentionsApp: true,
@@ -51,8 +51,9 @@ export default {
             <p>Two of the announcements change what cooking with the glasses looks like.</p>
             <ul>
               <li>
-                <strong>Ray-Ban Meta Audio: no camera at all.</strong> A camera-free pair from $349,
-                43 grams, up to 12 hours of battery (48 with the case), open for preorder on October 13.
+                <strong>Ray-Ban Meta Audio: no camera at all.</strong> A camera-free pair at $349,
+                43 grams, up to 12 hours of battery (48 with the case). Preorders are open and it ships
+                October 13.
                 <sup><a href="#src-h">4</a></sup> Anything that depends on the glasses seeing your food
                 does not apply to these. Voice guidance still does, which is the part Glutt uses.
               </li>
@@ -150,12 +151,44 @@ export default {
 
             <h2>What about Polly seeing through the glasses' camera?</h2>
             <p>
-              That is the obvious next step, and we have prototyped it. It is not in the App Store version, for
-              a reason outside our control: Meta's Wearables Device Access Toolkit, the only way a third-party
-              app can use the glasses' camera, is still a developer preview. Meta's own FAQ says developers
-              "cannot yet distribute them to end users." <sup><a href="#src-h">3</a></sup> We plan to bring
-              it to Glutt once Meta opens publishing. Until then, Polly looks through your iPhone camera, which
-              tends to have the better view of the pan anyway.
+              That is the obvious next step, and we have prototyped it. It is still not in the App Store
+              version, for a reason outside our control, and the reason changed last week. See the status
+              box below. Until submissions open, Polly looks through your iPhone camera, which tends to have
+              the better view of the pan anyway.
+            </p>
+
+            <h2>Status: can a cooking app use the glasses camera yet?</h2>
+            <p><strong>No, not for you. Checked October 1, 2026.</strong> Here is exactly where it stands.</p>
+            <div class="table">
+              <table>
+                <thead><tr><th scope="col">What</th><th scope="col">Status</th><th scope="col">What it means for you</th></tr></thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">Glasses as a headset for an app's voice</th>
+                    <td><strong>Works today</strong></td>
+                    <td>Polly talks and listens through the glasses right now</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Wearables Device Access Toolkit</th>
+                    <td><strong>1.0 shipped, rolling out September 30, 2026</strong> <sup><a href="#src-h">3</a></sup></td>
+                    <td>Developers get a stable toolkit, after a year of preview</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Publishing an app that uses the camera</th>
+                    <td><strong>Still closed.</strong> Meta: "You'll soon be able to submit… to be published," and "We'll have more to share on submission and publishing timing soon" <sup><a href="#src-h">3</a></sup></td>
+                    <td>No App Store app can see through your glasses for you yet, including ours</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Meta AI's own live AI</th>
+                    <td>Works, because it is Meta's</td>
+                    <td>"Hey Meta" can comment on what the camera sees</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              This page gets updated when that changes. The day submissions open is the day a cooking app can
+              finally watch the pan from your face instead of from the counter.
             </p>
 
             <h2>Tips for cooking with smart glasses</h2>
@@ -182,7 +215,7 @@ export default {
     },
     {
       q: 'Can Glutt see through my Meta glasses camera?',
-      a: 'Not yet. Third-party access to the glasses\' camera goes through Meta\'s Wearables Device Access Toolkit, which is still a developer preview without public distribution. Polly can see your food through the iPhone camera today.',
+      a: 'Not yet. Meta shipped its Wearables Device Access Toolkit 1.0 on September 30, 2026, but submissions for publishing are still not open, so no App Store app can use the glasses camera for end users. Polly sees your food through the iPhone camera today.',
     },
     {
       q: 'Does Glutt work with Meta Ray-Ban Display?',

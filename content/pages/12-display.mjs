@@ -14,7 +14,7 @@ export default {
   lede:
     'A screen in your glasses solves the oldest kitchen problem: reading the next step without touching anything. Here is what the Display does in a kitchen today, what is arriving, and where a phone app still does the work.',
   published: '2026-09-25',
-  updated: '2026-09-25',
+  updated: '2026-10-01',
   image: '/assets/app/voice-cookmode-900.webp',
   imageAlt: 'Glutt cook mode showing the current step, with voice help from Polly.',
   mentionsApp: true,
@@ -64,10 +64,12 @@ export default {
             </p>
             <p>
               Separately, the <strong>Wearables Device Access Toolkit</strong>, which is what an iPhone app
-              would use to reach the glasses' camera and sensors, is still a developer preview: Meta's FAQ
-              says you "cannot yet distribute them to end users." <sup><a href="#src-h">3</a></sup> So the
-              honest state of play in September 2026 is: display web apps are buildable, camera access from
-              a normal App Store app is not.
+              would use to reach the glasses' camera and sensors, reached <strong>1.0 on September 30,
+              2026</strong> after a year in developer preview. Publishing did not open with it: Meta says
+              "You'll soon be able to submit your Device Access Toolkit and Web Apps experiences to be
+              published," and "We'll have more to share on submission and publishing timing soon."
+              <sup><a href="#src-h">3</a></sup> So the honest state of play in October 2026 is: these
+              experiences are buildable and testable, and not yet shippable to you.
             </p>
 
             <h2>Where a phone cooking app still does the work</h2>
@@ -118,7 +120,7 @@ export default {
     },
     {
       q: 'Can third-party apps use the Meta glasses camera?',
-      a: 'Not for public release yet. That runs through Meta\'s Wearables Device Access Toolkit, which is still a developer preview; Meta\'s own FAQ says builds cannot be distributed to end users.',
+      a: 'Not for public release yet. Meta\'s Wearables Device Access Toolkit reached 1.0 on September 30, 2026, but submissions for publishing are still not open, so nothing using the glasses camera can ship to end users yet.',
     },
   ],
   faqSchema: true,

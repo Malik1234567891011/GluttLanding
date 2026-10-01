@@ -8,7 +8,7 @@ Key facts:
 - App Store: https://apps.apple.com/app/id6780553556
 - Website: https://glutt.org/
 - Polly is Glutt's live voice AI chef. Say "Chef" (or "Hey Chef") and ask out loud; she answers, runs timers, walks through each step and can look through the iPhone camera at the pan.
-- Works with Ray-Ban Meta and Oakley Meta glasses as a Bluetooth headset: when the glasses are connected, Glutt uses their microphones and open-ear speakers for Polly, so the phone can stay on the counter. Seeing through the glasses' camera is not available yet; Meta's toolkit for third-party apps is still in developer preview.
+- Works with Ray-Ban Meta and Oakley Meta glasses as a Bluetooth headset: when the glasses are connected, Glutt uses their microphones and open-ear speakers for Polly, so the phone can stay on the counter. Seeing through the glasses' camera is not available yet: Meta's Wearables Device Access Toolkit reached 1.0 on 2026-09-30, but submissions for publishing are not open, so no App Store app can use the glasses camera for end users.
 - Imports recipes from TikTok, Instagram, YouTube, Reddit, any recipe website and screenshots, including methods that are only spoken in a video.
 - Knows your fridge, pantry and equipment; shows missing ingredients and substitutes; builds grocery lists.
 - Cook mode with large type, automatic timers and serving scaling; calories and protein per serving.

@@ -12,7 +12,7 @@ export default {
   h1: 'Glutt, <em>frequently asked.</em>',
   lede: 'Everything people ask us about Glutt, the iPhone cooking app with a live AI chef. If your question is not here, email hi@cielpm.ai.',
   published: '2026-09-20',
-  updated: '2026-09-20',
+  updated: '2026-10-01',
   author: 'org',
   schemaType: 'WebPage',
   includeApp: true,
@@ -66,7 +66,7 @@ export default {
     // Glasses
     {
       q: 'Does Glutt work with Meta glasses?',
-      a: '<p id="glasses">Yes, for audio. When Ray-Ban Meta or Oakley Meta glasses are connected to your iPhone, Glutt automatically uses their microphones and open-ear speakers for Polly, so you can talk to her with your phone on the counter. Seeing through the glasses\' camera is not available yet, because Meta\'s toolkit for third-party apps is still in developer preview. <a href="/guides/cooking-with-meta-glasses">Read the Meta glasses guide.</a></p>',
+      a: '<p id="glasses">Yes, for audio. When Ray-Ban Meta or Oakley Meta glasses are connected to your iPhone, Glutt automatically uses their microphones and open-ear speakers for Polly, so you can talk to her with your phone on the counter. Seeing through the glasses\' camera is not available yet: Meta\'s toolkit for third-party apps reached 1.0 on September 30, 2026, but publishing submissions are still not open. <a href="/guides/cooking-with-meta-glasses">Read the Meta glasses guide.</a></p>',
     },
     {
       q: 'Does Glutt work with AirPods?',
