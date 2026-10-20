@@ -14,7 +14,7 @@ export default {
   lede:
     'The average saved-recipe folder is a graveyard: reels you liked, screenshots you never opened, links that now lead nowhere. Here is how to get recipes out of social media and into a form you can cook from.',
   published: '2026-09-20',
-  updated: '2026-10-01',
+  updated: '2026-10-20',
   image: '/assets/screens/recipes-900.webp',
   imageAlt: 'The Glutt recipes screen with saved meals, collections and a pantry match.',
   mentionsApp: true,
@@ -72,8 +72,11 @@ export default {
 
             <h2>YouTube, Reddit and recipe websites</h2>
             <p>
-              The same share-sheet flow works from YouTube, Reddit and Safari. On a recipe website, Glutt skips
-              the life story and the pop-ups and keeps the ingredients and the method.
+              The same share-sheet flow works from YouTube, Reddit and Safari. On YouTube, Glutt reads the
+              description first and listens to the video only when the recipe is not written there; the
+              <a href="/guides/save-recipes-from-youtube">YouTube guide</a> covers where creators hide recipes.
+              On a recipe website, Glutt skips the life story and the pop-ups and keeps the ingredients and the
+              method.
             </p>
 
             <h2>Screenshots and photos</h2>
@@ -145,5 +148,5 @@ export default {
     },
   ],
   faqSchema: true,
-  related: ['ai-chef', 'guides/hands-free-cooking', 'faq'],
+  related: ['guides/save-recipes-from-youtube', 'ai-chef', 'guides/hands-free-cooking'],
 };

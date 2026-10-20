@@ -1,7 +1,8 @@
 # Weekly SEO/GEO upkeep runbook
 
-The scheduled cloud routine "Glutt SEO/GEO weekly upkeep" runs this every Monday. Edit this file to
-change what it does; the routine only says "follow docs/weekly-upkeep.md".
+Run this weekly. **No scheduled routine exists yet** (checked 2026-10-20: the account has none), so
+it runs only when someone starts it. If a routine is created, its prompt should only say "follow
+docs/weekly-upkeep.md", so editing this file changes what it does.
 
 **Read first:** `docs/SEO-GEO.md` (strategy and the honesty rules), `docs/seo-geo-results.md` (the log,
 newest entry last), `landing/README.md` (how the site is built).

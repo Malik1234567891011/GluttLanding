@@ -7,6 +7,7 @@ const HUB = [
   'guides/cook-with-what-you-have',
   'guides/learn-to-cook-with-ai',
   'guides/save-recipes-from-tiktok-instagram',
+  'guides/save-recipes-from-youtube',
   'guides/make-your-own-cookbook',
   'guides/mealime-alternatives',
   'best-ai-cooking-apps',

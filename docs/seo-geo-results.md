@@ -180,3 +180,53 @@ phone" 12 @ 38.8 · "ai glasses for cooking" 8 @ 19.1 · "glutt" 7 @ 2.7 · "ray
 
 Unchanged and still worth watching: NYT Cooking hands-free mode has not shipped ("later this fall", no
 date). Mealime still closes Oct 21. Ray-Ban Meta Audio ships Oct 13.
+
+---
+
+## Check-in 2026-10-20 (day 30)
+
+No check-in ran between Oct 1 and today: the "weekly upkeep routine" this repo's runbook describes
+**does not exist** (no scheduled routines on the account). Measured by hand today.
+
+**Google Search Console**
+
+| | 2026-10-01 | 2026-10-20 |
+| --- | --- | --- |
+| Impressions, last 7 days | 368 | **508** |
+| Impressions, last 28 days | 407 | **1,910** |
+| Clicks, last 28 days | ~6 | **34** (CTR 1.8%) |
+| Average position | 10.5 | 11.4 (more queries, more of them long-tail) |
+| Pages indexed | 8+ | **16 of 21**; the 5 left out are /app, /privacy, /terms, /support, /delete-account, which is fine |
+
+Pages, 28 days (clicks / impressions / position): ai-glasses guide 9 / 256 / 9.5 · homepage 7 / 210 / 5.1 ·
+Display guide 5 / 84 / 6.7 · best-apps 4 / 371 / 12.4 · hands-free 4 / 78 / 5.3 · Meta glasses guide
+1 / 513 / 8.6 · about 1 / 116 · mealime 1 / 78 / 10.2 · import guide 0 / 142 / 34.1.
+
+The Meta glasses guide's 0.2% CTR is not a snippet problem: its named queries are the broad
+"ai/smart glasses for cooking" ones it shares with the newer ai-glasses guide, which wins the clicks.
+Most of its 513 impressions are anonymized long-tail.
+
+Google's generative-AI report shows conversational follow-ups reaching the site ("not chatgpt",
+"how about gemini", "give me free ones", "which ai is best for cooking recipes"), i.e. Glutt is being
+surfaced inside AI Mode conversations.
+
+Biggest unanswered demand: **"save recipe from youtube video" 45 impressions at position 33.5**, plus the
+TikTok-saving cluster (~130 impressions) at 35–51, all landing on the one import guide.
+
+**ChatGPT panel** (temporary chat)
+- Best app for cooking with Meta Ray-Ban glasses: **Glutt #1** again, then Meta AI, then NYT Cooking.
+- AI chef that talks you through recipes hands-free: Coco (Cook Along), RecipePod, Hands! AI Chef. No Glutt.
+- Best AI cooking apps 2026: Samsung Food, Flavorish, ChefGPT, DishGen, ReciMe, Cooklist. No Glutt.
+  The head-term picture is unchanged; these lists track App Store presence and third-party lists.
+
+**News check.** Mealime's homepage still says it shuts down October 21, 2026, so the guide stays as is
+until tomorrow. NYT Cooking hands-free mode: still unshipped. Meta's toolkit FAQ still says submissions
+open "soon", with no date. No page needed changing for these.
+
+**Shipped:** `/guides/save-recipes-from-youtube`. Behaviour checked in the `apple-ready` source:
+Glutt reads the YouTube description first and transcribes the audio only when the description has
+no recipe; Reddit posts linking to YouTube are followed. Step clips are off for imports, so the
+page does not mention them. ReciMe's YouTube import is credited fairly, with its help page as the source.
+The import guide now links to it.
+
+**Next:** move the Mealime guide to past tense after Oct 21; request indexing for the YouTube guide.
