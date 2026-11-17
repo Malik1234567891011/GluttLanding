@@ -5,7 +5,7 @@ export default {
   crumb: 'Save recipes from TikTok and Instagram',
   crumbs: [{ name: 'Guides', url: '/guides' }],
   cardText: 'Turn a cooking video or a screenshot into a clean recipe you will actually cook.',
-  title: 'How to Save Recipes from TikTok, Instagram & YouTube (2026 Guide)',
+  title: 'How to Save Recipes From TikTok to Your Phone (2026 Guide)',
   ogTitle: 'How to save recipes from TikTok, Instagram and YouTube, and actually cook them',
   description:
     'How to save recipes from TikTok, Instagram Reels, YouTube and websites, even videos where the recipe is only spoken, and turn them into dinner.',
@@ -19,7 +19,7 @@ export default {
   imageAlt: 'The Glutt recipes screen with saved meals, collections and a pantry match.',
   mentionsApp: true,
   answer:
-    'The fastest way is to share the video straight to a recipe app. In <a href="/">Glutt</a>, tap Share on the TikTok, Instagram or YouTube video, choose Glutt, and it becomes a clean recipe with ingredients, steps and timings. If the method is only spoken in the video and never written down, Glutt listens to it and writes it out. Screenshots and recipe websites work the same way.',
+    'The fastest way is to share the video straight to a recipe app. In <a href="/">Glutt</a>, tap Share on the TikTok, Instagram or YouTube video, choose Glutt, and it becomes a clean recipe with ingredients, steps and timings. If a TikTok or YouTube video only says the method out loud, Glutt listens to it and writes it out; on Instagram it reads the caption. Screenshots and recipe websites work the same way.',
   body: `
             <h2>Why "save" buttons don't work for recipes</h2>
             <p>
@@ -63,7 +63,7 @@ export default {
             <ol>
               <li>Open the reel or post and tap the <strong>share</strong> (paper plane) icon.</li>
               <li>Choose <strong>Share to</strong> or <strong>More</strong> to reach the iPhone share sheet, then pick <strong>Glutt</strong>.</li>
-              <li>Glutt reads the caption and the video, and builds the recipe.</li>
+              <li>Glutt reads the full caption, where most creators put the recipe, and builds it. Glutt does not listen to Instagram audio, so for a Reel where the recipe is only spoken, see <a href="/guides/save-recipes-from-instagram">saving recipes from Instagram</a>.</li>
             </ol>
             <p>
               Alternatively, tap <strong>Copy link</strong> in Instagram and paste the link into Glutt's
@@ -132,7 +132,7 @@ export default {
     },
     {
       q: 'Can an app get a recipe from a video with no written recipe?',
-      a: 'Yes. Glutt transcribes the spoken method from the video and turns it into ingredients and steps. Check the quantities afterwards, because creators sometimes round or skip them.',
+      a: 'Yes, for TikTok and YouTube. Glutt transcribes the spoken method from the video and turns it into ingredients and steps; for Instagram it reads the caption. Check the quantities afterwards, because creators sometimes round or skip them.',
     },
     {
       q: 'Can I save recipes from Instagram without the link breaking later?',
@@ -148,5 +148,5 @@ export default {
     },
   ],
   faqSchema: true,
-  related: ['guides/save-recipes-from-youtube', 'ai-chef', 'guides/hands-free-cooking'],
+  related: ['guides/save-recipes-from-youtube', 'guides/save-recipes-from-instagram', 'ai-chef'],
 };

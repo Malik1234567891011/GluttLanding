@@ -1,0 +1,339 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f3efe6" />
+    <title>AI Recipe Generators: Do They Work? How to Get a Good Recipe (2026)</title>
+    <meta name="description" content="What AI recipe generators like ChatGPT and ChefGPT do well, where invented recipes go wrong, how to prompt for a better one, and the safety checks no AI replaces." />
+    <link rel="canonical" href="https://glutt.org/guides/ai-recipe-generators" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Glutt" />
+    <meta property="og:title" content="Do AI recipe generators work? How to get a recipe worth cooking" />
+    <meta property="og:description" content="What AI recipe generators like ChatGPT and ChefGPT do well, where invented recipes go wrong, how to prompt for a better one, and the safety checks no AI replaces." />
+    <meta property="og:url" content="https://glutt.org/guides/ai-recipe-generators" />
+    <meta property="og:image" content="https://glutt.org/assets/app/kitchen-pantry-900.webp" />
+    <meta property="og:image:alt" content="The Glutt kitchen screen listing fridge and pantry items." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/instrument-serif-italic-latin.woff2" crossorigin />
+    <link rel="stylesheet" href="/landing/guide.css" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://glutt.org/#organization",
+      "name": "Glutt",
+      "legalName": "CielPM, Inc.",
+      "url": "https://glutt.org/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://glutt.org/assets/brand/glutt-app-icon-512.png",
+        "width": 512,
+        "height": 512
+      },
+      "email": "hi@cielpm.ai",
+      "founder": {
+        "@id": "https://glutt.org/about#founder"
+      },
+      "description": "Glutt is an iPhone cooking app with Polly, a live voice AI chef that talks you through any recipe hands-free, answers questions out loud, runs your timers and can look at your pan through the camera. It saves recipes from TikTok, Instagram, YouTube and any website, and works with Ray-Ban Meta glasses for audio.",
+      "sameAs": [
+        "https://apps.apple.com/us/app/glutt-recipes-ai-chef/id6780553556",
+        "https://apps.apple.com/us/developer/cielpm-inc/id6780553558"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "hi@cielpm.ai",
+        "url": "https://glutt.org/support"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://glutt.org/#website",
+      "name": "Glutt",
+      "alternateName": [
+        "Glutt: Recipes & AI Chef",
+        "glutt.org"
+      ],
+      "url": "https://glutt.org/",
+      "publisher": {
+        "@id": "https://glutt.org/#organization"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "Article",
+      "@id": "https://glutt.org/guides/ai-recipe-generators#main",
+      "url": "https://glutt.org/guides/ai-recipe-generators",
+      "name": "Do AI recipe generators work? Mostly, if you check the right things.",
+      "headline": "Do AI recipe generators work? Mostly, if you check the right things.",
+      "description": "What AI recipe generators like ChatGPT and ChefGPT do well, where invented recipes go wrong, how to prompt for a better one, and the safety checks no AI replaces.",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@id": "https://glutt.org/#website"
+      },
+      "datePublished": "2026-11-17T12:00:00+00:00",
+      "dateModified": "2026-11-17T12:00:00+00:00",
+      "image": "https://glutt.org/assets/app/kitchen-pantry-900.webp",
+      "breadcrumb": {
+        "@id": "https://glutt.org/guides/ai-recipe-generators#breadcrumb"
+      },
+      "publisher": {
+        "@id": "https://glutt.org/#organization"
+      },
+      "author": {
+        "@type": "Person",
+        "@id": "https://glutt.org/about#founder",
+        "name": "Malik Shourbaji",
+        "jobTitle": "Founder",
+        "worksFor": {
+          "@id": "https://glutt.org/#organization"
+        },
+        "url": "https://glutt.org/about",
+        "sameAs": [
+          "https://malikmakes.com"
+        ]
+      },
+      "mainEntityOfPage": "https://glutt.org/guides/ai-recipe-generators",
+      "mentions": {
+        "@id": "https://glutt.org/#app"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://glutt.org/guides/ai-recipe-generators#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Glutt",
+          "item": "https://glutt.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://glutt.org/guides"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "AI recipe generators",
+          "item": "https://glutt.org/guides/ai-recipe-generators"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://glutt.org/guides/ai-recipe-generators#faq",
+      "url": "https://glutt.org/guides/ai-recipe-generators",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Are AI-generated recipes safe to cook?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Usually, if you treat cooking times as a guide and cook meat to a safe internal temperature with a thermometer: 165°F for poultry, 160°F for ground meat, and 145°F plus a 3-minute rest for steaks, chops and roasts, per the USDA. Check allergens yourself."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can AI make a recipe from the ingredients I have?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. General assistants like ChatGPT, dedicated generators like ChefGPT, and Glutt's invent feature will build a recipe around the ingredients you list or keep in the app. Give amounts and your equipment for a better result."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why did my AI-generated baking recipe fail?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Baking depends on precise ratios of flour, fat, liquid and leavening, and an invented recipe has never been tested. For baking, start from a tested recipe and ask the AI to adapt it rather than invent one."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the best AI recipe generator?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "For flexibility and follow-up questions, a general assistant like ChatGPT. For pantry and macro-based generation, ChefGPT. For recipes that start from what your kitchen actually holds and an AI chef to cook them with, Glutt. If you want tested recipes instead of invented ones, SuperCook searches existing recipes by ingredient."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+
+  <body class="gd">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="nav">
+      <a class="nav__brand" href="/" aria-label="Glutt home">Glutt</a>
+      <nav class="nav__links" aria-label="Main navigation">
+        <a class="nav__link" href="/features">Features</a>
+        <a class="nav__link" href="/ai-chef">AI chef</a>
+        <a class="nav__link" href="/guides">Guides</a>
+        <a class="nav__link" href="/faq">FAQ</a>
+        <a class="nav__link" href="/support">Support</a>
+      </nav>
+      <a class="btn btn--primary btn--sm" href="https://apps.apple.com/app/id6780553556">Get the app</a>
+    </header>
+
+    <main id="main" class="doc">
+      <div class="wrap">
+        <ol class="crumbs"><li><a href="/">Glutt</a></li><li><a href="/guides">Guides</a></li><li><span aria-current="page">AI recipe generators</span></li></ol>
+        <article>
+          <header class="doc__head">
+            <p class="eyebrow">Guide · AI cooking</p>
+            <h1>Do AI recipe generators work? <em>Mostly, if you check the right things.</em></h1>
+            <p class="lede">Ask an AI for "something with chicken, spinach and the half lemon in my fridge" and you get a confident recipe in seconds. Often it is good. Sometimes it is quietly wrong. Here is how to tell the difference before dinner depends on it.</p>
+            <p class="byline">
+            <span>Updated <time datetime="2026-11-17">November 17, 2026</time></span>
+            <span>By Malik Shourbaji, founder of Glutt</span>
+            <span>3 min read</span>
+          </p>
+          </header>
+
+          <div class="doc__body">
+            <div class="answer"><strong>Short answer</strong><p>Yes, for everyday cooking. AI recipe generators such as ChatGPT, ChefGPT and the invent feature in <a href="/">Glutt</a> are good at turning the ingredients you have into a sensible stovetop dinner, adapting a dish to a diet, and scaling it. They are weakest where precision matters: <strong>baking ratios, exact quantities and cooking times</strong>, and <strong>food safety</strong>. An AI-invented recipe has never been cooked by anyone, so check the amounts against a tested recipe for anything baked, and use a thermometer for meat rather than the time it gives you: the USDA minimum is 165°F for poultry and 160°F for ground meat.</p></div>
+            
+            
+            <h2>What AI recipe generators are good at</h2>
+            <ul>
+              <li><strong>Using what you have.</strong> Give it the contents of your fridge and it finds a dish that uses most of it, which is the hard part on a weeknight.</li>
+              <li><strong>Adapting a dish.</strong> Dairy-free, higher protein, no oven, half the servings: rewriting a known recipe is something AI does well.</li>
+              <li><strong>Forgiving food.</strong> Stir-fries, soups, grain bowls, frittatas, pasta, traybakes. Dishes where "a handful" is a fine measurement are where generated recipes shine.</li>
+              <li><strong>Ideas.</strong> Five directions for the same chicken thighs, in seconds, so you can pick one.</li>
+            </ul>
+
+            <h2>Where invented recipes go wrong</h2>
+            <div class="table">
+              <table>
+                <thead><tr><th scope="col">Problem</th><th scope="col">What it looks like</th><th scope="col">What to do</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Baking ratios</th><td>Flour, fat, liquid and leavening that look plausible but do not balance; a cake that sinks or bread that does not rise</td><td>For anything baked, start from a tested recipe and ask the AI to adapt it, rather than inventing one</td></tr>
+                  <tr><th scope="row">Times and doneness</th><td>"Bake chicken 15 minutes" with no mention of thickness or temperature</td><td>Cook to temperature, not time; use a thermometer</td></tr>
+                  <tr><th scope="row">Quantities that drift</th><td>Amounts that do not add up after scaling, or a sauce for four with a teaspoon of liquid</td><td>Read the list before you shop; ask it to double-check totals</td></tr>
+                  <tr><th scope="row">Confident technique errors</th><td>Steps in the wrong order, or a method that does not fit the ingredient</td><td>Ask "why this step?" and see whether the answer makes sense</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              None of this is unique to AI; badly tested recipes have always existed. The difference is that a
+              generated recipe sounds exactly as sure of itself when it is wrong, and nobody has cooked it before
+              you.
+            </p>
+
+            <h2>The safety numbers no AI replaces</h2>
+            <p>Whatever any recipe, human or AI, says about time, these are the USDA minimum internal temperatures: <sup><a href="#src-h">1</a></sup></p>
+            <div class="table">
+              <table>
+                <thead><tr><th scope="col">Food</th><th scope="col">Safe minimum internal temperature</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">All poultry, including ground</th><td>165°F (73.9°C)</td></tr>
+                  <tr><th scope="row">Ground meats</th><td>160°F (71.1°C)</td></tr>
+                  <tr><th scope="row">Beef, pork, veal and lamb steaks, chops and roasts</th><td>145°F (62.8°C), then rest at least 3 minutes</td></tr>
+                  <tr><th scope="row">Egg dishes</th><td>160°F (71.1°C)</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>Also check any generated recipe against allergies yourself. An AI can miss that a sauce or stock contains one.</p>
+
+            <h2>How to get a better recipe out of an AI</h2>
+            <ol>
+              <li><strong>Give it the real inventory, with amounts.</strong> "Two chicken thighs, a bag of spinach, half a lemon" beats "chicken and spinach."</li>
+              <li><strong>Say what you have to cook with.</strong> One pan, no oven, 25 minutes, a rice cooker.</li>
+              <li><strong>Ask for weights and a doneness test.</strong> "Grams, and how I know it is done" makes vague recipes concrete.</li>
+              <li><strong>For baking, anchor it.</strong> Paste a tested recipe and ask for the change, instead of asking for a new cake.</li>
+              <li><strong>Read it once before you shop.</strong> Most mistakes are visible on paper: a missing liquid, a time that seems short.</li>
+            </ol>
+
+            <h2>The main options</h2>
+            <ul>
+              <li><strong>ChatGPT</strong> and other general assistants: free to start, endlessly flexible, and you can ask follow-up questions. They do not know what is in your kitchen unless you tell them every time.</li>
+              <li><strong>ChefGPT</strong>: a dedicated generator that builds recipes from your pantry, your macros or a meal plan.</li>
+              <li><strong>SuperCook</strong>: not a generator. It searches existing, human-written recipes for ones that match your ingredients, which avoids the "never been cooked" problem.</li>
+              <li><strong>Glutt</strong>: keeps your fridge and pantry, so its <em>invent a dish</em> feature starts from what you actually have; you can steer it with a meal type or a hint. The result is labeled as invented, and you review it before saving. Then <a href="/ai-chef">Polly, the AI chef</a>, talks you through it hands-free and answers the "is this done?" questions as you cook.</li>
+            </ul>
+            <p>
+              For more on cooking from what is in the fridge, see <a href="/guides/cook-with-what-you-have">cook with
+              what you already have</a>. For a wider comparison, see the <a href="/best-ai-cooking-apps">best AI cooking
+              apps</a>.
+            </p>
+          
+            <section class="faq" aria-labelledby="faq-h">
+          <h2 id="faq-h">Frequently asked questions</h2>
+          <h3>Are AI-generated recipes safe to cook?</h3>
+          <p>Usually, if you treat cooking times as a guide and cook meat to a safe internal temperature with a thermometer: 165°F for poultry, 160°F for ground meat, and 145°F plus a 3-minute rest for steaks, chops and roasts, per the USDA. Check allergens yourself.</p>
+          <h3>Can AI make a recipe from the ingredients I have?</h3>
+          <p>Yes. General assistants like ChatGPT, dedicated generators like ChefGPT, and Glutt's invent feature will build a recipe around the ingredients you list or keep in the app. Give amounts and your equipment for a better result.</p>
+          <h3>Why did my AI-generated baking recipe fail?</h3>
+          <p>Baking depends on precise ratios of flour, fat, liquid and leavening, and an invented recipe has never been tested. For baking, start from a tested recipe and ask the AI to adapt it rather than invent one.</p>
+          <h3>What is the best AI recipe generator?</h3>
+          <p>For flexibility and follow-up questions, a general assistant like ChatGPT. For pantry and macro-based generation, ChefGPT. For recipes that start from what your kitchen actually holds and an AI chef to cook them with, Glutt. If you want tested recipes instead of invented ones, SuperCook searches existing recipes by ingredient.</p>
+        </section>
+            <aside class="sources" aria-labelledby="src-h">
+          <h2 id="src-h">Sources</h2>
+          <ol>
+            <li><a href="https://www.fsis.usda.gov/food-safety/safe-food-handling-and-preparation/food-safety-basics/safe-temperature-chart" rel="noopener">USDA FSIS: Safe Minimum Internal Temperature Chart</a></li>
+          </ol>
+        </aside>
+          </div>
+        </article>
+
+        <div class="doc__foot">
+          <nav class="related" aria-labelledby="rel-h">
+          <h2 id="rel-h">Keep reading</h2>
+          <ul>
+            <li><a href="/guides/cook-with-what-you-have">Cook with what you already have<span>Apps that turn the contents of your fridge into dinner, and how to make them work in a real kitchen.</span></a></li>
+            <li><a href="/best-ai-cooking-apps">The best AI cooking apps in 2026<span>Thirteen AI cooking and recipe apps compared, including where Glutt is not the right pick.</span></a></li>
+            <li><a href="/ai-chef">Polly, Glutt's AI chef<span>A live voice AI chef that knows your recipe, runs your timers and can look at the pan.</span></a></li>
+          </ul>
+        </nav>
+          <section class="cta" aria-label="Get Glutt">
+          <h2>Invent dinner from <em>what you already have.</em></h2>
+          <p>Save any recipe, cook it hands-free with a live AI chef, and use what is already in your kitchen.</p>
+          <a class="btn btn--primary" href="https://apps.apple.com/app/id6780553556">Get Glutt on the App Store</a>
+          <small>iPhone with iOS 17.2 or later. Free to download, with a free trial of Glutt Premium.</small>
+        </section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="ft">
+      <div class="wrap ft__inner">
+        <div class="ft__brand">
+          <strong>Glutt</strong>
+          <p>Save any recipe, cook it hands-free with a live AI chef, and use what is already in your kitchen.</p>
+          <p class="ft__muted">Support: <a href="mailto:hi@cielpm.ai">hi@cielpm.ai</a></p>
+          <p class="ft__muted">© 2026 CielPM, Inc.. All rights reserved.</p>
+        </div>
+        <nav class="ft__col" aria-label="Product links">
+          <h2>Product</h2>
+          <a href="/features">Full product overview</a>
+          <a href="/ai-chef">Polly, the AI chef</a>
+          <a href="/guides/cooking-with-meta-glasses">Cooking with Meta glasses</a>
+          <a href="/guides">All guides</a>
+          <a href="https://apps.apple.com/app/id6780553556">Get Glutt on the App Store</a>
+        </nav>
+        <nav class="ft__col" aria-label="Company links">
+          <h2>Help &amp; legal</h2>
+          <a href="/faq">FAQ</a>
+          <a href="/about">About Glutt</a>
+          <a href="/support">Support</a>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="/delete-account">Delete Account</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

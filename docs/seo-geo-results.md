@@ -274,3 +274,23 @@ two glasses guides to match how people phrase the question (CTR test; compare in
   "Follow Recipes Hands-Free With Meta Glasses: AI Chef Guide (2026)"
 - AI glasses guide: "AI Glasses for Cooking: Which Smart Glasses Actually Help (2026)" →
   "Can Smart Glasses Help You Cook? AI Glasses Compared (2026)"
+
+### Same day, second pass (2026-11-17)
+
+Picked from the 90-day query list, not guessed:
+- **New `/guides/nyt-cooking-hands-free-meta-glasses`**: setup, requirements and "option missing" fixes from
+  NYT's help page; Glutt named for older iPhones, iPad and non-NYT recipes.
+- **New `/guides/save-recipes-from-instagram`**: the TikTok/Instagram cluster sits at 34–47. Honest about
+  the shipping build: Glutt reads the full Instagram caption (embed route) but does not transcribe
+  Instagram audio; private accounts fail.
+- **Accuracy fix:** four pages implied Glutt listens to Instagram videos. Only TikTok and YouTube audio is
+  transcribed (`ImportPipeline`, apple-ready). Corrected on the import guide, cookbook guide and FAQ.
+- **New `/guides/ai-recipe-generators`**: "ai recipe app / generator / ai tool for cooking" ≈200
+  impressions at 26–54. Informational, not a ranked list; USDA temperatures checked on the FSIS chart.
+  Mentions Glutt's shipping "invent a dish" (InventDishView: from pantry, labeled invented, reviewed).
+- **Retitles:** import guide → "How to Save Recipes From TikTok to Your Phone (2026 Guide)" (its real
+  queries); learn-to-cook → "…A Beginner's Guide to an AI Cooking Coach" ("best ai cooking assistant for
+  beginners" 17 @ 10.6).
+- Not chased: "ai chef pro alternatives" (restaurant B2B audience), Ray-Ban/Traeger April Fools noise.
+  ChatGPT's hands-free list (Coco, Hands! AI Chef) could not be verified on the App Store, so best-apps
+  was not expanded from it.

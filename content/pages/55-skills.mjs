@@ -5,7 +5,7 @@ export default {
   crumb: 'Learn to cook with AI',
   crumbs: [{ name: 'Guides', url: '/guides' }],
   cardText: '75 techniques, checked from a photo of your own work, with nine kitchen ranks to climb.',
-  title: 'Learn to Cook With AI: Techniques, Practice and Real Feedback',
+  title: 'Learn to Cook With AI: A Beginner\'s Guide to an AI Cooking Coach',
   ogTitle: 'Learning to cook with an AI coach that checks your work',
   description:
     'How to actually get better at cooking with an AI coach: which techniques to learn first, how photo-checked practice works, and where AI feedback helps and where it does not.',

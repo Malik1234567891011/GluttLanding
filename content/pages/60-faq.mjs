@@ -79,7 +79,7 @@ export default {
     // Recipes and kitchen
     {
       q: 'Where can I import recipes from?',
-      a: '<p id="recipes">TikTok, Instagram, YouTube, Reddit, any recipe website, and screenshots. Share the post or page to Glutt from the iPhone share sheet. If a video only says the method out loud, Glutt listens and writes it down. <a href="/guides/save-recipes-from-tiktok-instagram">How to import recipes.</a></p>',
+      a: '<p id="recipes">TikTok, Instagram, YouTube, Reddit, any recipe website, and screenshots. Share the post or page to Glutt from the iPhone share sheet. If a TikTok or YouTube video only says the method out loud, Glutt listens and writes it down; for Instagram it reads the caption. <a href="/guides/save-recipes-from-tiktok-instagram">How to import recipes.</a></p>',
     },
     {
       q: 'Does Glutt know what ingredients I have?',

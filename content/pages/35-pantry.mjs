@@ -129,6 +129,6 @@ export default {
       url: 'https://www.epa.gov/land-research/farm-kitchen-environmental-impacts-us-food-waste',
     },
   ],
-  related: ['ai-chef', 'guides/save-recipes-from-tiktok-instagram', 'best-ai-cooking-apps'],
+  related: ['guides/ai-recipe-generators', 'ai-chef', 'best-ai-cooking-apps'],
   ctaTitle: 'Cook what is <em>already in the fridge.</em>',
 };
