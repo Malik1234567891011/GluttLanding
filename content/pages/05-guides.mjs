@@ -2,6 +2,7 @@ const HUB = [
   'guides/ai-glasses-for-cooking',
   'guides/cooking-with-meta-glasses',
   'guides/cooking-with-meta-ray-ban-display',
+  'guides/nyt-cooking-hands-free-meta-glasses',
   'ai-chef',
   'guides/hands-free-cooking',
   'guides/cook-with-what-you-have',

@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#f3efe6" />
+    <title>NYT Cooking Hands-Free on Meta Glasses: Setup, Requirements, Fixes</title>
+    <meta name="description" content="How to use NYT Cooking Hands-Free on Ray-Ban Meta, Oakley Meta and Meta Ray-Ban Display: requirements, setup, voice commands, and why the option can be missing." />
+    <link rel="canonical" href="https://glutt.org/guides/nyt-cooking-hands-free-meta-glasses" />
+    <meta property="og:type" content="article" />
+    <meta property="og:site_name" content="Glutt" />
+    <meta property="og:title" content="How to use NYT Cooking Hands-Free with Meta AI glasses" />
+    <meta property="og:description" content="How to use NYT Cooking Hands-Free on Ray-Ban Meta, Oakley Meta and Meta Ray-Ban Display: requirements, setup, voice commands, and why the option can be missing." />
+    <meta property="og:url" content="https://glutt.org/guides/nyt-cooking-hands-free-meta-glasses" />
+    <meta property="og:image" content="https://glutt.org/assets/app/voice-cookmode-900.webp" />
+    <meta property="og:image:alt" content="Glutt cook mode showing the current recipe step, with voice help from Polly." />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="icon" href="/favicon.ico" sizes="48x48" />
+    <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/inter-latin.woff2" crossorigin />
+    <link rel="preload" as="font" type="font/woff2" href="/assets/fonts/instrument-serif-italic-latin.woff2" crossorigin />
+    <link rel="stylesheet" href="/landing/guide.css" />
+    <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://glutt.org/#organization",
+      "name": "Glutt",
+      "legalName": "CielPM, Inc.",
+      "url": "https://glutt.org/",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://glutt.org/assets/brand/glutt-app-icon-512.png",
+        "width": 512,
+        "height": 512
+      },
+      "email": "hi@cielpm.ai",
+      "founder": {
+        "@id": "https://glutt.org/about#founder"
+      },
+      "description": "Glutt is an iPhone cooking app with Polly, a live voice AI chef that talks you through any recipe hands-free, answers questions out loud, runs your timers and can look at your pan through the camera. It saves recipes from TikTok, Instagram, YouTube and any website, and works with Ray-Ban Meta glasses for audio.",
+      "sameAs": [
+        "https://apps.apple.com/us/app/glutt-recipes-ai-chef/id6780553556",
+        "https://apps.apple.com/us/developer/cielpm-inc/id6780553558"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "contactType": "customer support",
+        "email": "hi@cielpm.ai",
+        "url": "https://glutt.org/support"
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://glutt.org/#website",
+      "name": "Glutt",
+      "alternateName": [
+        "Glutt: Recipes & AI Chef",
+        "glutt.org"
+      ],
+      "url": "https://glutt.org/",
+      "publisher": {
+        "@id": "https://glutt.org/#organization"
+      },
+      "inLanguage": "en-US"
+    },
+    {
+      "@type": "Article",
+      "@id": "https://glutt.org/guides/nyt-cooking-hands-free-meta-glasses#main",
+      "url": "https://glutt.org/guides/nyt-cooking-hands-free-meta-glasses",
+      "name": "NYT Cooking Hands-Free on Meta glasses.",
+      "headline": "NYT Cooking Hands-Free on Meta glasses.",
+      "description": "How to use NYT Cooking Hands-Free on Ray-Ban Meta, Oakley Meta and Meta Ray-Ban Display: requirements, setup, voice commands, and why the option can be missing.",
+      "inLanguage": "en-US",
+      "isPartOf": {
+        "@id": "https://glutt.org/#website"
+      },
+      "datePublished": "2026-11-17T12:00:00+00:00",
+      "dateModified": "2026-11-17T12:00:00+00:00",
+      "image": "https://glutt.org/assets/app/voice-cookmode-900.webp",
+      "breadcrumb": {
+        "@id": "https://glutt.org/guides/nyt-cooking-hands-free-meta-glasses#breadcrumb"
+      },
+      "publisher": {
+        "@id": "https://glutt.org/#organization"
+      },
+      "author": {
+        "@type": "Person",
+        "@id": "https://glutt.org/about#founder",
+        "name": "Malik Shourbaji",
+        "jobTitle": "Founder",
+        "worksFor": {
+          "@id": "https://glutt.org/#organization"
+        },
+        "url": "https://glutt.org/about",
+        "sameAs": [
+          "https://malikmakes.com"
+        ]
+      },
+      "mainEntityOfPage": "https://glutt.org/guides/nyt-cooking-hands-free-meta-glasses",
+      "about": [
+        {
+          "@type": "Thing",
+          "name": "NYT Cooking"
+        },
+        {
+          "@type": "Thing",
+          "name": "Ray-Ban Meta"
+        },
+        {
+          "@type": "Thing",
+          "name": "Hands-free cooking"
+        }
+      ],
+      "mentions": {
+        "@id": "https://glutt.org/#app"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://glutt.org/guides/nyt-cooking-hands-free-meta-glasses#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Glutt",
+          "item": "https://glutt.org/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Guides",
+          "item": "https://glutt.org/guides"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "NYT Cooking Hands-Free",
+          "item": "https://glutt.org/guides/nyt-cooking-hands-free-meta-glasses"
+        }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://glutt.org/guides/nyt-cooking-hands-free-meta-glasses#faq",
+      "url": "https://glutt.org/guides/nyt-cooking-hands-free-meta-glasses",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Does NYT Cooking work with Ray-Ban Meta glasses?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. NYT Cooking Hands-Free reads supported recipes aloud through Ray-Ban Meta, Oakley Meta HSTN, Oakley Meta Vanguard and other Meta AI glasses, and shows the steps in the lens on Meta Ray-Ban Display. It needs an iPhone 15 or later on iOS 26 with Apple Intelligence on."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Why don't I see Hands-Free on an NYT Cooking recipe?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Either the recipe is not supported yet (only a selection are), NYT Cooking cannot detect your glasses (check they are on, connected in the Meta AI app and in Bluetooth range), or your device does not qualify: it needs an iPhone 15 or later on iOS 26 with Apple Intelligence, and it is not available on iPad."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What voice commands does NYT Cooking Hands-Free use?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Say \"next,\" \"back\" or \"help\" to move through the recipe, and \"exit\" to leave Hands-Free mode."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I use NYT Cooking Hands-Free on an iPad or an older iPhone?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. NYT says it needs an iPhone 15 or later and is not available on iPad. Glutt works with Meta glasses as Bluetooth audio on iOS 17.2 or later and talks you through any recipe you saved."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can NYT Cooking Hands-Free read recipes from other websites?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. It reads supported NYT Cooking recipes. To cook a recipe from TikTok, Instagram, YouTube or another site hands-free through Meta glasses, import it into an app like Glutt, whose AI chef reads the steps and answers questions."
+          }
+        }
+      ]
+    }
+  ]
+}
+    </script>
+  </head>
+
+  <body class="gd">
+    <a class="skip-link" href="#main">Skip to content</a>
+    <header class="nav">
+      <a class="nav__brand" href="/" aria-label="Glutt home">Glutt</a>
+      <nav class="nav__links" aria-label="Main navigation">
+        <a class="nav__link" href="/features">Features</a>
+        <a class="nav__link" href="/ai-chef">AI chef</a>
+        <a class="nav__link" href="/guides">Guides</a>
+        <a class="nav__link" href="/faq">FAQ</a>
+        <a class="nav__link" href="/support">Support</a>
+      </nav>
+      <a class="btn btn--primary btn--sm" href="https://apps.apple.com/app/id6780553556">Get the app</a>
+    </header>
+
+    <main id="main" class="doc">
+      <div class="wrap">
+        <ol class="crumbs"><li><a href="/">Glutt</a></li><li><a href="/guides">Guides</a></li><li><span aria-current="page">NYT Cooking Hands-Free</span></li></ol>
+        <article>
+          <header class="doc__head">
+            <p class="eyebrow">Guide · Meta AI glasses</p>
+            <h1>NYT Cooking Hands-Free <em>on Meta glasses.</em></h1>
+            <p class="lede">New York Times Cooking can now read a recipe to you through Meta AI glasses, one step at a time, and show the steps in the lens on Meta Ray-Ban Display. Here is what it needs, how to set it up, and what to do when it will not work for you.</p>
+            <p class="byline">
+            <span>Updated <time datetime="2026-11-17">November 17, 2026</time></span>
+            <span>By Malik Shourbaji, founder of Glutt</span>
+            <span>4 min read</span>
+          </p>
+          </header>
+
+          <div class="doc__body">
+            <div class="answer"><strong>Short answer</strong><p>NYT Cooking <strong>Hands-Free</strong> reads recipe steps through Meta AI glasses and moves on when you say "next." It needs an <strong>iPhone 15 or later on iOS 26 or later with Apple Intelligence on</strong>, the Meta AI app connected to your glasses, and a recipe that supports it: a selection of NYT recipes to start. It is not available on iPad. To start, open a supported recipe and choose <strong>Hands-Free</strong> in its Preparation section. If your phone is older, you are on iPad, or the recipe is not from NYT, <a href="/">Glutt</a> talks you through any recipe you have saved through the same glasses, on iOS 17.2 or later.</p></div>
+            
+            
+            <h2>What NYT Cooking Hands-Free does</h2>
+            <p>
+              It turns a supported NYT recipe into spoken steps. NYT's editors rewrote long steps into short
+              instructions with the ingredients and amounts built in, so you are not listening to a paragraph
+              read out word for word. <sup><a href="#src-h">2</a></sup> There are two versions, depending on
+              your glasses: <sup><a href="#src-h">1</a></sup>
+            </p>
+            <div class="table">
+              <table>
+                <thead><tr><th scope="col">Experience</th><th scope="col">What you get</th><th scope="col">Glasses</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Audio</th><td>Each step read aloud through the glasses' speakers; move through the recipe by voice</td><td>Ray-Ban Meta, Oakley Meta HSTN, Oakley Meta Vanguard, Ray-Ban Meta Optics, Meta Ray-Ban Display</td></tr>
+                  <tr><th scope="row">Audio and display</th><td>The same, plus the steps shown in the lens; navigate by voice, the touchpad or Meta Neural Band gestures</td><td>Meta Ray-Ban Display only</td></tr>
+                </tbody>
+              </table>
+            </div>
+
+            <h2>What you need</h2>
+            <ul>
+              <li><strong>An iPhone 15 or later.</strong> It is not available on iPad.</li>
+              <li><strong>iOS 26 or later, with Apple Intelligence turned on.</strong> Check Settings if you are not sure.</li>
+              <li><strong>The Meta AI app</strong>, updated and connected to your glasses. Glasses software updates also happen there.</li>
+              <li><strong>Bluetooth and microphone access</strong> for NYT Cooking, so it can reach the glasses and hear you.</li>
+              <li><strong>A supported recipe.</strong> Hands-Free works on a selection of NYT recipes to start, with more being added.</li>
+            </ul>
+            <p>
+              NYT's help page also asks that the glasses are switched on, worn, and have their arms fully
+              unfolded. <sup><a href="#src-h">1</a></sup>
+            </p>
+
+            <h2>How to set it up</h2>
+            <ol>
+              <li>Open a recipe that supports Hands-Free in the NYT Cooking app. The first time, a prompt offers to connect your glasses; if it does not appear, tap <strong>Hands-Free</strong> in the recipe's Preparation section.</li>
+              <li>Allow NYT Cooking to find Bluetooth devices, and accept the terms.</li>
+              <li>The Meta AI app opens and asks to connect NYT Cooking to your glasses. Approve it, and you are sent back.</li>
+              <li>Allow microphone access. Your glasses show up as connected.</li>
+              <li>Tap <strong>Start Hands-Free</strong>, then cook. Say <strong>"next"</strong>, <strong>"back"</strong> or <strong>"help"</strong> to move around, and <strong>"exit"</strong> to stop.</li>
+            </ol>
+
+            <h2>Why is the Hands-Free option missing?</h2>
+            <ul>
+              <li><strong>The recipe is not supported yet.</strong> Only some recipes have it. NYT points to collections such as its most popular recipes and quick weeknight dinners as good places to look.</li>
+              <li><strong>The app cannot see your glasses.</strong> The option only appears when NYT Cooking detects connected glasses: check they are on, connected in the Meta AI app, and in Bluetooth range.</li>
+              <li><strong>Your phone does not qualify.</strong> An iPhone 14 or older, an iPad, or Apple Intelligence switched off will keep it hidden.</li>
+            </ul>
+
+            <h2>When NYT Hands-Free is not the right fit</h2>
+            <p>
+              If you cook from NYT Cooking on a recent iPhone, use it: the step rewrites are genuinely good.
+              It is a narrator for NYT's own catalogue, though, so three groups are left out:
+            </p>
+            <ul>
+              <li><strong>Older iPhones and iPads.</strong> Anything below an iPhone 15, or any iPad, cannot run it.</li>
+              <li><strong>Recipes from anywhere else.</strong> A TikTok you saved, a family recipe, a food blog: Hands-Free only reads supported NYT recipes.</li>
+              <li><strong>Cooks with questions.</strong> It moves you through steps. It does not answer "can I use butter instead?" or "is this browned enough?"</li>
+            </ul>
+            <p>
+              That is the gap <a href="/">Glutt</a> fills with the same glasses. Glutt uses them as a Bluetooth
+              headset, so <a href="/ai-chef">Polly, its AI chef</a>, talks you through <em>any</em> recipe you
+              saved, from <a href="/guides/save-recipes-from-tiktok-instagram">TikTok and Instagram</a>,
+              <a href="/guides/save-recipes-from-youtube">YouTube</a>, websites or screenshots, keeps your place,
+              runs timers, and answers questions out loud. It runs on iOS 17.2 or later. It does not draw
+              anything on the Display's screen; that part is NYT's advantage today.
+            </p>
+
+            <div class="table">
+              <table>
+                <thead><tr><th scope="col"></th><th scope="col">NYT Cooking Hands-Free</th><th scope="col">Glutt with Meta glasses</th></tr></thead>
+                <tbody>
+                  <tr><th scope="row">Recipes</th><td>A selection of NYT recipes</td><td>Any recipe you save or import</td></tr>
+                  <tr><th scope="row">Phone</th><td>iPhone 15 or later, iOS 26+, Apple Intelligence; no iPad</td><td>iOS 17.2 or later</td></tr>
+                  <tr><th scope="row">Voice</th><td>Commands: next, back, help, exit</td><td>Conversation: say "Chef" and ask anything about the recipe</td></tr>
+                  <tr><th scope="row">Steps in the Display lens</th><td>Yes</td><td>No, audio only</td></tr>
+                  <tr><th scope="row">Glasses</th><td>Connected through the Meta AI app</td><td>Any Meta glasses paired as Bluetooth audio</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <p>
+              Plenty of people will use both: NYT for its own recipes, Glutt for everything else. For the
+              full picture of cooking with the glasses, see
+              <a href="/guides/cooking-with-meta-glasses">cooking with Meta glasses</a> and
+              <a href="/guides/cooking-with-meta-ray-ban-display">cooking with Meta Ray-Ban Display</a>.
+            </p>
+          
+            <section class="faq" aria-labelledby="faq-h">
+          <h2 id="faq-h">Frequently asked questions</h2>
+          <h3>Does NYT Cooking work with Ray-Ban Meta glasses?</h3>
+          <p>Yes. NYT Cooking Hands-Free reads supported recipes aloud through Ray-Ban Meta, Oakley Meta HSTN, Oakley Meta Vanguard and other Meta AI glasses, and shows the steps in the lens on Meta Ray-Ban Display. It needs an iPhone 15 or later on iOS 26 with Apple Intelligence on.</p>
+          <h3>Why don't I see Hands-Free on an NYT Cooking recipe?</h3>
+          <p>Either the recipe is not supported yet (only a selection are), NYT Cooking cannot detect your glasses (check they are on, connected in the Meta AI app and in Bluetooth range), or your device does not qualify: it needs an iPhone 15 or later on iOS 26 with Apple Intelligence, and it is not available on iPad.</p>
+          <h3>What voice commands does NYT Cooking Hands-Free use?</h3>
+          <p>Say "next," "back" or "help" to move through the recipe, and "exit" to leave Hands-Free mode.</p>
+          <h3>Can I use NYT Cooking Hands-Free on an iPad or an older iPhone?</h3>
+          <p>No. NYT says it needs an iPhone 15 or later and is not available on iPad. Glutt works with Meta glasses as Bluetooth audio on iOS 17.2 or later and talks you through any recipe you saved.</p>
+          <h3>Can NYT Cooking Hands-Free read recipes from other websites?</h3>
+          <p>No. It reads supported NYT Cooking recipes. To cook a recipe from TikTok, Instagram, YouTube or another site hands-free through Meta glasses, import it into an app like Glutt, whose AI chef reads the steps and answers questions.</p>
+        </section>
+            <aside class="sources" aria-labelledby="src-h">
+          <h2 id="src-h">Sources</h2>
+          <ol>
+            <li><a href="https://help.nytimes.com/360011047512-New-York-Times-Cooking/hands-free-cooking-with-meta-ai-glasses" rel="noopener">NYT Help Center: Hands-Free Cooking with Meta AI Glasses</a></li>
+            <li><a href="https://www.engadget.com/2268183/new-york-times-cooking-is-coming-to-metas-ai-and-display-glasses/" rel="noopener">Engadget: New York Times Cooking is coming to Meta's AI and display glasses</a> — September 24, 2026</li>
+          </ol>
+        </aside>
+          </div>
+        </article>
+
+        <div class="doc__foot">
+          <nav class="related" aria-labelledby="rel-h">
+          <h2 id="rel-h">Keep reading</h2>
+          <ul>
+            <li><a href="/guides/cooking-with-meta-glasses">Cooking with Meta glasses<span>Ray-Ban Meta and Oakley Meta in the kitchen: what works today, and how to set up a hands-free AI chef.</span></a></li>
+            <li><a href="/guides/cooking-with-meta-ray-ban-display">Cooking with Meta Ray-Ban Display<span>Recipe steps in your eyeline: what the Display can do in a kitchen today, NYT Cooking included.</span></a></li>
+            <li><a href="/ai-chef">Polly, Glutt's AI chef<span>A live voice AI chef that knows your recipe, runs your timers and can look at the pan.</span></a></li>
+          </ul>
+        </nav>
+          <section class="cta" aria-label="Get Glutt">
+          <h2>Cook <em>any recipe</em> through your glasses.</h2>
+          <p>Save any recipe, cook it hands-free with a live AI chef, and use what is already in your kitchen.</p>
+          <a class="btn btn--primary" href="https://apps.apple.com/app/id6780553556">Get Glutt on the App Store</a>
+          <small>iPhone with iOS 17.2 or later. Free to download, with a free trial of Glutt Premium.</small>
+        </section>
+        </div>
+      </div>
+    </main>
+
+    <footer class="ft">
+      <div class="wrap ft__inner">
+        <div class="ft__brand">
+          <strong>Glutt</strong>
+          <p>Save any recipe, cook it hands-free with a live AI chef, and use what is already in your kitchen.</p>
+          <p class="ft__muted">Support: <a href="mailto:hi@cielpm.ai">hi@cielpm.ai</a></p>
+          <p class="ft__muted">© 2026 CielPM, Inc.. All rights reserved.</p>
+        </div>
+        <nav class="ft__col" aria-label="Product links">
+          <h2>Product</h2>
+          <a href="/features">Full product overview</a>
+          <a href="/ai-chef">Polly, the AI chef</a>
+          <a href="/guides/cooking-with-meta-glasses">Cooking with Meta glasses</a>
+          <a href="/guides">All guides</a>
+          <a href="https://apps.apple.com/app/id6780553556">Get Glutt on the App Store</a>
+        </nav>
+        <nav class="ft__col" aria-label="Company links">
+          <h2>Help &amp; legal</h2>
+          <a href="/faq">FAQ</a>
+          <a href="/about">About Glutt</a>
+          <a href="/support">Support</a>
+          <a href="/privacy">Privacy Policy</a>
+          <a href="/terms">Terms of Service</a>
+          <a href="/delete-account">Delete Account</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>
