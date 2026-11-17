@@ -5,7 +5,7 @@ export default {
   crumb: 'AI glasses for cooking',
   crumbs: [{ name: 'Guides', url: '/guides' }],
   cardText: 'Which smart glasses actually help in a kitchen, what they cost, and what they still cannot do.',
-  title: 'AI Glasses for Cooking: Which Smart Glasses Actually Help (2026)',
+  title: 'Can Smart Glasses Help You Cook? AI Glasses Compared (2026)',
   ogTitle: 'AI glasses for cooking: which ones actually help',
   description:
     'Which AI and smart glasses are worth wearing in a kitchen in 2026: Ray-Ban Meta, Oakley Meta, Meta Ray-Ban Display and Solos, and what none of them do yet.',
@@ -122,7 +122,7 @@ export default {
     },
     {
       q: 'Do smart glasses show recipes in your vision?',
-      a: 'Only the ones with a display. Meta Ray-Ban Display can show cards in one lens, and New York Times Cooking is adding swipeable recipe step cards for it. Non-display glasses read steps aloud instead.',
+      a: 'Only the ones with a display. On Meta Ray-Ban Display, New York Times Cooking now shows recipe steps in the lens for a selection of its recipes. Non-display glasses read steps aloud instead.',
     },
     {
       q: 'Can smart glasses tell if my food is cooked?',

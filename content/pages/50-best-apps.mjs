@@ -9,12 +9,12 @@ export default {
   ogTitle: 'The best AI cooking apps in 2026, compared honestly',
   description:
     'An honest comparison of 13 AI cooking apps in 2026: voice AI chefs, recipe organizers and recipe finders, and what each is best for. From the makers of Glutt.',
-  eyebrow: 'Comparison · Updated September 2026',
+  eyebrow: 'Comparison · Updated November 2026',
   h1: 'The best AI cooking apps in 2026, <em>compared honestly.</em>',
   lede:
     '"AI cooking app" now covers everything from recipe generators to live voice chefs. They solve different problems, so the best one depends on which part of cooking you want help with. We make Glutt, so we have tried hard to be fair about where other apps are better.',
   published: '2026-09-20',
-  updated: '2026-09-20',
+  updated: '2026-11-17',
   image: '/assets/brand/og-glutt.jpg',
   mentionsApp: true,
   answer:
@@ -50,6 +50,7 @@ export default {
               <li><strong>Best for blind and low-vision cooks:</strong> Cookie Voice Recipes</li>
               <li><strong>Best general-purpose assistant:</strong> ChatGPT (Voice, with video)</li>
               <li><strong>Best if you already own Meta glasses:</strong> Meta AI, built in</li>
+              <li><strong>Best for NYT recipes on Meta glasses:</strong> NYT Cooking's Hands-Free mode (a selection of its recipes; iPhone 15 or later)</li>
             </ul>
 
             <h2>Comparison table</h2>

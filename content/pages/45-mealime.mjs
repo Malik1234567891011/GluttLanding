@@ -1,44 +1,45 @@
 export default {
   slug: 'guides/mealime-alternatives',
   order: 45,
-  navLabel: 'Mealime is shutting down: what to use instead',
+  navLabel: 'Mealime shut down: what to use instead',
   crumb: 'Mealime alternatives',
   crumbs: [{ name: 'Guides', url: '/guides' }],
-  cardText: 'Mealime closes on October 21, 2026. How to save your recipes first, and which apps can replace it.',
-  title: 'Mealime Is Shutting Down (Oct 21, 2026): Best Alternatives',
-  ogTitle: 'Mealime is shutting down on October 21, 2026. Here is what to use instead',
+  cardText: 'Mealime closed on October 21, 2026. Where its recipes went, and which apps replace it.',
+  title: 'Mealime Shut Down (Oct 21, 2026): Best Alternatives Now',
+  ogTitle: 'Mealime shut down on October 21, 2026. Here is what to use instead',
   description:
-    'Mealime shuts down on October 21, 2026 and deletes personal data. How to save your Mealime recipes before then, and the best alternatives for meal planning.',
+    'Mealime shut down on October 21, 2026 and deleted personal data. Where its recipes went, how to rebuild your favorites, and the best meal-planning apps to use now.',
   eyebrow: 'Guide · Meal planning',
-  h1: 'Mealime is shutting down. <em>Here is what to use instead.</em>',
+  h1: 'Mealime has shut down. <em>Here is what to use instead.</em>',
   lede:
-    'Mealime, the popular meal-planning app, is being discontinued on October 21, 2026. If you relied on it for weekly plans and grocery lists, here is how to keep your recipes and where to go next.',
+    'Mealime, the popular meal-planning app, was discontinued on October 21, 2026. If you relied on it for weekly plans and grocery lists, here is where its recipes went and what to use next.',
   published: '2026-09-21',
-  updated: '2026-09-21',
+  updated: '2026-11-17',
   mentionsApp: true,
   answer:
-    'Mealime will be discontinued on October 21, 2026, and says all personal data will be deleted when the app shuts down. Its closing notice does not offer an export, so <strong>save the recipes you care about before October 21</strong>. Mealime\'s recipes also live on public pages at mealime.com, so you can import them into another recipe app by link. Good replacements: <strong>Meals Hub</strong> (Mealime\'s official successor, inside Albertsons-family grocery apps), <strong>Plan to Eat</strong> or <strong>Paprika</strong> for a classic planner, <strong>Samsung Food</strong> for free, and <a href="/">Glutt</a> if you want a live AI chef to cook with.',
+    'Mealime was discontinued on October 21, 2026. The app is gone from the App Store, its recipe pages on mealime.com no longer load, and Mealime said all personal data would be deleted at shutdown. Its recipes carry on in <strong>Meals Hub</strong>, inside Albertsons-family grocery apps. To rebuild your favorites somewhere you control, re-save them from Meals Hub or from any recipe site into a new app. Good replacements: <strong>Meals Hub</strong> (Mealime\'s official successor, inside Albertsons-family grocery apps), <strong>Plan to Eat</strong> or <strong>Paprika</strong> for a classic planner, <strong>Samsung Food</strong> for free, and <a href="/">Glutt</a> if you want a live AI chef to cook with.',
   body: `
-            <h2>What is happening to Mealime</h2>
-            <p>Mealime's own closing page, titled "Mealime is moving to Meals Hub," says: <sup><a href="#src-h">1</a></sup></p>
+            <h2>What happened to Mealime</h2>
+            <p>Mealime's closing page said: <sup><a href="#src-h">1</a></sup></p>
             <ul>
               <li>"Mealime will be discontinued as of October 21, 2026."</li>
-              <li>Pro subscribers "will not be charged any additional subscription fees" before then, and all Pro recipes and features are now available to every Mealime user.</li>
+              <li>Pro subscribers "will not be charged any additional subscription fees" before the shutdown, and all Pro recipes and features were made free for every Mealime user.</li>
               <li>Users are pointed to <strong>Meals Hub</strong>, which lives inside Albertsons Companies grocery apps such as Safeway, Albertsons, Vons, Jewel-Osco, ACME Markets and Shaw's.</li>
               <li>"All personal data will be deleted when the Mealime application is shut down."</li>
             </ul>
             <p>
-              The notice says nothing about exporting recipes, meal plans or grocery lists. Plan on anything
-              you have not copied out by October 21 being gone.
+              The notice never offered an export of recipes, meal plans or grocery lists. As of November 17,
+              2026, the Mealime app no longer has an App Store listing, and its recipe pages under
+              <code>mealime.com/recipes/</code> return "not found." Mealime's home page and closing notice are
+              still up.
             </p>
 
-            <h2>How to save your Mealime recipes before October 21</h2>
+            <h2>How to get your Mealime favorites back</h2>
             <ol>
-              <li><strong>List the recipes you actually cook.</strong> Most people have a dozen favorites, not hundreds. Start there.</li>
-              <li><strong>Find each one on mealime.com.</strong> Mealime's recipes are published as public web pages under <code>mealime.com/recipes/</code>, so a web search for the recipe name plus "Mealime" usually finds it.</li>
-              <li><strong>Import the page into your new app.</strong> Most recipe apps can import a recipe from a web link. In Glutt, share the page from Safari to Glutt, or paste the link, and it becomes a recipe with ingredients and steps.</li>
-              <li><strong>Screenshot anything you can't find.</strong> If a recipe or a note only exists inside the app, take screenshots. Glutt, and several other apps, can read a recipe from a screenshot.</li>
-              <li><strong>Do it early.</strong> Once the app shuts down, its data is deleted, and there is no guarantee the public recipe pages will stay up either.</li>
+              <li><strong>List the dishes you actually cooked.</strong> Most people had a dozen favorites, not hundreds. Write the names down while you remember them.</li>
+              <li><strong>Look in Meals Hub first.</strong> Mealime said its recipes and planning tools continue in Meals Hub, inside Albertsons Companies grocery apps such as Safeway, Vons and Jewel-Osco.</li>
+              <li><strong>Save them somewhere you control.</strong> Copy each recipe into a recipe app, or find a close match on a recipe site and import that. In Glutt, share the page from Safari or paste the link, and it becomes a recipe with ingredients and steps.</li>
+              <li><strong>Check your camera roll.</strong> If you ever screenshotted a Mealime recipe or grocery list, Glutt and several other apps can read a recipe from a screenshot.</li>
             </ol>
 
             <h2>What made Mealime good, and what to look for in a replacement</h2>
@@ -94,16 +95,16 @@ export default {
           `,
   faq: [
     {
-      q: 'When is Mealime shutting down?',
-      a: 'Mealime says it will be discontinued as of October 21, 2026.',
+      q: 'Did Mealime shut down?',
+      a: 'Yes. Mealime was discontinued as of October 21, 2026. The app no longer has an App Store listing, and its recipe pages on mealime.com no longer load.',
     },
     {
-      q: 'Can I export my recipes from Mealime?',
-      a: 'Mealime\'s closing notice does not mention an export, and it says personal data will be deleted at shutdown. Mealime\'s recipes are public pages on mealime.com, so you can import them into another app by link before October 21, and screenshot anything else you want to keep.',
+      q: 'Can I still get my Mealime recipes?',
+      a: 'Not from Mealime itself: it never offered an export, said personal data would be deleted at shutdown, and its recipe pages now return not found. Mealime says its recipes continue in Meals Hub inside Albertsons-family grocery apps, so look there, and use any screenshots you saved.',
     },
     {
-      q: 'What happens to my Mealime Pro subscription?',
-      a: 'Mealime says Pro subscribers will not be charged any more subscription fees before the shutdown, and that all Pro recipes and features are available to all users until then.',
+      q: 'What happened to Mealime Pro subscriptions?',
+      a: 'Mealime said Pro subscribers would not be charged any more subscription fees before the shutdown, and made all Pro recipes and features free for everyone until it closed.',
     },
     {
       q: 'What is the best free alternative to Mealime?',
@@ -111,12 +112,12 @@ export default {
     },
     {
       q: 'Can Glutt import Mealime recipes?',
-      a: 'Mealime\'s recipes are on public pages at mealime.com, and Glutt imports recipes from websites. Share the recipe page to Glutt from Safari, or paste its link. For anything that only exists inside the Mealime app, a screenshot works too.',
+      a: 'Mealime\'s own recipe pages are gone, but Glutt imports recipes from any recipe website and from screenshots. Share a recipe page to Glutt from Safari, paste its link, or add a screenshot.',
     },
   ],
   faqSchema: true,
   sources: [
-    { title: 'Mealime: Mealime is moving to Meals Hub', url: 'https://www.mealime.com/closing' },
+    { title: 'Mealime: Thank You for Being Part of the Mealime Community (closing notice)', url: 'https://www.mealime.com/closing' },
     { title: 'Plan to Eat: Mealime is moving', url: 'https://www.plantoeat.com/blog/2026/09/mealime-is-moving-heres-your-best-meal-planning-alternative/' },
   ],
   related: ['guides/save-recipes-from-tiktok-instagram', 'best-ai-cooking-apps', 'ai-chef'],

@@ -5,7 +5,7 @@ export default {
   crumb: 'Cooking with Meta glasses',
   crumbs: [{ name: 'Guides', url: '/guides' }],
   cardText: 'Ray-Ban Meta and Oakley Meta in the kitchen: what works today, and how to set up a hands-free AI chef.',
-  title: 'Cooking with Meta Glasses: Hands-Free AI Chef for Ray-Ban Meta | Glutt',
+  title: 'Follow Recipes Hands-Free With Meta Glasses: AI Chef Guide (2026)',
   ogTitle: 'Cooking with Meta glasses: a hands-free AI chef in your ear',
   description:
     'How to cook hands-free with Ray-Ban Meta or Oakley Meta glasses: what Meta AI does, how to use Glutt\'s AI chef through the glasses, setup and limits.',
@@ -14,7 +14,7 @@ export default {
   lede:
     'Ray-Ban Meta and Oakley Meta glasses are good at one thing every cook needs: they keep your hands free. Here is what they can do in the kitchen on their own, and how to turn them into a proper recipe coach with Glutt.',
   published: '2026-09-20',
-  updated: '2026-10-01',
+  updated: '2026-11-17',
   image: '/assets/app/voice-cookmode-900.webp',
   imageAlt: 'Glutt cook mode showing the current recipe step with voice help from Polly.',
   mentionsApp: true,
@@ -52,9 +52,8 @@ export default {
             <ul>
               <li>
                 <strong>Ray-Ban Meta Audio: no camera at all.</strong> A camera-free pair at $349,
-                43 grams, up to 12 hours of battery (48 with the case). Preorders are open and it ships
-                October 13.
-                <sup><a href="#src-h">4</a></sup> Anything that depends on the glasses seeing your food
+                43 grams, up to 12 hours of battery (48 with the case). It went on sale October 13 and is in
+                stores now. <sup><a href="#src-h">4</a>, <a href="#src-h">6</a></sup> Anything that depends on the glasses seeing your food
                 does not apply to these. Voice guidance still does, which is the part Glutt uses.
               </li>
               <li>
@@ -63,18 +62,20 @@ export default {
                 <sup><a href="#src-h">4</a></sup>
               </li>
               <li>
-                <strong>New York Times Cooking is getting a hands-free mode</strong> that narrates recipe
-                steps through the glasses, with swipeable step cards on Meta Ray-Ban Display. The Times' AJ
-                Chavar described "a system to restructure lengthy steps into brief audio instructions."
-                It rolls out later this fall. <sup><a href="#src-h">5</a></sup>
+                <strong>New York Times Cooking now has a hands-free mode</strong> that reads recipe steps
+                through the glasses and moves on when you say so, with the steps also shown in the lens on
+                Meta Ray-Ban Display. It was previewed at Connect and is now live on a small selection of
+                NYT recipes. <sup><a href="#src-h">5</a>, <a href="#src-h">7</a></sup>
               </li>
             </ul>
             <h3>What about New York Times Cooking?</h3>
             <p>
-              If you cook from NYT Cooking and subscribe to it, that hands-free mode will be a good fit once
-              it ships: their editors shaped how each step is read out. It reads <em>their</em> recipes.
-              Glutt works from the recipes <em>you</em> saved, wherever they came from, and answers questions
-              back, which a narrator does not do. Different jobs, and plenty of people will want both.
+              If you cook from NYT Cooking, its hands-free mode is a good fit: their editors shaped how each
+              step is read out. It reads <em>their</em> recipes, starting with a small selection, and it
+              needs an iPhone 15 or later on iOS 26 with Apple Intelligence turned on; it is not available
+              on iPad. <sup><a href="#src-h">7</a></sup> Glutt works from the recipes <em>you</em> saved,
+              wherever they came from, answers questions back rather than only narrating, and runs on iOS
+              17.2 or later. Different jobs, and plenty of people will want both.
             </p>
 
             <h2>How to use Glutt's AI chef through your Meta glasses</h2>
@@ -245,6 +246,8 @@ export default {
     { title: 'Meta for Developers: Wearables Device Access Toolkit FAQ', url: 'https://developers.meta.com/wearables/faq/' },
     { title: 'TechCrunch: Meta introduces camera-free AI glasses', url: 'https://techcrunch.com/2026/09/23/meta-introduces-camera-free-ai-glasses/', note: 'September 23, 2026' },
     { title: 'Engadget: New York Times Cooking is coming to Meta\'s AI and display glasses', url: 'https://www.engadget.com/2268183/new-york-times-cooking-is-coming-to-metas-ai-and-display-glasses/', note: 'September 24, 2026' },
+    { title: 'Meta: Ray-Ban Meta Audio, our first audio glasses, are here', url: 'https://www.meta.com/blog/ray-ban-meta-audio-our-first-audio-glasses-are-here/' },
+    { title: 'NYT Help Center: Hands-Free Cooking with Meta AI Glasses', url: 'https://help.nytimes.com/360011047512-New-York-Times-Cooking/hands-free-cooking-with-meta-ai-glasses' },
   ],
   related: ['guides/ai-glasses-for-cooking', 'guides/cooking-with-meta-ray-ban-display', 'ai-chef'],
   ctaTitle: 'Put a chef in <em>your glasses.</em>',

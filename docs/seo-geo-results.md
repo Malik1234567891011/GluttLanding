@@ -230,3 +230,47 @@ page does not mention them. ReciMe's YouTube import is credited fairly, with its
 The import guide now links to it.
 
 **Next:** move the Mealime guide to past tense after Oct 21; request indexing for the YouTube guide.
+
+---
+
+## Check-in 2026-11-17 (day 58)
+
+**Google Search Console, last 28 days**
+
+| | 2026-10-20 | 2026-11-17 |
+| --- | --- | --- |
+| Impressions | 1,910 | **3,180** |
+| Clicks | 34 | 24 |
+| CTR | 1.8% | 0.8% |
+| Average position | 11.4 | **8.2** |
+
+Rankings improved and impressions rose 66%, but clicks fell. The new impressions are mostly
+question-shaped glasses queries where we rank 3–6 and get no clicks, which looks like AI Overviews
+answering in place: "smart glasses for following recipes hands-free while cooking" 183 @ 5.5,
+"can smart/ai glasses help with food and cooking tips?" 230 @ ~6. Pages: ai-glasses guide 1,170 imp /
+3 clicks @ 5.4 · best-apps 873 / 3 @ 10.0 · Meta glasses guide 610 / 5 @ 7.5 · homepage 331 / 9 @ 4.1 ·
+YouTube guide (new) 187 / 1 @ 22.1 (was 33.5 for its main query).
+
+Noise worth knowing: "ai chef pro alternatives" 209 @ 3.2 is mostly aichef.pro (a restaurant B2B suite),
+not Glutt's audience; "traeger/cuisinart vs ray-ban" and "ray-ban meat thermometer" come from the
+April Fools debunk on the ai-glasses guide. Not chased.
+
+**ChatGPT** (temporary chat) "best app for cooking with Meta Ray-Ban glasses": **NYT Cooking #1, Glutt #2**
+(was Glutt #1 on Oct 1 and Oct 20). Cause: NYT Cooking's Hands-Free mode for Meta glasses is now live,
+per the NYT Help Center. ChatGPT cites glutt.org/guides/cooking-with-meta-glasses for Glutt.
+
+**News, verified on primary sources today**
+- NYT Cooking Hands-Free is live: small selection of recipes; iPhone 15+, iOS 26+ with Apple
+  Intelligence, not iPad; audio on Ray-Ban Meta, Oakley Meta HSTN/Vanguard, Display and others; steps in
+  the lens on Display. Four pages said "later this fall"; all updated.
+- Ray-Ban Meta Audio went on sale Oct 13 (Meta's own post). The Meta glasses guide still said preorder.
+- Mealime shut down: App Store listing 404, mealime.com/recipes/* pages 404. The guide told people to
+  import those pages, which no longer works. Rewritten in past tense; Meals Hub is the recovery path.
+- Meta's toolkit FAQ still says submissions open "soon". No change.
+
+**Shipped:** the four glasses/Display/best-apps updates above, the Mealime rewrite, and new titles on the
+two glasses guides to match how people phrase the question (CTR test; compare in 4 weeks):
+- Meta glasses guide: "Cooking with Meta Glasses: Hands-Free AI Chef for Ray-Ban Meta | Glutt" →
+  "Follow Recipes Hands-Free With Meta Glasses: AI Chef Guide (2026)"
+- AI glasses guide: "AI Glasses for Cooking: Which Smart Glasses Actually Help (2026)" →
+  "Can Smart Glasses Help You Cook? AI Glasses Compared (2026)"

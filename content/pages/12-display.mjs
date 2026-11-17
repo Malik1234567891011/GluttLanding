@@ -4,7 +4,7 @@ export default {
   navLabel: 'Cooking with Meta Ray-Ban Display',
   crumb: 'Meta Ray-Ban Display',
   crumbs: [{ name: 'Guides', url: '/guides' }],
-  cardText: 'Recipe steps in your eyeline: what the Display can do in a kitchen today, and what is coming.',
+  cardText: 'Recipe steps in your eyeline: what the Display can do in a kitchen today, NYT Cooking included.',
   title: 'Cooking With Meta Ray-Ban Display: Recipes in Your Eyeline',
   ogTitle: 'Cooking with Meta Ray-Ban Display',
   description:
@@ -12,15 +12,15 @@ export default {
   eyebrow: 'Guide · Meta Ray-Ban Display',
   h1: 'Cooking with <em>Meta Ray-Ban Display.</em>',
   lede:
-    'A screen in your glasses solves the oldest kitchen problem: reading the next step without touching anything. Here is what the Display does in a kitchen today, what is arriving, and where a phone app still does the work.',
+    'A screen in your glasses solves the oldest kitchen problem: reading the next step without touching anything. Here is what the Display does in a kitchen today, and where a phone app still does the work.',
   published: '2026-09-25',
-  updated: '2026-10-01',
+  updated: '2026-11-17',
   image: '/assets/app/voice-cookmode-900.webp',
   imageAlt: 'Glutt cook mode showing the current step, with voice help from Polly.',
   mentionsApp: true,
   about: [{ '@type': 'Thing', name: 'Meta Ray-Ban Display' }, { '@type': 'Thing', name: 'Hands-free cooking' }],
   answer:
-    'Meta Ray-Ban Display puts a small screen in your right lens, controlled by the Meta Neural Band on your wrist. For cooking today that means Meta AI by voice, timers, and glanceable cards. <strong>New York Times Cooking</strong> is adding a hands-free mode with swipeable recipe step cards, arriving later this fall. Third-party developers can now build Display <strong>web apps</strong>, and Meta names "cooking guides" as an example. <a href="/">Glutt</a> works with Display today through audio: its AI chef talks you through your own saved recipes. It does not draw on the Display screen yet.',
+    'Meta Ray-Ban Display puts a small screen in your right lens, controlled by the Meta Neural Band on your wrist. For cooking today that means Meta AI by voice, timers, and glanceable cards. <strong>New York Times Cooking</strong> now has a hands-free mode that shows recipe steps in the lens and reads them aloud, on a small selection of its recipes. Third-party developers can now build Display <strong>web apps</strong>, and Meta names "cooking guides" as an example. <a href="/">Glutt</a> works with Display today through audio: its AI chef talks you through your own saved recipes. It does not draw on the Display screen yet.',
   body: `
             <h2>What makes the Display different from other AI glasses</h2>
             <p>
@@ -39,19 +39,23 @@ export default {
               <li><strong>Run a cooking app's audio</strong> through the glasses, the way you would with any Bluetooth headset. That is how <a href="/ai-chef">Polly, Glutt's AI chef</a>, works with them today.</li>
             </ul>
 
-            <h2>New York Times Cooking is bringing recipe cards</h2>
+            <h2>New York Times Cooking shows recipe steps in the lens</h2>
             <p>
-              At Meta Connect in September 2026, NYT Cooking previewed a hands-free mode: recipe steps
-              narrated through AI glasses, and on Meta Ray-Ban Display, shown as brief cards you swipe
-              through. The Times' AJ Chavar described "a system to restructure lengthy steps into brief audio
-              instructions, preserving the author's expertise while supplying ingredients and measurements in
-              line." It is not available yet; Meta and the Times said later this fall.
-              <sup><a href="#src-h">2</a></sup>
+              NYT Cooking previewed a hands-free mode at Meta Connect in September 2026, and it is now
+              live. <sup><a href="#src-h">2</a>, <a href="#src-h">4</a></sup> On Meta Ray-Ban Display the
+              steps appear in the lens as you cook and are read aloud, and you move through them by voice,
+              with the touchpad on the glasses, or with Neural Band gestures. Other Meta AI glasses get the
+              audio-only version.
             </p>
+            <ul>
+              <li><strong>Recipes:</strong> a small selection of NYT recipes to start, with more promised.</li>
+              <li><strong>Phone:</strong> iPhone 15 or later, iOS 26 or later with Apple Intelligence on. Not available on iPad.</li>
+              <li><strong>Setup:</strong> the Meta AI app connected to both the glasses and NYT Cooking.</li>
+            </ul>
             <p>
               It is the clearest signal yet that step-by-step cooking is a first-class use for the Display,
-              and if you subscribe to NYT Cooking it will be excellent for their recipes. It reads their
-              catalogue, not the recipe you saved off Instagram last week.
+              and if you cook from NYT Cooking it is excellent for their recipes. It reads their catalogue,
+              not the recipe you saved off Instagram last week.
             </p>
 
             <h2>The Display can run third-party web apps now</h2>
@@ -68,7 +72,7 @@ export default {
               2026</strong> after a year in developer preview. Publishing did not open with it: Meta says
               "You'll soon be able to submit your Device Access Toolkit and Web Apps experiences to be
               published," and "We'll have more to share on submission and publishing timing soon."
-              <sup><a href="#src-h">3</a></sup> So the honest state of play in October 2026 is: these
+              <sup><a href="#src-h">3</a></sup> So the honest state of play in November 2026 is: these
               experiences are buildable and testable, and not yet shippable to you.
             </p>
 
@@ -81,7 +85,7 @@ export default {
                 <tbody>
                   <tr><th scope="row">Your own saved recipes</th><td>No</td><td>Yes: TikTok, Instagram, websites, screenshots</td></tr>
                   <tr><th scope="row">Knows your pantry</th><td>No</td><td>Yes, and what you're missing before you start</td></tr>
-                  <tr><th scope="row">Step tracking and timers</th><td>Generic timers; NYT cards coming</td><td>Timers attached to the step that needs them</td></tr>
+                  <tr><th scope="row">Step tracking and timers</th><td>Generic timers; NYT step cards on supported NYT recipes</td><td>Timers attached to the step that needs them</td></tr>
                   <tr><th scope="row">Answers questions mid-cook</th><td>Meta AI, from general knowledge</td><td>Polly, from the recipe you are cooking</td></tr>
                   <tr><th scope="row">Shown on the Display screen</th><td>Yes, that's the point</td><td>Not yet; Glutt uses the audio</td></tr>
                 </tbody>
@@ -104,11 +108,11 @@ export default {
   faq: [
     {
       q: 'Is there a recipe app for Meta Ray-Ban Display?',
-      a: 'New York Times Cooking previewed a hands-free mode with swipeable step cards for Display, arriving later this fall. Meta also lets developers build Display web apps and names cooking guides as an example use. Glutt works with Display today through audio: its AI chef talks you through recipes you saved, though it does not draw on the Display screen.',
+      a: 'Yes: New York Times Cooking has a hands-free mode that shows recipe steps on the Display and reads them aloud, on a small selection of its recipes, and it needs an iPhone 15 or later. Meta also lets developers build Display web apps and names cooking guides as an example use. Glutt works with Display today through audio: its AI chef talks you through recipes you saved, though it does not draw on the Display screen.',
     },
     {
       q: 'Can Meta Ray-Ban Display show recipe steps?',
-      a: 'Meta AI can show glanceable cards, and NYT Cooking is adding recipe step cards you swipe through with the Neural Band. Any developer can also build a Display web app that shows steps.',
+      a: 'Yes. NYT Cooking shows recipe steps in the lens on supported recipes, and you move through them by voice, the touchpad or the Neural Band. Meta AI can show glanceable cards, and any developer can build a Display web app that shows steps.',
     },
     {
       q: 'Does Glutt work with Meta Ray-Ban Display?',
@@ -132,6 +136,7 @@ export default {
       note: 'September 24, 2026',
     },
     { title: 'Meta for Developers: Wearables Device Access Toolkit FAQ', url: 'https://developers.meta.com/wearables/faq/' },
+    { title: 'NYT Help Center: Hands-Free Cooking with Meta AI Glasses', url: 'https://help.nytimes.com/360011047512-New-York-Times-Cooking/hands-free-cooking-with-meta-ai-glasses' },
   ],
   related: ['guides/cooking-with-meta-glasses', 'guides/ai-glasses-for-cooking', 'ai-chef'],
   ctaTitle: 'Bring <em>your own recipes</em> to the glasses.',
